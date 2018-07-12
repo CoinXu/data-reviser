@@ -41,6 +41,11 @@ function VeriUnInt64(isArray: boolean, callback: Function) {
           }
         }
       }
+      if(index === -1) {
+        this.model[key] = this[key];
+      }else{
+        this.model[key][index] = this[key][index];
+      }
     };
 
     return;

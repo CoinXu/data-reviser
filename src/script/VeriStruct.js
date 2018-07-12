@@ -36,6 +36,12 @@ function VeriStruct(entry, isArray, callback) {
                     this[key][index] = value;
                 }
             }
+            if (index === -1) {
+                this.model[key] = this[key];
+            }
+            else {
+                this.model[key][index] = this[key][index];
+            }
         };
         return;
     };

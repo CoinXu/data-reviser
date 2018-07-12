@@ -21,7 +21,7 @@
           num64: 64,
           str: "test",
           float: 1.01,
-          double: "1.011",
+          double: 1.011,
           unnum: 1111,
           unnum64: 1111,
           doubleArray: [1.11,1.21],
@@ -51,7 +51,8 @@
         })
         let entry = new testEntry();
         entry.setModel(data);
-        console.log(entry);
+        let model = entry.get();
+        console.log(model);
       }
     }
   }

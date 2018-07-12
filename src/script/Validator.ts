@@ -1,12 +1,10 @@
 import {__D_NAME__,__Array_tag__} from "./StaticData"
 
 class Validator {
-  // private model: T | null;
-  // public constructor(value?: T) {
-  //   this.model = value;
-  // }
+  protected model;
 
   public setModel(model) {
+    this.model = model;
     for (let key in model) {
       try {
         if(this[__Array_tag__][key]){
@@ -25,9 +23,11 @@ class Validator {
       }
     }
   }
-  // public get(): T {
-  //   return this.model;
-  // }
+
+
+  public get() {
+    return this.model;
+  }
 }
 
 export default Validator
