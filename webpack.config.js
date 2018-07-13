@@ -1,14 +1,10 @@
 var path = require('path')
 const { VueLoaderPlugin } = require('vue-loader');
 var webpack = require('webpack')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
 
 module.exports = {
-  entry: './src/main.js',
-  output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
-    filename: 'build.js'
-  },
   module: {
     rules: [
       {
@@ -84,31 +80,45 @@ module.exports = {
     historyApiFallback: true,
     noInfo: true,
     overlay: true,
-    port: 3003,
-    host: "0.0.0.0"
+    port: 3002,
+    host: "127.0.0.1"
   },
   performance: {
     hints: false
   },
   plugins: [
     new VueLoaderPlugin(),
+    new UglifyJSPlugin()
   ],
   devtool: '#eval-source-map'
+}
+
+if (process.env.NODE_ENV === 'development') {
+  module.exports.entry = {
+    main: './src/main.js',
+  }
+  module.exports.output = {
+    path: path.resolve(__dirname, './dist'),
+    publicPath: '/dist/',
+    filename: 'build.js'
+  }
 }
 
 if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
   // http://vue-loader.vuejs.org/en/workflow/production.html
+  module.exports.entry = {
+    validator: './src/script/index.js'
+  }
+  module.exports.output = {
+    path: path.resolve(__dirname, './dist'),
+    publicPath: '/dist/',
+    filename: '[name].[hash].js'
+  }
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
-      }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
       }
     }),
     new webpack.LoaderOptionsPlugin({
