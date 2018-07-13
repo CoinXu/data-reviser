@@ -1,4 +1,5 @@
 var path = require('path')
+const { VueLoaderPlugin } = require('vue-loader');
 var webpack = require('webpack')
 
 module.exports = {
@@ -66,6 +67,10 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
+      },
+      {
+        test: /\.ts$/,
+        loader: "ts-loader"
       }
     ]
   },
@@ -73,7 +78,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js'
     },
-    extensions: ['*', '.js', '.vue', '.json']
+    extensions: ['*', '.js', '.vue', '.json','.ts']
   },
   devServer: {
     historyApiFallback: true,
@@ -85,6 +90,9 @@ module.exports = {
   performance: {
     hints: false
   },
+  plugins: [
+    new VueLoaderPlugin(),
+  ],
   devtool: '#eval-source-map'
 }
 

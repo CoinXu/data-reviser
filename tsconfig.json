@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "module": "es6",
+    "target": "es5", // 将ts编译成什么规范
+    "allowJs": true, // 是否允许js语法在ts中
+    "outDir": "./dist/"
+  },
+  "include": [
+    "./src/*" // 编译包含哪些文件
+  ],
+  "exclude": [
+    "./node_modules/" // 编译除去哪些文件
+  ]
+}
