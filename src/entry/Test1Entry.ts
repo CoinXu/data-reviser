@@ -1,8 +1,8 @@
 import {Validator,Decorator,structType} from "../script/index";
-import {__VERI_TYPE__} from "../script/StaticData";
-import test1ObjEntry from "./test1ObjEntry";
+import {__VERI_TYPE__} from "../script/staticData";
+import Test1ObjEntry from "./Test1ObjEntry";
 
-class test1Entry extends Validator{
+class Test1Entry extends Validator{
 
   @Decorator(__VERI_TYPE__.INT32)
   num1: number = 1;
@@ -29,12 +29,12 @@ class test1Entry extends Validator{
   numarr: Array<any> = [];
 
   @Decorator(__VERI_TYPE__.STRUCT)
-  @structType(test1ObjEntry)
-  obj: test1ObjEntry = new test1ObjEntry();
+  @structType(Test1ObjEntry)
+  obj: Test1ObjEntry = new Test1ObjEntry();
 
 }
 
-export default test1Entry;
+export default Test1Entry;
 
 
 

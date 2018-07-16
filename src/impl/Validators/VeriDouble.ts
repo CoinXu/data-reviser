@@ -1,4 +1,4 @@
-import {__ERROR_TYPE__} from "../../script/StaticData";
+import {__ERROR_TYPE__} from "../../script/staticData";
 import {IVeri} from "../../inter/decorator";
 
 export function VeriDouble(key: string, value: any):IVeri {

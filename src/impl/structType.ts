@@ -1,4 +1,4 @@
-import {__CLASS_TYPE_} from "../script/StaticData";
+import {__CLASS_TYPE_} from "../script/staticData";
 
 export function structType(classType: object) {
   return function (target, key) {

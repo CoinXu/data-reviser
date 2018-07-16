@@ -1,4 +1,4 @@
-import {__D_NAME__} from "../script/StaticData"
+import {__D_NAME__} from "../script/staticData"
 import {Validator as IValidator} from "../inter/decorator"
 
 export class Validator implements IValidator{

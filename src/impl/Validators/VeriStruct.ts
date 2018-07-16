@@ -1,4 +1,4 @@
-import {__ERROR_TYPE__,__CLASS_TYPE_} from "../../script/StaticData";
+import {__ERROR_TYPE__,__CLASS_TYPE_} from "../../script/staticData";
 import {IVeri} from "../../inter/decorator";
 
 export function VeriStruct(key: string, value: any): IVeri {

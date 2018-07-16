@@ -1,4 +1,4 @@
-import {__D_NAME__, __ERROR_TYPE__, __VERI_TYPE__} from "../script/StaticData";
+import {__D_NAME__, __ERROR_TYPE__, __VERI_TYPE__} from "../script/staticData";
 import {
   VeriInt32,
   VeriStruct,

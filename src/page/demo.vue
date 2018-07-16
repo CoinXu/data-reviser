@@ -5,8 +5,8 @@
 </template>
 
 <script>
-  import test1Entry from '../entry/test1Entry';
-  import test1ObjEntry from "../entry/test1ObjEntry";
+  import test1Entry from '../entry/Test1Entry';
+  import test1ObjEntry from "../entry/Test1ObjEntry";
   import jQuery from "jquery";
 
   export default {
