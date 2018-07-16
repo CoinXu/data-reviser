@@ -31,7 +31,15 @@ src----inter:定义接口
  |-----router:开发使用，路由
 ```
 
-## 使用
+## 安装与使用
+### 安装
+```
+npm install paramveri --registry=http://npm.100.com
+或者
+yarn add paramveri --registry=http://npm.100.com
+```
+### 使用
+可参考src/page与src/entry的测试用例
 ```
 1、
 @Decorator(param,secondparam)
@@ -70,7 +78,15 @@ __VERI_TYPE__:参数类型
 __ERROR_TYPE__:错误类型
 
 
+```
 
-发布后export在ParamVeri中
+注意：发布后export在ParamVeri中,eg:
+```js
+import {ParamVeri} from "paramveri";
+
+export class objEntry extends ParamVeri.Validator{
+  @ParamVeri.Decorator(ParamVeri.__VERI_TYPE__.INT32)
+  num: number = 1;
+}
 
 ```
