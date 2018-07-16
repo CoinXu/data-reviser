@@ -1,6 +1,4 @@
-import {Validator} from "../impl/Validator";
-import {Decorator} from  "../impl/Decorator";
-import {structType} from  "../impl/structType";
+import {Validator,Decorator,structType} from "../script/index";
 import {__VERI_TYPE__} from "../script/StaticData";
 import test1ObjEntry from "./test1ObjEntry";
 

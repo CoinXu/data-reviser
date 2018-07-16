@@ -113,7 +113,9 @@ if (process.env.NODE_ENV === 'production') {
   module.exports.output = {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',
-    filename: '[name].[hash].js'
+    filename: '[name].js',
+    library: "ParamVeri",
+    libraryTarget: "commonjs"
   }
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({

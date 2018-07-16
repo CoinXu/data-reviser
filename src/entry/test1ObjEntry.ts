@@ -1,5 +1,4 @@
-import {Validator} from "../impl/Validator";
-import {Decorator} from  "../impl/Decorator";
+import {Validator,Decorator} from "../script/index";
 import {__VERI_TYPE__} from "../script/StaticData";
 
 class test1ObjEntry extends Validator{
