@@ -112,7 +112,7 @@ if (process.env.NODE_ENV === 'production') {
   }
   module.exports.output = {
     path: path.resolve(__dirname, './dist/paramveri/'),
-    publicPath: '/dist/',
+    publicPath: '/dist/paramveri/',
     filename: '[name].js',
     library: "ParamVeri",
     libraryTarget: "commonjs"
