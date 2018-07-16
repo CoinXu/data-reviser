@@ -8,10 +8,10 @@
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# 开发测试运行，localhost:80
 npm run dev
 
-# build for production with minification
+# 构建发布
 npm run build
 ```
 
@@ -30,3 +30,9 @@ src----inter:定义接口
  |-----entry:开发使用，实体类
  |-----router:开发使用，路由
 ```
+
+## 使用
+
+
+
+发布后export在ParamVeri中
