@@ -111,7 +111,7 @@ if (process.env.NODE_ENV === 'production') {
     validator: './src/script/index.js'
   }
   module.exports.output = {
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, './dist/paramveri/'),
     publicPath: '/dist/',
     filename: '[name].js',
     library: "ParamVeri",
