@@ -26,4 +26,6 @@ src----inter:定义接口
  |-----script
          |-----index.js: 入口
          |-----staticData: 全局静态变量
+ |-----page:开发使用，测试页面
+ |-----entry:开发使用，实体类
 ```
