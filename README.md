@@ -32,7 +32,45 @@ src----inter:定义接口
 ```
 
 ## 使用
+```
+1、
+@Decorator(param,secondparam)
+装饰器，param为验证的类型，包括：
+__VERI_TYPE__ = {
+  INT32: "int32",
+  INT64: "int64",
+  DOUBLE: "double",
+  FLOAT: "float",
+  STRING: "string",
+  STRUCT: "struct",
+  UNINT32: "unsign int32",
+  UNINT64: "unsign int64",
+  ARRAY: "array"
+};
+secondparam只有在类型为__VERI_TYPE__.ARRAY的情况下才需要，用于声明数组内数据类型
+
+2、
+@structType(class)
+装饰器配合@Decorator使用，只有在类型为__VERI_TYPE__.STRUCT条件下才使用，用于声明struct参数格式
+eg:
+@Decorator(__VERI_TYPE__.STRUCT)
+@structType(test1ObjEntry)
+obj: test1ObjEntry = new test1ObjEntry();
+
+3、
+Validator
+实体类父类，包装了setModel，getModel方法
+setModel:设置model，返回错误信息
+getModel:返回Model
+
+4、
+StaticData
+包含各种静态变量
+__VERI_TYPE__:参数类型
+__ERROR_TYPE__:错误类型
 
 
 
 发布后export在ParamVeri中
+
+```
