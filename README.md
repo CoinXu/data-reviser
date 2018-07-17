@@ -23,6 +23,7 @@ For detailed explanation on how things work, consult the [docs for vue-loader](h
 src----inter:定义接口
  |-----impl:接口实现
          |-----validators: 验证器
+         |-----Decorators: 装饰器
  |-----script
          |-----index.js: 入口
          |-----staticData: 全局静态变量
@@ -41,28 +42,29 @@ yarn add paramveri --registry=http://npm.100.com
 ### 使用
 可参考src/page与src/entry的测试用例
 ```
-1、
-@decorator(param,secondparam)
-装饰器，param为验证的类型，包括：
-VERI_TYPE = {
-  INT32: "int32",
-  INT64: "int64",
-  DOUBLE: "double",
-  FLOAT: "float",
-  STRING: "string",
-  STRUCT: "struct",
-  UNINT32: "unsign int32",
-  UNINT64: "unsign int64",
-  ARRAY: "array"
-};
-secondparam只有在类型为VERI_TYPE.ARRAY的情况下才需要，用于声明数组内数据类型
+1、装饰器
+@decoInt32(errMsg:string,isRequire:boolean)
+@decoDouble(errMsg:string,isRequire:boolean)
+@decoFloat(errMsg:string,isRequire:boolean)
+@decoInt64(errMsg:string,isRequire:boolean)
+@decoString(errMsg:string,isRequire:boolean)
+@decoStruct(errMsg:string,isRequire:boolean)
+@decoUnInt32(errMsg:string,isRequire:boolean)
+@decoUnInt64(errMsg:string,isRequire:boolean)
+@decoBoolean(errMsg:string,isRequire:boolean)
+@decoArray(arrayType: string,errMsg:string,isRequire:boolean)
+errMsg为自定义错误信息，默认为空
+isRequire：说明是否必须，默认为false
+arrayType: 数组项类型,参考staticData.VERI_TYPE
+
+
 
 2、
 @structType(class)
-装饰器配合@decorator使用，只有在类型为VERI_TYPE.STRUCT条件下才使用，用于声明struct参数格式
+装饰器配合@decoStruct，用于声明struct参数格式
 eg:
-@decorator(VERI_TYPE.STRUCT)
-@structType(test1ObjEntry)
+@decoStruct("error",true)
+@structType(Test1ObjEntry)
 obj: test1ObjEntry = new test1ObjEntry();
 
 3、
@@ -85,7 +87,7 @@ ERROR_TYPE:错误类型
 import {ParamVeri} from "paramveri";
 
 export class objEntry extends ParamVeri.Validator{
-  @ParamVeri.decorator(ParamVeri.VERI_TYPE.INT32)
+  @ParamVeri.decoInt32("",true)
   num: number = 1;
 }
 
