@@ -83,7 +83,8 @@ errMsg：自定义错误信息，默认为空
 //返回值
 {
     key1: IParamWrongMsg,
-    key2: IParamWrongMsg
+    key2: IParamWrongMsg,
+    key3: [IParamWrongMsg,IParamWrongMsg]
 }
 
 ```
