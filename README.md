@@ -53,7 +53,7 @@ yarn add paramveri --registry=http://npm.100.com
 @decoUnInt64(errMsg:string,isRequire:boolean)
 @decoBoolean(errMsg:string,isRequire:boolean)
 @decoArray(arrayType: string,errMsg:string,isRequire:boolean)
-errMsg为自定义错误信息，默认为空
+errMsg：自定义错误信息，默认为空
 isRequire：说明是否必须，默认为false
 arrayType: 数组项类型,参考staticData.VERI_TYPE
 
