@@ -126,6 +126,7 @@ class Test1Entry extends paramVeri.Validator{
 
 #### 静态变量与接口
 + `VERI_TYPE`: 参数类型
+
 ```js
 VERI_TYPE = {
   INT32: "int32",
@@ -141,6 +142,7 @@ VERI_TYPE = {
 };
 ```
 + `ERROR_TYPE`: 错误类型
+
 ```js
 ERROR_TYPE = {
   TYPE_ERROR: "type error",
@@ -150,6 +152,7 @@ ERROR_TYPE = {
 ```
 
 + ``: 错误信息
+
 ```ts
 IErrMsg {
   type: string,
