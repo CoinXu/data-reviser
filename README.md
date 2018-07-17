@@ -163,26 +163,26 @@ class Test1Entry extends paramVeri.Validator{
 + `VERI_TYPE`: 参数类型
 
 ```js
-VERI_TYPE = {
-  INT32: "int32",
-  INT64: "int64",
-  DOUBLE: "double",
-  FLOAT: "float",
-  STRING: "string",
-  STRUCT: "struct",
-  UNINT32: "unsign int32",
-  UNINT64: "unsign int64",
-  BOOLEAN: "boolean",
-  ARRAY: "array"
+enum VERI_TYPE = {
+  INT32,
+  INT64,
+  DOUBLE,
+  FLOAT,
+  STRING,
+  STRUCT,
+  UNINT32,
+  UNINT64,
+  BOOLEAN,
+  ARRAY
 };
 ```
 + `ERROR_TYPE`: 错误类型
 
 ```js
-ERROR_TYPE = {
-  TYPE_ERROR: "type error",
-  SIZE_ERROR: "size error",
-  REQUIRE_ERROR: "require error"
+enum ERROR_TYPE = {
+  TYPE_ERROR,
+  SIZE_ERROR,
+  REQUIRE_ERROR
 };
 ```
 
