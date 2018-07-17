@@ -16,7 +16,7 @@ import {DecoUnInt32} from "./TypeDecorator/DecoUnInt32";
 import {DecoUnInt64} from "./TypeDecorator/DecoUnInt64";
 import {DecoArray} from "./TypeDecorator/DecoArray";
 import {DecoBoolean} from "./TypeDecorator/DecoBoolean";
-import {IErrMsg} from "../../inter/decorator";
+import {IParamWrongMsg} from "../../inter/decorator";
 import {D_NAME} from "../../script/staticData";
 
 export {
@@ -43,14 +43,24 @@ export function dealVeri(ve: IVeri,key: string,value: any, errMsg: string) {
   if (ve.value) {
     this[key] = value;
   }else{
-    let err: IErrMsg = {
-      type: ve.error,
-      msg: errMsg
-    };
+    let err: IParamWrongMsg;
     if(ve.index){
-      err["index"] = ve.index;
+      this.errMsg[key] = [];
+      for (var i = 0; i < ve.index.length; i++){
+        err = {
+          type: ve.index[i].error,
+          msg: errMsg,
+          index: ve.index[i].index
+        }
+        this.errMsg[key].push(err);
+      }
+    }else{
+      err  = {
+        type: ve.error,
+        msg: errMsg
+      };
+      this.errMsg[key] = err;
     }
-    this.errMsg[key] = err;
   }
   this.model[key] = this[key];
 }

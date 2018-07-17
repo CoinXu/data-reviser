@@ -5,7 +5,7 @@
  */
 
 import {ERROR_TYPE} from "../../script/staticData";
-import {IVeri} from "../../inter/decorator";
+import {IVeri, IVeriIndex} from "../../inter/decorator";
 
 
 /**
@@ -25,18 +25,20 @@ export function veriArray(key: string, value: any, veriFun: Function):IVeri {
     };
   }else{
     this[key] = [];
-    let ve;
-    let errIndex = [];
+    let ve: IVeri;
+    let errIndex = new Array<IVeriIndex>();
     for (let i = 0; i < value.length; i++) {
       ve = veriFun.call(this, key, value[i]);
       if (!ve.value) {
-        errIndex.push(i);
+        errIndex.push({
+          index: i,
+          error: ve.error
+        });
       }
     }
     if(errIndex.length){
       return {
         value: false,
-        error: ve.error,
         index: errIndex
       };
     }else {
