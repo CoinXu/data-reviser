@@ -77,8 +77,34 @@ errMsg：自定义错误信息，默认为空
 + `@structType(class)`: 配合@decoStruct使用，用于声明struct参数格式
 
 #### Validator
-+ `setModel`: 设置model，返回错误信息,参考IErrMsg
++ `setModel(model: object)`: 设置model，返回错误信息,参考IErrMsg
 + `getModel`: 返回Model
+
+eg:
+```js
+let data = {
+    num1: 10,
+    num64: 64,
+    unnum32: 100,
+    unnum64: 6400,
+    double: 1.11,
+    float: 1.1,
+    str: "test",
+    numarr: [1,2,3,4],
+    boo: true,
+    obj: {
+        num: 11
+    }
+};
+let obj = new test1ObjEntry();
+obj.setModel(data.obj);
+jQuery.extend(data,{
+    obj: obj
+})
+let entry = new test1Entry();
+let errmsg = entry.setModel(data);
+let model = entry.getModel();
+```
 
 eg:
 ```ts
