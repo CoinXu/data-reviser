@@ -41,8 +41,9 @@ yarn add paramveri --registry=http://npm.100.com
 ```
 ### 使用
 可参考src/page与src/entry的测试用例
-```
-1、装饰器
+
+#### 装饰器
+```js
 @decoInt32(errMsg:string,isRequire:boolean)
 @decoDouble(errMsg:string,isRequire:boolean)
 @decoFloat(errMsg:string,isRequire:boolean)
@@ -56,9 +57,10 @@ yarn add paramveri --registry=http://npm.100.com
 errMsg：自定义错误信息，默认为空
 isRequire：说明是否必须，默认为false
 arrayType: 数组项类型,参考staticData.VERI_TYPE
+```
 
 
-
+```
 2、
 @structType(class)
 装饰器配合@decoStruct，用于声明struct参数格式
