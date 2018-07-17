@@ -70,7 +70,7 @@ obj: test1ObjEntry = new test1ObjEntry();
 3、
 Validator
 实体类父类，包装了setModel，getModel方法
-setModel:设置model，返回错误信息{type: 错误类型，msg：自定义错误信息，index： 若为数组，指定数组下标}
+setModel:设置model，返回错误信息{type: 错误类型（参考ERROR_TYPE），msg：自定义错误信息，index： 若为数组，指定数组下标}
 getModel:返回Model
 
 4、
