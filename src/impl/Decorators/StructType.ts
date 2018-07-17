@@ -4,7 +4,7 @@
  * @description 设置struct类型装饰器
  */
 
-import {CLASS_TYPE} from "../script/staticData";
+import {CLASS_TYPE} from "../../script/staticData";
 
 /**
  * 设置struct类型
@@ -12,7 +12,7 @@ import {CLASS_TYPE} from "../script/staticData";
  * @param {object} classType - struct类型对应的实体类
  * @returns {(target, key) => {}}
  */
-export function structType(classType: object) {
+export function StructType(classType: object) {
   return function (target, key) {
     const objectType = target[CLASS_TYPE] || (target[CLASS_TYPE] = {});
 

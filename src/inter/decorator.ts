@@ -19,10 +19,23 @@ export interface Validator {
  * 验证器接口
  * @param {boolean} value - 验证结果正确与否
  * @param {string} error - value为false情况下，返回错误信息
- * @param {number} index - 若为数组情况下，返回错误数据index
+ * @param {array} index - 若为数组情况下，返回错误数据index
  */
 export interface IVeri {
   value: boolean,
   error?: string,
-  index?: number
+  index?: Array<number>
+}
+
+/**
+ * 错误信息
+ *
+ * @param {string} type - 错误类型
+ * @param {string} msg - 用户自定义错误信息
+ * @param {array} index - 若为数组情况下，返回错误数据index
+ */
+export interface IErrMsg {
+  type: string,
+  msg?: string,
+  index?: Array<number>
 }

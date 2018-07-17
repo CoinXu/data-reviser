@@ -6,29 +6,30 @@
 
 
 import {IVeri} from "../../inter/decorator";
-import {decoInt32} from "./decoInt32";
-import {decoDouble} from "./decoDouble";
-import {decoFloat} from "./decoFloat";
-import {decoInt64} from "./decoInt64";
-import {decoString} from "./decoString";
-import {decoStruct} from "./decoStruct";
-import {decoUnInt32} from "./decoUnInt32";
-import {decoUnInt64} from "./decoUnInt64";
-import {decoArray} from "./decoArray";
-import {decoBoolean} from "./decoBoolean";
-import {D_NAME, ERROR_TYPE} from "../../script/staticData";
+import {DecoInt32} from "./TypeDecorator/DecoInt32";
+import {DecoDouble} from "./TypeDecorator/DecoDouble";
+import {DecoFloat} from "./TypeDecorator/DecoFloat";
+import {DecoInt64} from "./TypeDecorator/DecoInt64";
+import {DecoString} from "./TypeDecorator/DecoString";
+import {DecoStruct} from "./TypeDecorator/DecoStruct";
+import {DecoUnInt32} from "./TypeDecorator/DecoUnInt32";
+import {DecoUnInt64} from "./TypeDecorator/DecoUnInt64";
+import {DecoArray} from "./TypeDecorator/DecoArray";
+import {DecoBoolean} from "./TypeDecorator/DecoBoolean";
+import {IErrMsg} from "../../inter/decorator";
+import {D_NAME} from "../../script/staticData";
 
 export {
-  decoInt32,
-  decoDouble,
-  decoFloat,
-  decoInt64,
-  decoString,
-  decoStruct,
-  decoUnInt32,
-  decoUnInt64,
-  decoArray,
-  decoBoolean
+  DecoInt32,
+  DecoDouble,
+  DecoFloat,
+  DecoInt64,
+  DecoString,
+  DecoStruct,
+  DecoUnInt32,
+  DecoUnInt64,
+  DecoArray,
+  DecoBoolean
 }
 
 /**
@@ -42,46 +43,57 @@ export function dealVeri(ve: IVeri,key: string,value: any, errMsg: string) {
   if (ve.value) {
     this[key] = value;
   }else{
-    this.errMsg[key] = {
+    let err: IErrMsg = {
       type: ve.error,
       msg: errMsg
     };
     if(ve.index){
-      this.errMsg[key]["index"] = ve.index;
+      err["index"] = ve.index;
     }
+    this.errMsg[key] = err;
   }
   this.model[key] = this[key];
 }
 
 /**
- * 设置参数验证器
+ * 所有装饰器初始化步骤，获取验证函数容器
  *
  * @param {object} target - 实体类原型
  * @param {string} key - 键值
- * @param {boolean} require - 参数是否必须
+ * @returns {Array} container - 验证参数方法所在容器
+ */
+export function initValidator(target: object, key: string) {
+  const map = target[D_NAME] || (target[D_NAME] = {});
+  const initModel = target["initModel"] || (target["initModel"] = {});
+  if(!initModel[key]) {
+    initModel[key] = false;
+  }
+  const container = map[key] || (map[key] = []);
+  return container;
+}
+
+/**
+ * 设置参数类型验证器
+ *
+ * @param {object} target - 实体类原型
+ * @param {string} key - 键值
  * @param {string} errMsg - 自定义错误信息
  * @param {Function} veriFun - 调用函数
  * @param {boolean} isArray - 是否数组类型，默认为false
  * @param {Function} callArray - 若为数组类型，传入数组项所用验证器,默认为空
  */
-export function setValidator(target: object, key: string, require: boolean, errMsg: string, veriFun: Function, isArray: boolean = false, callArray: Function = null) {
-  const map = target[D_NAME] || (target[D_NAME] = {});
-  target["initModel"] = target["initModel"] || {};
-  target["initModel"][key] = require;
+export function setValidator(target: object, key: string, errMsg: string, veriFun: Function, isArray: boolean = false, callArray: Function = null) {
+  const container = initValidator.call(this,target, key);
 
-  map[key] = function (key: string, value: any) {
-    if(require && typeof value === "undefined"){
-      dealVeri.call(this,{value: false, error: ERROR_TYPE.REQUIRE_ERROR},key,value, errMsg);
-    }else {
-      if(typeof value !== "undefined") {
-        let ve: IVeri;
-        if(isArray){
-          ve = veriFun.call(this, key, value, callArray);
-        }else {
-          ve = veriFun.call(this, key, value);
-        }
-        dealVeri.call(this, ve, key, value, errMsg);
+  container.push(function (key: string, value: any) {
+    if(typeof value !== "undefined") {
+      let ve: IVeri;
+      if(isArray){
+        ve = veriFun.call(this, key, value, callArray);
+      }else {
+        ve = veriFun.call(this, key, value);
       }
+      dealVeri.call(this, ve, key, value, errMsg);
     }
-  }
+  });
 }

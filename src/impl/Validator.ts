@@ -15,6 +15,10 @@ export class Validator implements IValidator{
   model: object;
   errMsg: object;
 
+  constructor(){
+
+  }
+
   /**
    * 设置model，获取错误信息
    *
@@ -25,9 +29,13 @@ export class Validator implements IValidator{
     this.errMsg = {};
     if(this.initModel) {
       this.model = model;
+      let container;
       for (let key in this.initModel) {
         try {
-          this[D_NAME][key].call(this, key, model[key]);
+          container = this[D_NAME][key];
+          for(var i = 0; i < container.length; i++) {
+            this[D_NAME][key][i].call(this, key, model[key]);
+          }
         } catch (e) {
           console.log(e);
         }

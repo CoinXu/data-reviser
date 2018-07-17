@@ -4,54 +4,43 @@
  * @description 测试用实体类
  */
 
-import {Validator,structType} from "../script/index";
-import {
-  decoInt32,
-  decoDouble,
-  decoFloat,
-  decoInt64,
-  decoString,
-  decoStruct,
-  decoUnInt32,
-  decoUnInt64,
-  decoArray,
-  decoBoolean
-} from "../impl/Decorators/index";
+import paramVeri from "../script/index";
 import {VERI_TYPE} from "../script/staticData";
 import Test1ObjEntry from "./Test1ObjEntry";
 
 // 测试用实体类
-class Test1Entry extends Validator{
+class Test1Entry extends paramVeri.Validator{
 
-  @decoInt32("num is require",true)
+  @paramVeri.DecoRequire("require")
+  @paramVeri.DecoInt32("num is wrong")
   num1: number = 1;
 
-  @decoInt64("发生错误",true)
+  @paramVeri.DecoInt64("发生错误")
   num64: number = 1;
 
-  @decoUnInt32("error", true)
+  @paramVeri.DecoUnInt32("error",)
   unnum32: number = 1;
 
-  @decoUnInt64("",true)
+  @paramVeri.DecoUnInt64("")
   unnum64: number = 1;
 
-  @decoDouble("double is require", true)
+  @paramVeri.DecoDouble("double is require",)
   double: number = 1.0;
 
-  @decoFloat("发生错误", true)
+  @paramVeri.DecoFloat("发生错误")
   float: number = 1.0;
 
-  @decoString("",true)
+  @paramVeri.DecoString("")
   str: string = "demo";
 
-  @decoBoolean("error",false)
+  @paramVeri.DecoBoolean("error")
   boo: boolean = false;
 
-  @decoArray(VERI_TYPE.INT32,"",true)
+  @paramVeri.DecoArray(VERI_TYPE.INT32,"")
   numarr: Array<any> = [];
 
-  @decoStruct("error",true)
-  @structType(Test1ObjEntry)
+  @paramVeri.DecoStruct("error")
+  @paramVeri.StructType(Test1ObjEntry)
   obj: Test1ObjEntry = new Test1ObjEntry();
 
 }

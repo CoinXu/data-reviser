@@ -5,27 +5,29 @@
  */
 
 
-import {structType} from "../impl/structType";
+import {StructType} from "../impl/Decorators/StructType";
 import {Validator} from "../impl/Validator";
 import {VERI_TYPE,ERROR_TYPE} from "./staticData";
-import {decoArray,decoBoolean,decoDouble,decoFloat,decoInt32,decoInt64,decoStruct,decoString,decoUnInt32,decoUnInt64} from "../impl/Decorators/index";
+import {DecoRequire} from "../impl/Decorators/DecoRequire";
+import {DecoArray,DecoBoolean,DecoDouble,DecoFloat,DecoInt32,DecoInt64,DecoStruct,DecoString,DecoUnInt32,DecoUnInt64} from "../impl/Decorators/index";
 
 /*
  * 入口
  */
-export {
-  decoArray,
-  decoBoolean,
-  decoDouble,
-  decoFloat,
-  decoInt32,
-  decoInt64,
-  decoStruct,
-  decoString,
-  decoUnInt32,
-  decoUnInt64,
-  structType,
+export default {
+  DecoArray,
+  DecoBoolean,
+  DecoDouble,
+  DecoFloat,
+  DecoInt32,
+  DecoInt64,
+  DecoStruct,
+  DecoString,
+  DecoUnInt32,
+  DecoUnInt64,
+  StructType,
   Validator,
   ERROR_TYPE,
-  VERI_TYPE
+  VERI_TYPE,
+  DecoRequire
 }

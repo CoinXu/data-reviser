@@ -42,6 +42,11 @@ yarn add paramveri --registry=http://npm.100.com
 ### 使用
 可参考src/page与src/entry的测试用例
 
+## 验证装饰器
++ `@decoInt32(errMsg:string,isRequire:boolean)`： 检测修饰的值是否为合法的int32
++ `@decoInt32(errMsg:string,isRequire:boolean)`
+
+
 #### 验证装饰器
 ```js
 @decoInt32(errMsg:string,isRequire:boolean)
@@ -79,17 +84,4 @@ getModel:返回Model
 ```js
 VERI_TYPE:参数类型
 ERROR_TYPE:错误类型
-
-
-```
-
-注意：发布后export在ParamVeri中,eg:
-```js
-import {ParamVeri} from "paramveri";
-
-export class objEntry extends ParamVeri.Validator{
-  @ParamVeri.decoInt32("",true)
-  num: number = 1;
-}
-
 ```

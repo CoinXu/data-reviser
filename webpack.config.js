@@ -114,8 +114,7 @@ if (process.env.NODE_ENV === 'production') {
     path: path.resolve(__dirname, './dist/paramveri/'),
     publicPath: '/dist/paramveri/',
     filename: '[name].js',
-    library: "ParamVeri",
-    libraryTarget: "commonjs"
+    libraryTarget: "commonjs2"
   }
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({

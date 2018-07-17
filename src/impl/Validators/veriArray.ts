@@ -26,18 +26,23 @@ export function veriArray(key: string, value: any, veriFun: Function):IVeri {
   }else{
     this[key] = [];
     let ve;
+    let errIndex = [];
     for (let i = 0; i < value.length; i++) {
       ve = veriFun.call(this, key, value[i]);
       if (!ve.value) {
-        return {
-          value: false,
-          error: ve.error,
-          index: i
-        };
+        errIndex.push(i);
       }
     }
-    return {
-      value: true
-    };
+    if(errIndex.length){
+      return {
+        value: false,
+        error: ve.error,
+        index: errIndex
+      };
+    }else {
+      return {
+        value: true
+      };
+    }
   }
 }
