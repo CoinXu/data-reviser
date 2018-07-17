@@ -4,7 +4,7 @@
  * @description 测试用实体类
  */
 
-import {Validator,decorator,structType} from "../script/index";
+import {Validator,structType} from "../script/index";
 import {
   decoInt32,
   decoDouble,
