@@ -5,7 +5,6 @@
  */
 
 import paramVeri from "../script/index";
-import {VERI_TYPE} from "../script/staticData";
 import Test1ObjEntry from "./Test1ObjEntry";
 
 // 测试用实体类
@@ -36,7 +35,7 @@ class Test1Entry extends paramVeri.Validator{
   @paramVeri.DecoBoolean("error")
   boo: boolean = false;
 
-  @paramVeri.DecoArray(VERI_TYPE.INT32,"")
+  @paramVeri.DecoArray(paramVeri.VERI_TYPE.INT32,"")
   numarr: Array<any> = [];
 
   @paramVeri.DecoStruct("error")
