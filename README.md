@@ -42,7 +42,7 @@ yarn add paramveri --registry=http://npm.100.com
 ### 使用
 可参考src/page与src/entry的测试用例
 
-#### 装饰器
+#### 验证装饰器
 ```js
 @decoInt32(errMsg:string,isRequire:boolean)
 @decoDouble(errMsg:string,isRequire:boolean)
@@ -59,24 +59,24 @@ isRequire：说明是否必须，默认为false
 arrayType: 数组项类型,参考staticData.VERI_TYPE
 ```
 
-
-```
-2、
+#### 实体装饰器
+```js
 @structType(class)
-装饰器配合@decoStruct，用于声明struct参数格式
-eg:
+//装饰器配合@decoStruct，用于声明struct参数格式,eg:
 @decoStruct("error",true)
 @structType(Test1ObjEntry)
 obj: test1ObjEntry = new test1ObjEntry();
+```
 
-3、
-Validator
-实体类父类，包装了setModel，getModel方法
+#### Validator
+```js
+//实体类父类，包装了setModel，getModel方法
 setModel:设置model，返回错误信息{type: 错误类型（参考ERROR_TYPE），msg：自定义错误信息，index： 若为数组，指定数组下标}
 getModel:返回Model
+```
 
-4、
-静态变量
+#### 静态变量
+```js
 VERI_TYPE:参数类型
 ERROR_TYPE:错误类型
 
