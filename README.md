@@ -74,8 +74,7 @@ setModel:设置model，返回错误信息
 getModel:返回Model
 
 4、
-staticData
-包含各种静态变量
+静态变量
 VERI_TYPE:参数类型
 ERROR_TYPE:错误类型
 
