@@ -77,7 +77,16 @@ errMsg：自定义错误信息，默认为空
 + `@structType(class)`: 配合@decoStruct使用，用于声明struct参数格式
 
 #### Validator
-+ `setModel(model: object)`: 设置model，返回错误信息,参考IErrMsg
++ `setModel(model: object)`: 设置model，返回错误信息
+
+```ts
+{
+    key1: IParamWrongMsg,
+    key2: IParamWrongMsg
+}
+
+```
+
 + `getModel`: 返回Model
 
 eg:
@@ -177,12 +186,12 @@ ERROR_TYPE = {
 };
 ```
 
-+ `IErrMsg`: 错误信息
++ `IParamWrongMsg`: 错误信息
 
 ```ts
-IErrMsg {
+interface IParamWrongMsg {
   type: string,
   msg?: string,
-  index?: Array<number>
+  index?: number
 }
 ```
