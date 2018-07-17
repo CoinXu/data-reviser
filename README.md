@@ -56,10 +56,20 @@ yarn add paramveri --registry=http://npm.100.com
 + `@decoUnInt64(errMsg:string)`:  检测修饰的值是否为合法的unsign int64
 + `@decoBoolean(errMsg:string)`:  检测修饰的值是否为合法的boolean
 + `@decoArray(arrayType:string, errMsg:string)`:  检测修饰的值是否为合法的array
+
 ```
 
 errMsg：自定义错误信息，默认为空
 arrayType: 数组项类型,参考VERI_TYPE
+
+```
+
+#### require装饰器
++ `@DecoRequire(errMsg:string)`: 检测修饰的值为require
+
+```
+
+errMsg：自定义错误信息，默认为空
 
 ```
 
@@ -69,40 +79,6 @@ arrayType: 数组项类型,参考VERI_TYPE
 #### Validator
 + `setModel`: 设置model，返回错误信息,参考IErrMsg
 + `getModel`: 返回Model
-
-#### 静态变量与接口
-+ `VERI_TYPE`: 参数类型
-```js
-VERI_TYPE = {
-  INT32: "int32",
-  INT64: "int64",
-  DOUBLE: "double",
-  FLOAT: "float",
-  STRING: "string",
-  STRUCT: "struct",
-  UNINT32: "unsign int32",
-  UNINT64: "unsign int64",
-  BOOLEAN: "boolean",
-  ARRAY: "array"
-};
-```
-+ `ERROR_TYPE`: 错误类型
-```js
-ERROR_TYPE = {
-  TYPE_ERROR: "type error",
-  SIZE_ERROR: "size error",
-  REQUIRE_ERROR: "require error"
-};
-```
-
-+ ``: 错误信息
-```ts
-IErrMsg {
-  type: string,
-  msg?: string,
-  index?: Array<number>
-}
-```
 
 eg:
 ```ts
@@ -144,5 +120,40 @@ class Test1Entry extends paramVeri.Validator{
   @paramVeri.StructType(Test1ObjEntry)
   obj: Test1ObjEntry = new Test1ObjEntry();
 
+}
+```
+
+
+#### 静态变量与接口
++ `VERI_TYPE`: 参数类型
+```js
+VERI_TYPE = {
+  INT32: "int32",
+  INT64: "int64",
+  DOUBLE: "double",
+  FLOAT: "float",
+  STRING: "string",
+  STRUCT: "struct",
+  UNINT32: "unsign int32",
+  UNINT64: "unsign int64",
+  BOOLEAN: "boolean",
+  ARRAY: "array"
+};
+```
++ `ERROR_TYPE`: 错误类型
+```js
+ERROR_TYPE = {
+  TYPE_ERROR: "type error",
+  SIZE_ERROR: "size error",
+  REQUIRE_ERROR: "require error"
+};
+```
+
++ ``: 错误信息
+```ts
+IErrMsg {
+  type: string,
+  msg?: string,
+  index?: Array<number>
 }
 ```
