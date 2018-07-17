@@ -7,7 +7,7 @@
 
 import {structType} from "../impl/structType";
 import {Validator} from "../impl/Validator";
-import {VERI_TYPE} from "./staticData";
+import {VERI_TYPE,ERROR_TYPE} from "./staticData";
 import {decoArray,decoBoolean,decoDouble,decoFloat,decoInt32,decoInt64,decoStruct,decoString,decoUnInt32,decoUnInt64} from "../impl/Decorators/index";
 
 /*
@@ -26,5 +26,6 @@ export {
   decoUnInt64,
   structType,
   Validator,
+  ERROR_TYPE,
   VERI_TYPE
 }
