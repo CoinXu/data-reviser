@@ -1,10 +1,22 @@
-export const __D_NAME__ = "_validator_";
-export const __CLASS_TYPE_ = "_class_";
-export const __ERROR_TYPE__ = {
-  type_error: "type error",
-  size_error: "size error"
+/**
+ * @date 2017-07-17
+ * @author zhuoyihan
+ * @description 静态变量
+ */
+
+export const D_NAME = "_validator_";
+export const CLASS_TYPE = "_class_";
+/*
+ * 错误类型
+ */
+export const ERROR_TYPE = {
+  TYPE_ERROR: "type error",
+  SIZE_ERROR: "size error"
 };
-export const __VERI_TYPE__ = {
+/*
+ * 参数类型
+ */
+export const VERI_TYPE = {
   INT32: "int32",
   INT64: "int64",
   DOUBLE: "double",

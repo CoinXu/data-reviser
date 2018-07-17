@@ -1,3 +1,9 @@
+/**
+ * @date 2017-07-17
+ * @author zhuoyihan
+ * @default vue路由配置
+ */
+
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 

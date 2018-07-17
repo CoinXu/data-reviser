@@ -1,11 +1,20 @@
-import {Decorator} from "../impl/Decorator";
+/**
+ * @date 2017-07-17
+ * @author zhuoyihan
+ * @description 参数验证入口
+ */
+
+import {decorator} from "../impl/decorator";
 import {structType} from "../impl/structType";
 import {Validator} from "../impl/Validator";
-import {__VERI_TYPE__} from "./staticData";
+import {VERI_TYPE} from "./staticData";
 
+/*
+ * 入口
+ */
 export {
-  Decorator,
+  decorator,
   structType,
   Validator,
-  __VERI_TYPE__
+  VERI_TYPE
 }

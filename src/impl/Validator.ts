@@ -1,16 +1,31 @@
-import {__D_NAME__} from "../script/staticData"
+/**
+ * @date 2017-07-17
+ * @author zhuoyihan
+ * @description 实体类父类
+ */
+
+import {D_NAME} from "../script/staticData"
 import {Validator as IValidator} from "../inter/decorator"
 
+/*
+ * 实体类父类
+ */
 export class Validator implements IValidator{
   model;
   errmsg;
 
+  /**
+   * 设置model，获取错误信息
+   *
+   * @param {object} model - 参数模型
+   * @returns {any}
+   */
   public setModel(model) {
     this.model = model;
     this.errmsg = [];
     for (let key in model) {
       try {
-        this[__D_NAME__][key].call(this, key, model[key]);
+        this[D_NAME][key].call(this, key, model[key]);
       }catch(e){
         console.log(e);
       }
@@ -19,6 +34,11 @@ export class Validator implements IValidator{
   }
 
 
+  /**
+   * 获取model
+   *
+   * @returns {{}}
+   */
   public getModel() {
     let retModel = {};
     for(let key in this.model){
