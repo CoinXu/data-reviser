@@ -151,7 +151,7 @@ ERROR_TYPE = {
 };
 ```
 
-+ ``: 错误信息
++ `IErrMsg`: 错误信息
 
 ```ts
 IErrMsg {
