@@ -42,9 +42,9 @@ yarn add paramveri --registry=http://npm.100.com
 可参考src/page与src/entry的测试用例
 ```
 1、
-@Decorator(param,secondparam)
+@decorator(param,secondparam)
 装饰器，param为验证的类型，包括：
-__VERI_TYPE__ = {
+VERI_TYPE = {
   INT32: "int32",
   INT64: "int64",
   DOUBLE: "double",
@@ -55,13 +55,13 @@ __VERI_TYPE__ = {
   UNINT64: "unsign int64",
   ARRAY: "array"
 };
-secondparam只有在类型为__VERI_TYPE__.ARRAY的情况下才需要，用于声明数组内数据类型
+secondparam只有在类型为VERI_TYPE.ARRAY的情况下才需要，用于声明数组内数据类型
 
 2、
 @structType(class)
-装饰器配合@Decorator使用，只有在类型为__VERI_TYPE__.STRUCT条件下才使用，用于声明struct参数格式
+装饰器配合@decorator使用，只有在类型为VERI_TYPE.STRUCT条件下才使用，用于声明struct参数格式
 eg:
-@Decorator(__VERI_TYPE__.STRUCT)
+@decorator(VERI_TYPE.STRUCT)
 @structType(test1ObjEntry)
 obj: test1ObjEntry = new test1ObjEntry();
 
@@ -72,10 +72,10 @@ setModel:设置model，返回错误信息
 getModel:返回Model
 
 4、
-StaticData
+staticData
 包含各种静态变量
-__VERI_TYPE__:参数类型
-__ERROR_TYPE__:错误类型
+VERI_TYPE:参数类型
+ERROR_TYPE:错误类型
 
 
 ```
@@ -85,7 +85,7 @@ __ERROR_TYPE__:错误类型
 import {ParamVeri} from "paramveri";
 
 export class objEntry extends ParamVeri.Validator{
-  @ParamVeri.Decorator(ParamVeri.__VERI_TYPE__.INT32)
+  @ParamVeri.decorator(ParamVeri.VERI_TYPE.INT32)
   num: number = 1;
 }
 
