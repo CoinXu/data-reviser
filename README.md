@@ -80,6 +80,7 @@ errMsg：自定义错误信息，默认为空
 + `setModel(model: object)`: 设置model，返回错误信息
 
 ```ts
+//返回值
 {
     key1: IParamWrongMsg,
     key2: IParamWrongMsg
