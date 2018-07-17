@@ -11,8 +11,9 @@ import {Validator as IValidator} from "../inter/decorator"
  * 实体类父类
  */
 export class Validator implements IValidator{
-  model;
-  errmsg;
+  initModel: object;
+  model: object;
+  errMsg: object;
 
   /**
    * 设置model，获取错误信息
@@ -21,16 +22,18 @@ export class Validator implements IValidator{
    * @returns {any}
    */
   public setModel(model) {
-    this.model = model;
-    this.errmsg = [];
-    for (let key in model) {
-      try {
-        this[D_NAME][key].call(this, key, model[key]);
-      }catch(e){
-        console.log(e);
+    this.errMsg = {};
+    if(this.initModel) {
+      this.model = model;
+      for (let key in this.initModel) {
+        try {
+          this[D_NAME][key].call(this, key, model[key]);
+        } catch (e) {
+          console.log(e);
+        }
       }
     }
-    return this.errmsg;
+    return this.errMsg;
   }
 
 

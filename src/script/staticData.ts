@@ -11,7 +11,8 @@ export const CLASS_TYPE = "_class_";
  */
 export const ERROR_TYPE = {
   TYPE_ERROR: "type error",
-  SIZE_ERROR: "size error"
+  SIZE_ERROR: "size error",
+  REQUIRE_ERROR: "require error"
 };
 /*
  * 参数类型

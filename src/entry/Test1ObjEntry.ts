@@ -4,13 +4,13 @@
  * @description 测试用，参数类型为struct时，struct对应实体类
  */
 
-import {Validator,decorator} from "../script/index";
-import {VERI_TYPE} from "../script/staticData";
+import {Validator} from "../script/index";
+import {decoInt32} from "../impl/Decorators/index";
 
 // 测试用实体类
 class Test1ObjEntry extends Validator{
 
-  @decorator(VERI_TYPE.INT32)
+  @decoInt32("num is require",true)
   num: number = 1;
 
 

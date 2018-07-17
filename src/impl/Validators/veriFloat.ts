@@ -19,14 +19,14 @@ export function veriFloat(key: string, value: any):IVeri {
     //验证是否为number
     return {
       value: false,
-      error: {error: ERROR_TYPE.TYPE_ERROR, key: key}
+      error: ERROR_TYPE.TYPE_ERROR
     };
   }else{
     if(value > Math.pow(2,128) || value < -Math.pow(2,128)){
       //验证指数位是否超过float范围
       return {
         value: false,
-        error: {error: ERROR_TYPE.SIZE_ERROR, key: key}
+        error: ERROR_TYPE.SIZE_ERROR
       };
     }else{
       return {

@@ -19,7 +19,7 @@ export function veriString(key: string, value: any):IVeri {
     //验证是否为number
     return {
       value: false,
-      error: {error: ERROR_TYPE.TYPE_ERROR, key: key}
+      error: ERROR_TYPE.TYPE_ERROR
     };
   }else{
     //条件满足

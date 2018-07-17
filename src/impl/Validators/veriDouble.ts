@@ -19,14 +19,14 @@ export function veriDouble(key: string, value: any):IVeri {
     //验证是否为number
     return {
       value: false,
-      error: {error: ERROR_TYPE.TYPE_ERROR, key: key}
+      error: ERROR_TYPE.TYPE_ERROR
     };
   }else{
     if(value > Math.pow(2,1024) || value < -Math.pow(2,1024)){
       //验证指数位是否超过double范围
       return {
         value: false,
-        error: {error: ERROR_TYPE.SIZE_ERROR, key: key}
+        error: ERROR_TYPE.SIZE_ERROR
       };
     }else{
       return {

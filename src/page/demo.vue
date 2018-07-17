@@ -25,6 +25,7 @@
           float: 1.1,
           str: "test",
           numarr: [1,2,3,4],
+          boo: true,
           obj: {
             num: 11
           }

@@ -21,18 +21,18 @@ export function veriArray(key: string, value: any, veriFun: Function):IVeri {
     //验证是否为数组
     return {
       value: false,
-      error: {error: ERROR_TYPE.TYPE_ERROR, key: key}
+      error: ERROR_TYPE.TYPE_ERROR
     };
   }else{
     this[key] = [];
     let ve;
-    for (let i in value) {
+    for (let i = 0; i < value.length; i++) {
       ve = veriFun.call(this, key, value[i]);
       if (!ve.value) {
-        ve.error.index = i;
         return {
           value: false,
-          error: ve.error
+          error: ve.error,
+          index: i
         };
       }
     }

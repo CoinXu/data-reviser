@@ -19,21 +19,21 @@ export function veriInt64(key: string, value: any):IVeri {
     //验证是否为number
     return {
       value: false,
-      error: {error: ERROR_TYPE.TYPE_ERROR, key: key}
+      error: ERROR_TYPE.TYPE_ERROR
     };
   }else{
     if(value > 9223372036854775807 || value < -9223372036854775808){
       //验证是否超过int64范围
       return {
         value: false,
-        error: {error: ERROR_TYPE.SIZE_ERROR, key: key}
+        error: ERROR_TYPE.SIZE_ERROR
       };
     }else{
       if(value % 1 !== 0){
         //存在小数
         return {
           value: false,
-          error: {error: ERROR_TYPE.TYPE_ERROR, key: key}
+          error: ERROR_TYPE.TYPE_ERROR
         };
       }else {
         //条件满足

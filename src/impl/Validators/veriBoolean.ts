@@ -1,30 +1,30 @@
 /**
  * @date 2017-07-17
  * @author zhuoyihan
- * @description struct验证器
+ * @description boolean验证器
  */
 
-import {ERROR_TYPE,CLASS_TYPE} from "../../script/staticData";
+import {ERROR_TYPE} from "../../script/staticData";
 import {IVeri} from "../../inter/decorator";
 
 /**
- * struct类型验证
+ * boolean类型验证
  *
  * @param {string} key - 键值
  * @param {any} value - 值
  * @returns {IVeri}
  */
-export function veriStruct(key: string, value: any): IVeri {
-  if(!(value instanceof this[CLASS_TYPE][key])){
-    //验证对象是否正确
+export function veriBoolean(key: string, value: any):IVeri {
+  if(typeof value !== "boolean"){
+    //验证是否为boolean
     return {
       value: false,
       error: ERROR_TYPE.TYPE_ERROR
     };
   }else{
+    //条件满足
     return {
       value: true
     };
   }
 }
-
