@@ -131,11 +131,11 @@ if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.entry = {
-    validator: './src/script/index.js'
+    index: './src/script/index.js'
   }
   module.exports.output = {
-    path: path.resolve(__dirname, './dist/paramveri/'),
-    publicPath: '/dist/paramveri/',
+    path: path.resolve(__dirname, './publish/paramveri/'),
+    publicPath: '/bin//',
     filename: '[name].js',
     libraryTarget: "commonjs2"
   }

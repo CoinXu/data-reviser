@@ -1,0 +1,14 @@
+{
+  "name": "param-veri",
+  "version": "1.0.3",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+  },
+  "typings": "./typings/index.d.ts"
+}
