@@ -13,6 +13,9 @@ npm run dev
 
 # 构建发布
 npm run build
+
+# 测试
+npm run test
 ```
 
 
@@ -33,6 +36,7 @@ src----inter:定义接口
  |-----page:开发使用，测试页面
  |-----entry:开发使用，实体类
  |-----router:开发使用，路由
+test: 测试用例
 ```
 
 ## 安装与使用
