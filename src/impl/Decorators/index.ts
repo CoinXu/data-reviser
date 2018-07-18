@@ -41,7 +41,7 @@ export {
  */
 export function dealVeri(ve: IVeri,key: string,value: any, errMsg: string) {
   if (ve.value) {
-    this[key] = value;
+    return true;
   }else{
     let err: IParamWrongMsg;
     if(ve.index){
@@ -61,8 +61,8 @@ export function dealVeri(ve: IVeri,key: string,value: any, errMsg: string) {
       };
       this.errMsg[key] = err;
     }
+    return false;
   }
-  this.model[key] = this[key];
 }
 
 /**
@@ -103,7 +103,7 @@ export function setValidator(target: object, key: string, errMsg: string, veriFu
       }else {
         ve = veriFun.call(this, key, value);
       }
-      dealVeri.call(this, ve, key, value, errMsg);
+      return dealVeri.call(this, ve, key, value, errMsg);
     }
   });
 }

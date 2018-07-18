@@ -30,12 +30,18 @@ export class Validator implements IValidator{
     if(this.initModel) {
       this.model = model;
       let container;
+      let isRight = true;
       for (let key in this.initModel) {
         try {
           container = this[D_NAME][key];
+          isRight = true;
           for(var i = 0; i < container.length; i++) {
-            this[D_NAME][key][i].call(this, key, model[key]);
+            isRight = isRight && this[D_NAME][key][i].call(this, key, model[key]);
           }
+          if(isRight) {
+            this[key] = model[key];
+          }
+          this.model[key] = this[key];
         } catch (e) {
           console.log(e);
         }

@@ -21,7 +21,9 @@ export function DecoRequire(errMsg: string = null) {
 
     container.push(function (key, value) {
       if(typeof value === "undefined"){
-        dealVeri.call(this, {value: false, error: ERROR_TYPE.REQUIRE_ERROR}, key, value, errMsg);
+        return dealVeri.call(this, {value: false, error: ERROR_TYPE.REQUIRE_ERROR}, key, value, errMsg);
+      }else{
+        return true;
       }
     });
 

@@ -80,7 +80,7 @@ module.exports = {
     historyApiFallback: true,
     noInfo: true,
     overlay: true,
-    port: 3002,
+    port: 3003,
     host: "127.0.0.1"
   },
   performance: {
