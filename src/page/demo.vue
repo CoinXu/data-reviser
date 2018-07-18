@@ -17,7 +17,7 @@
     methods: {
       checkParam: function () {
         let data = {
-          num1: 10,
+          // num1: 10,
           num64: 64,
           unnum32: 100,
           unnum64: 6400,

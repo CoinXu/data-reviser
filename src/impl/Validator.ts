@@ -77,7 +77,9 @@ export class Validator implements IValidator{
           }
         }
       }else{
-        retModel[key] = this.model[key];
+        if(typeof this.model[key] !== "undefined") {
+          retModel[key] = this.model[key];
+        }
       }
     }
     return retModel;

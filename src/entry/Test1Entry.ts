@@ -10,42 +10,40 @@ import Test1ObjEntry from "./Test1ObjEntry";
 // 测试用实体类
 class Test1Entry extends paramVeri.Validator{
 
+
+  @paramVeri.DecoInt32("wrong")
   @paramVeri.DecoRequire("require")
-  @paramVeri.DecoInt32("num is wrong")
   num1: number = 1;
 
-  @paramVeri.DecoInt64("发生错误")
+  @paramVeri.DecoInt64("wrong")
   num64: number = 1;
 
-  @paramVeri.DecoUnInt32("error",)
+  @paramVeri.DecoUnInt32("wrong")
   unnum32: number = 1;
 
-  @paramVeri.DecoUnInt64("")
+  @paramVeri.DecoUnInt64("wrong")
   unnum64: number = 1;
 
-  @paramVeri.DecoDouble("double is require",)
+  @paramVeri.DecoDouble("wrong")
   double: number = 1.0;
 
-  @paramVeri.DecoFloat("发生错误")
+  @paramVeri.DecoFloat("wrong")
   float: number = 1.0;
 
-  @paramVeri.DecoString("")
+  @paramVeri.DecoString("wrong")
   str: string = "demo";
 
-  @paramVeri.DecoBoolean("error")
+  @paramVeri.DecoBoolean("wrong")
   boo: boolean = false;
 
-  @paramVeri.DecoArray(paramVeri.VERI_TYPE.INT32,"")
+  @paramVeri.DecoArray(paramVeri.VERI_TYPE.INT32,"wrong")
   numarr: Array<any> = [];
 
-  @paramVeri.DecoStruct("error")
+  @paramVeri.DecoStruct("wrong")
   @paramVeri.StructType(Test1ObjEntry)
   obj: Test1ObjEntry = new Test1ObjEntry();
 
 }
 
 export default Test1Entry;
-
-
-
 

@@ -96,14 +96,12 @@ export function setValidator(target: object, key: string, errMsg: string, veriFu
   const container = initValidator.call(this,target, key);
 
   container.push(function (key: string, value: any) {
-    if(typeof value !== "undefined") {
-      let ve: IVeri;
-      if(isArray){
-        ve = veriFun.call(this, key, value, callArray);
-      }else {
-        ve = veriFun.call(this, key, value);
-      }
-      return dealVeri.call(this, ve, key, value, errMsg);
+    let ve: IVeri;
+    if(isArray){
+      ve = veriFun.call(this, key, value, callArray);
+    }else {
+      ve = veriFun.call(this, key, value);
     }
+    return dealVeri.call(this, ve, key, value, errMsg);
   });
 }

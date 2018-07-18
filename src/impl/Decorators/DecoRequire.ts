@@ -23,6 +23,13 @@ export function DecoRequire(errMsg: string = null) {
       if(typeof value === "undefined"){
         return dealVeri.call(this, {value: false, error: ERROR_TYPE.REQUIRE_ERROR}, key, value, errMsg);
       }else{
+        if(typeof value === "string"){
+          value = value.replace(/^([\s]+)/g, "");
+          value = value.replace(/([\s]+)$/g, "");
+          if(value.length <= 0){
+            return dealVeri.call(this, {value: false, error: ERROR_TYPE.REQUIRE_ERROR}, key, value, errMsg);
+          }
+        }
         return true;
       }
     });

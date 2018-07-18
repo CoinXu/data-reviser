@@ -9,7 +9,7 @@ import paramVeri from "../script/index";
 // 测试用实体类
 class Test1ObjEntry extends paramVeri.Validator{
 
-  @paramVeri.DecoInt32("num is require")
+  @paramVeri.DecoInt32("wrong")
   num: number = 1;
 }
 

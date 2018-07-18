@@ -93,6 +93,29 @@ module.exports = {
   devtool: '#eval-source-map'
 }
 
+if (process.env.NODE_ENV === 'test') {
+  module.exports.devtool = '#source-map'
+  module.exports.entry = {
+    main: './test/paramveri.ts'
+  }
+  module.exports.output = {
+    path: path.resolve(__dirname, './test'),
+    publicPath: '/test/',
+    filename: 'build.js',
+    libraryTarget: "commonjs2"
+  }
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
+    })
+  ])
+}
+
 if (process.env.NODE_ENV === 'development') {
   module.exports.entry = {
     main: './src/main.js',
