@@ -37,14 +37,15 @@ src----inter:定义接口
  |-----entry:开发使用，实体类
  |-----router:开发使用，路由
 test: 测试用例
+publish: 发布的包以及typings所在
 ```
 
 ## 安装与使用
 ### 安装
 ```
-npm install paramveri --registry=http://npm.100.com
+npm install param-veri --registry=http://npm.100.com
 或者
-yarn add paramveri --registry=http://npm.100.com
+yarn add param-veri --registry=http://npm.100.com
 ```
 ### 使用
 可参考src/page与src/entry的测试用例
