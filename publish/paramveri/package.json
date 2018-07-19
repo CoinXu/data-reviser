@@ -10,5 +10,5 @@
   "license": "ISC",
   "devDependencies": {
   },
-  "typings": "./typings/index.d.ts"
+  "typings": "./typings/paramTyping.d.ts"
 }
