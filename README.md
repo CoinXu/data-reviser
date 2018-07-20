@@ -90,6 +90,15 @@ eg:
 #### 实体装饰器
 + `@structType(class)`: 配合@decoStruct使用，用于声明struct参数格式
 
+#### 长度装饰器
++ `@DecoMaxLength(size, errMsg)`: 声明参数最大长度
++ `@DecoMinLength(size, errMsg)`: 声明参数最小长度
+```ts
+  @paramVeri.DecoMaxLength(4,"length wrong")
+  @paramVeri.DecoMinLength(2,"length wrong")
+  str: string = "demo";
+```
+
 #### Validator
 + `setModel(model: object)`: 设置model，返回错误信息
 
@@ -163,6 +172,8 @@ class Test1Entry extends paramVeri.Validator{
   @paramVeri.DecoFloat("wrong")
   float: number = 1.0;
 
+  @paramVeri.DecoMaxLength(4,"length wrong")
+  @paramVeri.DecoMinLength(2,"length wrong")
   @paramVeri.DecoString("wrong")
   str: string = "demo";
 
@@ -211,7 +222,9 @@ enum VERI_TYPE = {
 enum ERROR_TYPE = {
   TYPE_ERROR,
   SIZE_ERROR,
-  REQUIRE_ERROR
+  REQUIRE_ERROR,
+  LENGTH_MIN_ERRO
+  LENGTH_MAX_ERRO,
 };
 ```
 

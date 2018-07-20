@@ -21,6 +21,8 @@ import {DecoUnInt32} from "../impl/Decorators/TypeDecorator/DecoUnInt32";
 import {DecoUnInt64} from "../impl/Decorators/TypeDecorator/DecoUnInt64";
 import {DecoEmail} from "../impl/Decorators/TypeDecorator/DecoEmail";
 import {DecoPhone} from "../impl/Decorators/TypeDecorator/DecoPhone";
+import {DecoMinLength} from "../impl/Decorators/LenthDecorator/DecoMinLength";
+import {DecoMaxLength} from "../impl/Decorators/LenthDecorator/DecoMaxLength";
 
 /*
  * 入口
@@ -42,5 +44,7 @@ export default {
   VERI_TYPE,
   DecoRequire,
   DecoEmail,
-  DecoPhone
+  DecoPhone,
+  DecoMinLength,
+  DecoMaxLength
 }

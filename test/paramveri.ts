@@ -361,6 +361,42 @@ function testPhoneTypeWrong() {
   };
 }
 
+// 测试参数类型最大长度错误
+function testMaxLengthWrong() {
+  class TestEntry extends paramVeri.Validator{
+    @paramVeri.DecoMaxLength(4,"length wrong")
+    str: string = "demo";
+  }
+  let data = {
+    str: "demo12"
+  };
+  let entry = new TestEntry();
+  let errmsg = entry.setModel(data);
+  let model = entry.getModel();
+  return {
+    model: model,
+    errmsg: errmsg
+  };
+}
+
+// 测试参数类型最小长度错误
+function testMinLengthWrong() {
+  class TestEntry extends paramVeri.Validator{
+    @paramVeri.DecoMinLength(2,"length wrong")
+    str: string = "demo";
+  }
+  let data = {
+    str: "d"
+  };
+  let entry = new TestEntry();
+  let errmsg = entry.setModel(data);
+  let model = entry.getModel();
+  return {
+    model: model,
+    errmsg: errmsg
+  };
+}
+
 // 合并两json
 function joinModel(data1,data2) {
   let tarData = {};
@@ -389,5 +425,7 @@ export default {
   testStructTypeWrong,
   testStructEntryTypeWrong,
   testEmailTypeWrong,
-  testPhoneTypeWrong
+  testPhoneTypeWrong,
+  testMaxLengthWrong,
+  testMinLengthWrong
 }

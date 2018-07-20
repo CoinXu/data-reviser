@@ -25,7 +25,9 @@ interface Iparamveri {
   ERROR_TYPE: {
     TYPE_ERROR,
     SIZE_ERROR,
-    REQUIRE_ERROR
+    REQUIRE_ERROR,
+    LENGTH_MIN_ERRO,
+    LENGTH_MAX_ERRO,
   },
   VERI_TYPE: {
     INT32,
@@ -43,7 +45,9 @@ interface Iparamveri {
   },
   DecoRequire(errMsg: string),
   DecoEmail(errMsg: string),
-  DecoPhone(errMsg: string)
+  DecoPhone(errMsg: string),
+  DecoMinLength(size: number,errMsg: string),
+  DecoMaxLength(size: number,errMsg: string)
 }
 
 declare var paramVeri: Iparamveri;

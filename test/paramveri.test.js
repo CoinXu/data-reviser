@@ -230,4 +230,30 @@ describe('参数验证测试', function() {
       }
     });
   });
+  it('参数最大长度错误', function() {
+    expect(paramveri.default.testMaxLengthWrong()).to.be.deep.equal({
+      model: {
+        str: "demo"
+      },
+      errmsg: {
+        str: {
+          type: "length more than max",
+          msg: "length wrong"
+        }
+      }
+    });
+  });
+  it('参数最小长度错误', function() {
+    expect(paramveri.default.testMinLengthWrong()).to.be.deep.equal({
+      model: {
+        str: "demo"
+      },
+      errmsg: {
+        str: {
+          type: "length less than min",
+          msg: "length wrong"
+        }
+      }
+    });
+  });
 });

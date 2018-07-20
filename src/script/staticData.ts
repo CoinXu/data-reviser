@@ -12,7 +12,9 @@ export const CLASS_TYPE = "_class_";
 export const ERROR_TYPE = {
   TYPE_ERROR: "type error",
   SIZE_ERROR: "size error",
-  REQUIRE_ERROR: "require error"
+  REQUIRE_ERROR: "require error",
+  LENGTH_MIN_ERRO: "length less than min",
+  LENGTH_MAX_ERRO: "length more than max",
 };
 /*
  * 参数类型

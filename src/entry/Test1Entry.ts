@@ -31,6 +31,8 @@ class Test1Entry extends paramVeri.Validator{
   @paramVeri.DecoFloat("wrong")
   float: number = 1.0;
 
+  @paramVeri.DecoMaxLength(4,"length wrong")
+  @paramVeri.DecoMinLength(2,"length wrong")
   @paramVeri.DecoString("wrong")
   str: string = "demo";
 
