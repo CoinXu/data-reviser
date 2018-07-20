@@ -12,7 +12,7 @@ import {Validator as IValidator} from "../inter/decorator"
  */
 export class Validator implements IValidator{
   initModel: object;
-  model: object;
+  model: object = {};
   errMsg: object;
 
   constructor(){
@@ -28,7 +28,6 @@ export class Validator implements IValidator{
   public setModel(model) {
     this.errMsg = {};
     if(this.initModel) {
-      this.model = model;
       let container;
       let isRight = true;
       for (let key in this.initModel) {
