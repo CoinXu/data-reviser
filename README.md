@@ -60,12 +60,13 @@ yarn add param-veri --registry=http://npm.100.com
 + `@decoUnInt32(errMsg:string)`:  检测修饰的值是否为合法的unsign int32
 + `@decoUnInt64(errMsg:string)`:  检测修饰的值是否为合法的unsign int64
 + `@decoBoolean(errMsg:string)`:  检测修饰的值是否为合法的boolean
-+ `@decoArray(arrayType:string, errMsg:string)`:  检测修饰的值是否为合法的array
++ `@decoArray(arrayType:string, errMsg:string，level: number)`:  检测修饰的值是否为合法的array
 
 ```
 
 errMsg：自定义错误信息，默认为空
 arrayType: 数组项类型,参考VERI_TYPE
+level: 数组维度，默认为1
 
 ```
 
