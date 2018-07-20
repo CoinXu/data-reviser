@@ -59,7 +59,7 @@ export class Validator implements IValidator{
   public getModel() {
     let retModel = {};
     for(let key in this.model){
-      if(typeof this.model[key] === "object"){
+      if(typeof this.model[key] === "object" && this.model[key] !== null){
         if(this.model[key] instanceof Array){
           retModel[key] = this.getArrayModel(this.model[key]);
           // if(this.model[key].length > 0 && typeof this.model[key][0] === "object"){

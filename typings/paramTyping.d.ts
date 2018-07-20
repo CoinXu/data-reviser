@@ -10,7 +10,7 @@ interface Validator {
 }
 
 interface Iparamveri {
-  DecoArray(arrayType:string, errMsg:string, level: number),
+  DecoArray(arrayType: string, errMsg: string, level: number),
   DecoBoolean(errMsg: string),
   DecoDouble(errMsg: string),
   DecoFloat(errMsg: string),
@@ -38,10 +38,12 @@ interface Iparamveri {
     UNINT64,
     BOOLEAN,
     ARRAY,
-    EMAIL
+    EMAIL,
+    PHONE,
   },
-  DecoRequire(errMsg:string),
-  DecoEmail(errMsg:string)
+  DecoRequire(errMsg: string),
+  DecoEmail(errMsg: string),
+  DecoPhone(errMsg: string)
 }
 
 declare var paramVeri: Iparamveri;

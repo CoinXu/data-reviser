@@ -21,7 +21,8 @@ describe('参数验证测试', function() {
         str: "test",
         unnum32: 100,
         unnum64: 6400,
-        mail: ""
+        phone: 13560521917,
+        mail: "295958897@qq.com",
       },
       errmsg: {}
     });
@@ -202,6 +203,19 @@ describe('参数验证测试', function() {
       },
       errmsg: {
         mail: {
+          type: "type error",
+          msg: "wrong"
+        }
+      }
+    });
+  });
+  it('phone参数类型错误', function() {
+    expect(paramveri.default.testPhoneTypeWrong()).to.be.deep.equal({
+      model: {
+        phone: null
+      },
+      errmsg: {
+        phone: {
           type: "type error",
           msg: "wrong"
         }

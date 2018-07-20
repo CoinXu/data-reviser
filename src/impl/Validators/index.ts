@@ -15,6 +15,7 @@ import {veriUnInt32} from "./veriUnInt32";
 import {veriUnInt64} from "./veriUnInt64";
 import {veriBoolean} from "./veriBoolean";
 import {veriEmail} from "./veriEmail";
+import {veriPhone} from "./veriPhone";
 
 // 验证器入口
 export {
@@ -28,5 +29,6 @@ export {
   veriUnInt32,
   veriUnInt64,
   veriBoolean,
-  veriEmail
+  veriEmail,
+  veriPhone
 }

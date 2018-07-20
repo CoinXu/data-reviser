@@ -29,4 +29,5 @@ export const VERI_TYPE = {
   BOOLEAN: "boolean",
   ARRAY: "array",
   EMAIL: "email",
+  PHONE: "phome"
 };

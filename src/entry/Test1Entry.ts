@@ -40,6 +40,9 @@ class Test1Entry extends paramVeri.Validator{
   @paramVeri.DecoEmail("wrong")
   mail: string = "";
 
+  @paramVeri.DecoPhone("wrong")
+  phone: number = null;
+
   @paramVeri.DecoArray(paramVeri.VERI_TYPE.INT32,"wrong",3)
   numarr: Array<any> = [];
 

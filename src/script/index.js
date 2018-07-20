@@ -20,6 +20,7 @@ import {DecoStruct} from "../impl/Decorators/TypeDecorator/DecoStruct";
 import {DecoUnInt32} from "../impl/Decorators/TypeDecorator/DecoUnInt32";
 import {DecoUnInt64} from "../impl/Decorators/TypeDecorator/DecoUnInt64";
 import {DecoEmail} from "../impl/Decorators/TypeDecorator/DecoEmail";
+import {DecoPhone} from "../impl/Decorators/TypeDecorator/DecoPhone";
 
 /*
  * 入口
@@ -40,5 +41,6 @@ export default {
   ERROR_TYPE,
   VERI_TYPE,
   DecoRequire,
-  DecoEmail
+  DecoEmail,
+  DecoPhone
 }

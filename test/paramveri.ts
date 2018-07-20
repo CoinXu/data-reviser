@@ -43,6 +43,9 @@ function testAllRight() {
     @paramVeri.DecoEmail("wrong")
     mail: string = "";
 
+    @paramVeri.DecoPhone("wrong")
+    phone: number = null;
+
     @paramVeri.DecoArray(paramVeri.VERI_TYPE.INT32,"wrong")
     numarr: Array<any> = [];
 
@@ -61,6 +64,8 @@ function testAllRight() {
     str: "test",
     numarr: [1,2,3,4],
     boo: true,
+    mail: "295958897@qq.com",
+    phone: 13560521917,
     obj: {
       num: 11
     }
@@ -354,6 +359,24 @@ function testEmailTypeWrong() {
   };
 }
 
+// 测试phone参数类型错误
+function testPhoneTypeWrong() {
+  class TestEntry extends paramVeri.Validator{
+    @paramVeri.DecoPhone("wrong")
+    phone: number = null;
+  }
+  let data = {
+    phone: 123456789
+  };
+  let entry = new TestEntry();
+  let errmsg = entry.setModel(data);
+  let model = entry.getModel();
+  return {
+    model: model,
+    errmsg: errmsg
+  };
+}
+
 // 合并两json
 function joinModel(data1,data2) {
   let tarData = {};
@@ -381,5 +404,6 @@ export default {
   testBooleanTypeWrong,
   testStructTypeWrong,
   testStructEntryTypeWrong,
-  testEmailTypeWrong
+  testEmailTypeWrong,
+  testPhoneTypeWrong
 }
