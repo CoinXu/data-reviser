@@ -70,13 +70,8 @@ function testAllRight() {
       num: 11
     }
   };
-  let obj = new Test1ObjEntry();
-  obj.setModel(data.obj);
-  let data1 = joinModel(data,{
-    obj: obj
-  })
   let entry = new Test1Entry();
-  let errmsg = entry.setModel(data1);
+  let errmsg = entry.setModel(data);
   let model = entry.getModel();
   return {
     model: model,
@@ -291,20 +286,13 @@ function testStructTypeWrong() {
   class TestEntry extends paramVeri.Validator{
     @paramVeri.DecoStruct("wrong")
     @paramVeri.StructType(TestobjEntry)
-    obj: TestobjEntry = new TestobjEntry();
+    obj: object = {};
   }
   let data = {
-    obj: {
-      num: 11
-    }
+    obj: 11
   };
-  let obj = new TestobjEntry();
-  obj.setModel(data.obj);
-  let data1 = joinModel(data,{
-    obj: 1
-  })
   let entry = new TestEntry();
-  let errmsg = entry.setModel(data1);
+  let errmsg = entry.setModel(data);
   let model = entry.getModel();
   return {
     model: model,
@@ -325,15 +313,11 @@ function testStructEntryTypeWrong() {
   }
   let data = {
     obj: {
-      num: 11
+      num: "11"
     }
   };
-  let obj = new TestEntry();
-  let data1 = joinModel(data,{
-    obj: obj
-  })
   let entry = new TestEntry();
-  let errmsg = entry.setModel(data1);
+  let errmsg = entry.setModel(data);
   let model = entry.getModel();
   return {
     model: model,

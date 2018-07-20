@@ -32,10 +32,18 @@ export function dealVeri(ve: IVeri,key: string,value: any, errMsg: string) {
         this.errMsg[key].push(err);
       }
     }else{
-      err  = {
-        type: ve.error,
-        msg: errMsg
-      };
+      if(typeof ve.key !== "undefined"){
+        err = {
+          type: ve.error,
+          msg: errMsg,
+          key: ve.key
+        };
+      }else {
+        err = {
+          type: ve.error,
+          msg: errMsg
+        };
+      }
       this.errMsg[key] = err;
     }
     return false;

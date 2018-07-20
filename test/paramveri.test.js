@@ -27,7 +27,7 @@ describe('参数验证测试', function() {
       errmsg: {}
     });
   });
-  it('int32参数require错误', function() {
+  it('参数require错误', function() {
     expect(paramveri.default.testRequireWrong()).to.be.deep.equal({
       model: {
       },
@@ -186,12 +186,20 @@ describe('参数验证测试', function() {
   it('struct参数格式错误', function() {
     expect(paramveri.default.testStructEntryTypeWrong()).to.be.deep.equal({
       model: {
-        obj: {}
+        obj: {
+          num: 1
+        }
       },
       errmsg: {
         obj: {
           type: "type error",
-          msg: "wrong"
+          msg: "wrong",
+          key: {
+            num: {
+              type: "type error",
+              msg: "wrong",
+            }
+          }
         }
       }
     });

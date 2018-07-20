@@ -5,7 +5,7 @@
  */
 
 import {ERROR_TYPE,CLASS_TYPE} from "../../script/staticData";
-import {IVeri} from "../../inter/decorator";
+import {IVeri, IVeriIndex} from "../../inter/decorator";
 
 /**
  * struct类型验证
@@ -15,16 +15,38 @@ import {IVeri} from "../../inter/decorator";
  * @returns {IVeri}
  */
 export function veriStruct(key: string, value: any): IVeri {
-  if(!(value instanceof this[CLASS_TYPE][key])){
-    //验证对象是否正确
+  if(typeof value === "object" && value !== null && !(value instanceof Array)){
+    let obj = new this[CLASS_TYPE][key]();
+    let error = obj.setModel(value);
+    let model = obj.getModel();
+    if(Object.keys(error).length !== 0){
+      this[key] = model;
+      return {
+        value: false,
+        key: error,
+        error: ERROR_TYPE.TYPE_ERROR
+      }
+    }else{
+      return {
+        value: true
+      };
+    }
+  }else{
     return {
       value: false,
       error: ERROR_TYPE.TYPE_ERROR
     };
-  }else{
-    return {
-      value: true
-    };
   }
+  // if(!(value instanceof this[CLASS_TYPE][key])){
+  //   //验证对象是否正确
+  //   return {
+  //     value: false,
+  //     error: ERROR_TYPE.TYPE_ERROR
+  //   };
+  // }else{
+  //   return {
+  //     value: true
+  //   };
+  // }
 }
 

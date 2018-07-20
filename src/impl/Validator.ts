@@ -41,7 +41,9 @@ export class Validator implements IValidator{
           if(isRight) {
             this[key] = model[key];
           }
-          this.model[key] = this[key];
+          if(typeof this[key] !== "undefined") {
+            this.model[key] = this[key];
+          }
         } catch (e) {
           console.log(e);
         }
@@ -57,33 +59,25 @@ export class Validator implements IValidator{
    * @returns {{}}
    */
   public getModel() {
-    let retModel = {};
-    for(let key in this.model){
-      if(typeof this.model[key] === "object" && this.model[key] !== null){
-        if(this.model[key] instanceof Array){
-          retModel[key] = this.getArrayModel(this.model[key]);
-          // if(this.model[key].length > 0 && typeof this.model[key][0] === "object"){
-          //   retModel[key] = [];
-          //   for(let i in this.model[key]){
-          //     retModel[key][i] = this.model[key][i].getModel();
-          //   }
-          // }else{
-          //   retModel[key] = this.model[key];
-          // }
-        }else {
-          try {
-            retModel[key] = this.model[key].getModel();
-          } catch (e) {
-            console.log(e);
-          }
-        }
-      }else{
-        if(typeof this.model[key] !== "undefined") {
-          retModel[key] = this.model[key];
-        }
-      }
-    }
-    return retModel;
+    // let retModel = {};
+    // for(let key in this.model){
+    //   if(typeof this.model[key] === "object" && this.model[key] !== null){
+    //     if(this.model[key] instanceof Array){
+    //       retModel[key] = this.getArrayModel(this.model[key]);
+    //     }else {
+    //       try {
+    //         retModel[key] = this.model[key].getModel();
+    //       } catch (e) {
+    //         console.log(e);
+    //       }
+    //     }
+    //   }else{
+    //     if(typeof this.model[key] !== "undefined") {
+    //       retModel[key] = this.model[key];
+    //     }
+    //   }
+    // }
+    return this.model;
   }
 
   /**

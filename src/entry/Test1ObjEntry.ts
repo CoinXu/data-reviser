@@ -5,12 +5,14 @@
  */
 
 import paramVeri from "../script/index";
+import Test2ObjEntry from "./Test2ObjEntry";
 
 // 测试用实体类
 class Test1ObjEntry extends paramVeri.Validator{
 
-  @paramVeri.DecoInt32("wrong")
-  num: number = 1;
+  @paramVeri.DecoStruct("wrong")
+  @paramVeri.StructType(Test2ObjEntry)
+  obj1: object = {};
 }
 
 export default Test1ObjEntry;

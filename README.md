@@ -106,28 +106,31 @@ eg:
 
 eg:
 ```js
-let data = {
-    num1: 10,
-    num64: 64,
-    unnum32: 100,
-    unnum64: 6400,
-    double: 1.11,
-    float: 1.1,
-    str: "test",
-    numarr: [1,2,3,4],
-    boo: true,
-    obj: {
-        num: 11
-    }
-};
-let obj = new test1ObjEntry();
-obj.setModel(data.obj);
-jQuery.extend(data,{
-    obj: obj
-})
-let entry = new test1Entry();
-let errmsg = entry.setModel(data);
-let model = entry.getModel();
+ let data = {
+   num1: 10,
+   num64: 64,
+   unnum32: 100,
+   unnum64: 6400,
+   double: 1.11,
+   float: 1.1,
+   str: "test",
+   mail: "2959581@qq.com",
+   phone: 13561127191,
+   numarr: [
+     [[1,1],[1,1]],
+     [[2,2],[2,2]],
+   ],
+   boo: true,
+   obj: {
+     obj1: {
+       num: 11
+     }
+   }
+ };
+ let entry = new test1Entry();
+ let errmsg = entry.setModel(data);
+ let model = entry.getModel();
+ console.log(model,errmsg);
 ```
 
 eg:
@@ -138,37 +141,45 @@ import Test1ObjEntry from "./Test1ObjEntry";
 // 测试用实体类
 class Test1Entry extends paramVeri.Validator{
 
-  @paramVeri.DecoInt32("num is wrong")
+
+  @paramVeri.DecoInt32("wrong")
   @paramVeri.DecoRequire("require")
   num1: number = 1;
 
-  @paramVeri.DecoInt64("发生错误")
+  @paramVeri.DecoInt64("wrong")
+  @paramVeri.DecoRequire()
   num64: number = 1;
 
-  @paramVeri.DecoUnInt32("error",)
+  @paramVeri.DecoUnInt32("wrong")
   unnum32: number = 1;
 
-  @paramVeri.DecoUnInt64("")
+  @paramVeri.DecoUnInt64("wrong")
   unnum64: number = 1;
 
-  @paramVeri.DecoDouble("double is require",)
+  @paramVeri.DecoDouble("wrong")
   double: number = 1.0;
 
-  @paramVeri.DecoFloat("发生错误")
+  @paramVeri.DecoFloat("wrong")
   float: number = 1.0;
 
-  @paramVeri.DecoString("")
+  @paramVeri.DecoString("wrong")
   str: string = "demo";
 
-  @paramVeri.DecoBoolean("error")
+  @paramVeri.DecoBoolean("wrong")
   boo: boolean = false;
 
-  @paramVeri.DecoArray(paramVeri.VERI_TYPE.INT32,"")
+  @paramVeri.DecoEmail("wrong")
+  mail: string = "";
+
+  @paramVeri.DecoPhone("wrong")
+  phone: number = null;
+
+  @paramVeri.DecoArray(paramVeri.VERI_TYPE.INT32,"wrong",3)
   numarr: Array<any> = [];
 
-  @paramVeri.DecoStruct("error")
+  @paramVeri.DecoStruct("wrong")
   @paramVeri.StructType(Test1ObjEntry)
-  obj: Test1ObjEntry = new Test1ObjEntry();
+  obj: object = {};
 
 }
 ```
@@ -205,9 +216,18 @@ enum ERROR_TYPE = {
 + `IParamWrongMsg`: 错误信息
 
 ```ts
+/**
+ * 错误信息
+ *
+ * @param {string} type - 错误类型
+ * @param {string} msg - 用户自定义错误信息
+ * @param {string} index - 若为数组情况下，返回错误数据index, 若数组维度大于1， 以-分割
+ * @param {IParamWrongMsg} key - 若为object情况下，返回错误数据对象
+ */
 interface IParamWrongMsg {
   type: string,
   msg?: string,
-  index?: string
+  index?: string,
+  key?: object
 }
 ```

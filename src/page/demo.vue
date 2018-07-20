@@ -6,8 +6,6 @@
 
 <script>
   import test1Entry from '../entry/Test1Entry';
-  import test1ObjEntry from "../entry/Test1ObjEntry";
-  import jQuery from "jquery";
 
   export default {
     name: "demo",
@@ -32,14 +30,11 @@
           ],
           boo: true,
           obj: {
-            num: 11
+            obj1: {
+              num: 11
+            }
           }
         };
-        let obj = new test1ObjEntry();
-        obj.setModel(data.obj);
-        jQuery.extend(data,{
-          obj: obj
-        })
         let entry = new test1Entry();
         let errmsg = entry.setModel(data);
         let model = entry.getModel();
