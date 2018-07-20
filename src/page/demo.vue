@@ -24,6 +24,7 @@
           double: 1.11,
           float: 1.1,
           str: "test",
+          mail: "2959581@qq.com",
           numarr: [
             [[1,1],[1,1]],
             [[2,2],[2,2]],

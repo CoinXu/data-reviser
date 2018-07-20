@@ -37,6 +37,9 @@ class Test1Entry extends paramVeri.Validator{
   @paramVeri.DecoBoolean("wrong")
   boo: boolean = false;
 
+  @paramVeri.DecoEmail("wrong")
+  mail: string = "";
+
   @paramVeri.DecoArray(paramVeri.VERI_TYPE.INT32,"wrong",3)
   numarr: Array<any> = [];
 

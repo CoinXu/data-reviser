@@ -37,9 +37,11 @@ interface Iparamveri {
     UNINT32,
     UNINT64,
     BOOLEAN,
-    ARRAY
+    ARRAY,
+    EMAIL
   },
-  DecoRequire(errMsg:string)
+  DecoRequire(errMsg:string),
+  DecoEmail(errMsg:string)
 }
 
 declare var paramVeri: Iparamveri;

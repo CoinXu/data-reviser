@@ -60,6 +60,7 @@ yarn add param-veri --registry=http://npm.100.com
 + `@decoUnInt32(errMsg:string)`:  检测修饰的值是否为合法的unsign int32
 + `@decoUnInt64(errMsg:string)`:  检测修饰的值是否为合法的unsign int64
 + `@decoBoolean(errMsg:string)`:  检测修饰的值是否为合法的boolean
++ `@decoEmail(errMsg:string)`:  检测修饰的值是否为合法的email
 + `@decoArray(arrayType:string, errMsg:string，level: number)`:  检测修饰的值是否为合法的array
 
 ```
@@ -187,7 +188,8 @@ enum VERI_TYPE = {
   UNINT32,
   UNINT64,
   BOOLEAN,
-  ARRAY
+  ARRAY,
+  EMAIL
 };
 ```
 + `ERROR_TYPE`: 错误类型

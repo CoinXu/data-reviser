@@ -40,6 +40,9 @@ function testAllRight() {
     @paramVeri.DecoBoolean("wrong")
     boo: boolean = false;
 
+    @paramVeri.DecoEmail("wrong")
+    mail: string = "";
+
     @paramVeri.DecoArray(paramVeri.VERI_TYPE.INT32,"wrong")
     numarr: Array<any> = [];
 
@@ -333,6 +336,24 @@ function testStructEntryTypeWrong() {
   };
 }
 
+// 测试email参数类型错误
+function testEmailTypeWrong() {
+  class TestEntry extends paramVeri.Validator{
+    @paramVeri.DecoEmail("wrong")
+    mail: string = "";
+  }
+  let data = {
+    mail: "123456789"
+  };
+  let entry = new TestEntry();
+  let errmsg = entry.setModel(data);
+  let model = entry.getModel();
+  return {
+    model: model,
+    errmsg: errmsg
+  };
+}
+
 // 合并两json
 function joinModel(data1,data2) {
   let tarData = {};
@@ -359,5 +380,6 @@ export default {
   testArraySubTypeWrong,
   testBooleanTypeWrong,
   testStructTypeWrong,
-  testStructEntryTypeWrong
+  testStructEntryTypeWrong,
+  testEmailTypeWrong
 }

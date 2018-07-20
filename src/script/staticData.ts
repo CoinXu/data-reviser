@@ -27,5 +27,6 @@ export const VERI_TYPE = {
   UNINT32: "unsign int32",
   UNINT64: "unsign int64",
   BOOLEAN: "boolean",
-  ARRAY: "array"
+  ARRAY: "array",
+  EMAIL: "email",
 };

@@ -15,7 +15,8 @@ import {
   veriStruct,
   veriUnInt32,
   veriUnInt64,
-  veriBoolean
+  veriBoolean,
+  veriEmail
 } from "../../Validators/index";
 import {VERI_TYPE} from "../../../script/staticData";
 
@@ -57,6 +58,9 @@ export function DecoArray(arrayType: string,errMsg: string = null, level: number
         break;
       case VERI_TYPE.BOOLEAN:
         veriFun = veriBoolean;
+        break;
+      case VERI_TYPE.EMAIL:
+        veriFun = veriEmail;
         break;
       default:
         veriFun = function (key, value) {

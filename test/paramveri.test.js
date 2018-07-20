@@ -21,6 +21,7 @@ describe('参数验证测试', function() {
         str: "test",
         unnum32: 100,
         unnum64: 6400,
+        mail: ""
       },
       errmsg: {}
     });
@@ -188,6 +189,19 @@ describe('参数验证测试', function() {
       },
       errmsg: {
         obj: {
+          type: "type error",
+          msg: "wrong"
+        }
+      }
+    });
+  });
+  it('email参数类型错误', function() {
+    expect(paramveri.default.testEmailTypeWrong()).to.be.deep.equal({
+      model: {
+        mail: ""
+      },
+      errmsg: {
+        mail: {
           type: "type error",
           msg: "wrong"
         }

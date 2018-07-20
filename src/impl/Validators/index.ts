@@ -14,6 +14,7 @@ import {veriString} from "./veriString";
 import {veriUnInt32} from "./veriUnInt32";
 import {veriUnInt64} from "./veriUnInt64";
 import {veriBoolean} from "./veriBoolean";
+import {veriEmail} from "./veriEmail";
 
 // 验证器入口
 export {
@@ -26,5 +27,6 @@ export {
   veriString,
   veriUnInt32,
   veriUnInt64,
-  veriBoolean
+  veriBoolean,
+  veriEmail
 }
