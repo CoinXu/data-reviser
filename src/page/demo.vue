@@ -18,13 +18,16 @@
       checkParam: function () {
         let data = {
           num1: 10,
-          // num64: 64,
+          num64: 64,
           unnum32: 100,
           unnum64: 6400,
           double: 1.11,
           float: 1.1,
           str: "test",
-          numarr: [1,2,3,4],
+          numarr: [
+            [[1,1],[1,1]],
+            [[2,2],[2,2]],
+          ],
           boo: true,
           obj: {
             num: 11

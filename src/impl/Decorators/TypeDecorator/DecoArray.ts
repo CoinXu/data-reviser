@@ -24,9 +24,10 @@ import {VERI_TYPE} from "../../../script/staticData";
  *
  * @param {string} arrayType - 数组项类型
  * @param {string} errMsg - 错误提示
+ * @param {number} level - n维数组，默认为1
  * @returns {(target, key) => {}}
  */
-export function DecoArray(arrayType: string,errMsg: string = null) {
+export function DecoArray(arrayType: string,errMsg: string = null, level: number = 1) {
   return function (target: object, key: string) {
     let veriFun;
     switch (arrayType) {
@@ -63,7 +64,7 @@ export function DecoArray(arrayType: string,errMsg: string = null) {
         }
         break;
     }
-    setValidator.call(this, target, key, errMsg, veriArray, true, veriFun);
+    setValidator.call(this, target, key, errMsg, veriArray, true, veriFun, level);
     return;
   }
 }

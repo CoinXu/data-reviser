@@ -61,14 +61,15 @@ export class Validator implements IValidator{
     for(let key in this.model){
       if(typeof this.model[key] === "object"){
         if(this.model[key] instanceof Array){
-          if(this.model[key].length > 0 && typeof this.model[key][0] === "object"){
-            retModel[key] = [];
-            for(let i in this.model[key]){
-              retModel[key][i] = this.model[key][i].getModel();
-            }
-          }else{
-            retModel[key] = this.model[key];
-          }
+          retModel[key] = this.getArrayModel(this.model[key]);
+          // if(this.model[key].length > 0 && typeof this.model[key][0] === "object"){
+          //   retModel[key] = [];
+          //   for(let i in this.model[key]){
+          //     retModel[key][i] = this.model[key][i].getModel();
+          //   }
+          // }else{
+          //   retModel[key] = this.model[key];
+          // }
         }else {
           try {
             retModel[key] = this.model[key].getModel();
@@ -83,5 +84,27 @@ export class Validator implements IValidator{
       }
     }
     return retModel;
+  }
+
+  /**
+   * 递归读取数组
+   *
+   * @param {Array} data - 要递归读取的数组
+   * @returns {any[]}
+   */
+  private getArrayModel(data: Array<any>){
+    let retData = [];
+    for(let i = 0; i < data.length; i++){
+      if(typeof data[i] === "object"){
+        if(data[i] instanceof Array){
+          retData.push(this.getArrayModel(data[i]));
+        }else{
+          retData.push(data[i].getModel());
+        }
+      }else{
+        retData.push(data[i]);
+      }
+    }
+    return retData;
   }
 }

@@ -19,11 +19,11 @@ export interface Validator {
  * 验证器数组时，验证器接口index字段数组类型
  *
  * @param {string} error - 验证结果
- * @param {number} index - 对应数组下标
+ * @param {string} index - 对应数组下标, 若维度大于1，以-分割
  */
 export interface IVeriIndex {
   error: string,
-  index: number
+  index: string
 }
 
 /**
@@ -44,10 +44,10 @@ export interface IVeri {
  *
  * @param {string} type - 错误类型
  * @param {string} msg - 用户自定义错误信息
- * @param {array} index - 若为数组情况下，返回错误数据index
+ * @param {string} index - 若为数组情况下，返回错误数据index, 若数组维度大于1， 以-分割
  */
 export interface IParamWrongMsg {
   type: string,
   msg?: string,
-  index?: number
+  index?: string
 }

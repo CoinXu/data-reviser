@@ -91,15 +91,16 @@ export function initValidator(target: object, key: string) {
  * @param {Function} veriFun - 调用函数
  * @param {boolean} isArray - 是否数组类型，默认为false
  * @param {Function} callArray - 若为数组类型，传入数组项所用验证器,默认为空
+ * @param {number} level - 若为数组类型，传入数组维度,默认为空
  */
-export function setValidator(target: object, key: string, errMsg: string, veriFun: Function, isArray: boolean = false, callArray: Function = null) {
+export function setValidator(target: object, key: string, errMsg: string, veriFun: Function, isArray: boolean = false, callArray: Function = null, level: number = null) {
   const container = initValidator.call(this,target, key);
 
   container.push(function (key: string, value: any) {
     let ve: IVeri;
     if(typeof value !== "undefined"){
       if(isArray){
-        ve = veriFun.call(this, key, value, callArray);
+        ve = veriFun.call(this, key, value, callArray, level);
       }else {
         ve = veriFun.call(this, key, value);
       }

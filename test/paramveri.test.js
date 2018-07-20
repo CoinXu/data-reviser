@@ -150,7 +150,7 @@ describe('参数验证测试', function() {
         numarr: [{
           type: "type error",
           msg: "wrong",
-          index: 3
+          index: "3"
         }]
       }
     });
