@@ -135,7 +135,7 @@ if (process.env.NODE_ENV === 'production') {
   }
   module.exports.output = {
     path: path.resolve(__dirname, './publish/paramveri/'),
-    publicPath: '/bin//',
+    publicPath: '/',
     filename: '[name].js',
     libraryTarget: "commonjs2"
   }

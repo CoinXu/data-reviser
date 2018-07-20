@@ -37,7 +37,7 @@ src----inter:定义接口
  |-----entry:开发使用，实体类
  |-----router:开发使用，路由
 test: 测试用例
-publish: 发布的包以及typings所在
+publish: 发布的包所在
 ```
 
 ## 安装与使用

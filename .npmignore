@@ -1,0 +1,12 @@
+.idea/
+test/
+dist/
+src/
+yarn.lock
+webpack.config.js
+tsconfig.json
+index.html
+.gitignore
+.editorconfig
+.babelrc
+package-lock.json

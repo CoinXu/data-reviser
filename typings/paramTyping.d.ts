@@ -10,7 +10,7 @@ interface Validator {
 }
 
 interface Iparamveri {
-  DecoArray(arrayType:string, errMsg:string),
+  DecoArray(arrayType:string, errMsg:string, level: number),
   DecoBoolean(errMsg: string),
   DecoDouble(errMsg: string),
   DecoFloat(errMsg: string),

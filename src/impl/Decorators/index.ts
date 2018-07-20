@@ -6,31 +6,8 @@
 
 
 import {IVeri} from "../../inter/decorator";
-import {DecoInt32} from "./TypeDecorator/DecoInt32";
-import {DecoDouble} from "./TypeDecorator/DecoDouble";
-import {DecoFloat} from "./TypeDecorator/DecoFloat";
-import {DecoInt64} from "./TypeDecorator/DecoInt64";
-import {DecoString} from "./TypeDecorator/DecoString";
-import {DecoStruct} from "./TypeDecorator/DecoStruct";
-import {DecoUnInt32} from "./TypeDecorator/DecoUnInt32";
-import {DecoUnInt64} from "./TypeDecorator/DecoUnInt64";
-import {DecoArray} from "./TypeDecorator/DecoArray";
-import {DecoBoolean} from "./TypeDecorator/DecoBoolean";
 import {IParamWrongMsg} from "../../inter/decorator";
 import {D_NAME} from "../../script/staticData";
-
-export {
-  DecoInt32,
-  DecoDouble,
-  DecoFloat,
-  DecoInt64,
-  DecoString,
-  DecoStruct,
-  DecoUnInt32,
-  DecoUnInt64,
-  DecoArray,
-  DecoBoolean
-}
 
 /**
  * 处理验证器返回结果
@@ -93,7 +70,14 @@ export function initValidator(target: object, key: string) {
  * @param {Function} callArray - 若为数组类型，传入数组项所用验证器,默认为空
  * @param {number} level - 若为数组类型，传入数组维度,默认为空
  */
-export function setValidator(target: object, key: string, errMsg: string, veriFun: Function, isArray: boolean = false, callArray: Function = null, level: number = null) {
+export function setValidator(
+  target: object,
+  key: string,
+  errMsg: string,
+  veriFun: Function,
+  isArray: boolean = false,
+  callArray: Function = null,
+  level: number = null) {
   const container = initValidator.call(this,target, key);
 
   container.push(function (key: string, value: any) {
