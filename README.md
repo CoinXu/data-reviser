@@ -93,6 +93,7 @@ eg:
 #### 长度装饰器
 + `@DecoMaxLength(size, errMsg)`: 声明参数最大长度
 + `@DecoMinLength(size, errMsg)`: 声明参数最小长度
+
 ```ts
   @paramVeri.DecoMaxLength(4,"length wrong")
   @paramVeri.DecoMinLength(2,"length wrong")
