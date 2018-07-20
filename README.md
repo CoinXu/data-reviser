@@ -206,6 +206,6 @@ enum ERROR_TYPE = {
 interface IParamWrongMsg {
   type: string,
   msg?: string,
-  index?: number
+  index?: string
 }
 ```
