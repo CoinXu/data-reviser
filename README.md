@@ -70,12 +70,18 @@ arrayType: 数组项类型,参考VERI_TYPE
 ```
 
 #### require装饰器
-+ `@DecoRequire(errMsg:string)`: 检测修饰的值为require
++ `@DecoRequire(errMsg:string)`: 检测修饰的值为require,注：require装饰器需放在验证装饰器下方
 
 ```
 
 errMsg：自定义错误信息，默认为空
 
+```
+eg:
+```ts
+  @paramVeri.DecoInt32("num is wrong")
+  @paramVeri.DecoRequire("require")
+  num1: number = 1;
 ```
 
 #### 实体装饰器
@@ -130,8 +136,8 @@ import Test1ObjEntry from "./Test1ObjEntry";
 // 测试用实体类
 class Test1Entry extends paramVeri.Validator{
 
-  @paramVeri.DecoRequire("require")
   @paramVeri.DecoInt32("num is wrong")
+  @paramVeri.DecoRequire("require")
   num1: number = 1;
 
   @paramVeri.DecoInt64("发生错误")
