@@ -97,11 +97,16 @@ export function setValidator(target: object, key: string, errMsg: string, veriFu
 
   container.push(function (key: string, value: any) {
     let ve: IVeri;
-    if(isArray){
-      ve = veriFun.call(this, key, value, callArray);
-    }else {
-      ve = veriFun.call(this, key, value);
+    if(typeof value !== "undefined"){
+      if(isArray){
+        ve = veriFun.call(this, key, value, callArray);
+      }else {
+        ve = veriFun.call(this, key, value);
+      }
+      return dealVeri.call(this, ve, key, value, errMsg);
+    }else{
+      //排除undefined干扰，将未传值当成某种类型判断
+      return false;
     }
-    return dealVeri.call(this, ve, key, value, errMsg);
   });
 }
