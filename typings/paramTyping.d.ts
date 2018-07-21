@@ -1,4 +1,4 @@
-declare module 'params-veri' {
+declare module "param-veri"{
   interface IParamWrongMsg {
     type: string,
     msg?: string,
@@ -6,8 +6,32 @@ declare module 'params-veri' {
   }
 
   interface Validator {
+    new(): Validator;
     setModel(model: object): IParamWrongMsg;
     getModel(): object;
+  }
+
+  interface VERI_TYPE {
+    INT64: string,
+    INT32: string,
+    DOUBLE: string,
+    FLOAT: string,
+    STRING: string,
+    STRUCT: string,
+    UNINT32: string,
+    UNINT64: string,
+    BOOLEAN: string,
+    ARRAY: string,
+    EMAIL: string,
+    PHONE: string,
+  }
+
+  interface ERROR_TYPE {
+    TYPE_ERROR: string,
+    SIZE_ERROR: string,
+    REQUIRE_ERROR: string,
+    LENGTH_MIN_ERRO: string,
+    LENGTH_MAX_ERRO: string,
   }
 
   interface Iparamveri {
@@ -23,27 +47,8 @@ declare module 'params-veri' {
     DecoUnInt64(errMsg: string),
     StructType(entryClass: object),
     Validator: Validator,
-    ERROR_TYPE: {
-      TYPE_ERROR,
-      SIZE_ERROR,
-      REQUIRE_ERROR,
-      LENGTH_MIN_ERRO,
-      LENGTH_MAX_ERRO,
-    },
-    VERI_TYPE: {
-      INT32,
-      INT64,
-      DOUBLE,
-      FLOAT,
-      STRING,
-      STRUCT,
-      UNINT32,
-      UNINT64,
-      BOOLEAN,
-      ARRAY,
-      EMAIL,
-      PHONE,
-    },
+    ERROR_TYPE: ERROR_TYPE,
+    VERI_TYPE: VERI_TYPE,
     DecoRequire(errMsg: string),
     DecoEmail(errMsg: string),
     DecoPhone(errMsg: string),
@@ -51,7 +56,7 @@ declare module 'params-veri' {
     DecoMaxLength(size: number,errMsg: string)
   }
 
-  var paramVeri: Iparamveri;
+  let paramVeri: Iparamveri;
 
-  export = paramVeri;
+  export default paramVeri;
 }
