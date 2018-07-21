@@ -35,25 +35,25 @@ declare module "param-veri"{
   }
 
   interface Iparamveri {
-    DecoArray(arrayType: string, errMsg: string, level: number),
-    DecoBoolean(errMsg: string),
-    DecoDouble(errMsg: string),
-    DecoFloat(errMsg: string),
-    DecoInt32(errMsg: string),
-    DecoInt64(errMsg: string),
-    DecoStruct(errMsg: string),
-    DecoString(errMsg: string),
-    DecoUnInt32(errMsg: string),
-    DecoUnInt64(errMsg: string),
+    DecoArray(arrayType: string, errMsg?: string, level?: number),
+    DecoBoolean(errMsg?: string),
+    DecoDouble(errMsg?: string),
+    DecoFloat(errMsg?: string),
+    DecoInt32(errMsg?: string),
+    DecoInt64(errMsg?: string),
+    DecoStruct(errMsg?: string),
+    DecoString(errMsg?: string),
+    DecoUnInt32(errMsg?: string),
+    DecoUnInt64(errMsg?: string),
     StructType(entryClass: object),
     Validator: Validator,
     ERROR_TYPE: ERROR_TYPE,
     VERI_TYPE: VERI_TYPE,
-    DecoRequire(errMsg: string),
-    DecoEmail(errMsg: string),
-    DecoPhone(errMsg: string),
-    DecoMinLength(size: number,errMsg: string),
-    DecoMaxLength(size: number,errMsg: string)
+    DecoRequire(errMsg?: string),
+    DecoEmail(errMsg?: string),
+    DecoPhone(errMsg?: string),
+    DecoMinLength(size: number,errMsg?: string),
+    DecoMaxLength(size: number,errMsg?: string)
   }
 
   let paramVeri: Iparamveri;
