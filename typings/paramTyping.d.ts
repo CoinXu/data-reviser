@@ -12,18 +12,17 @@ declare module "param-veri"{
   }
 
   interface VERI_TYPE {
-    INT64: string,
-    INT32: string,
-    DOUBLE: string,
-    FLOAT: string,
-    STRING: string,
-    STRUCT: string,
-    UNINT32: string,
-    UNINT64: string,
-    BOOLEAN: string,
-    ARRAY: string,
-    EMAIL: string,
-    PHONE: string,
+    INT64: Function,
+    INT32: Function,
+    DOUBLE: Function,
+    FLOAT: Function,
+    STRING: Function,
+    STRUCT: Function,
+    UNINT32: Function,
+    UNINT64: Function,
+    BOOLEAN: Function,
+    EMAIL: Function,
+    PHONE: Function,
   }
 
   interface ERROR_TYPE {

@@ -212,7 +212,6 @@ enum VERI_TYPE = {
   UNINT32,
   UNINT64,
   BOOLEAN,
-  ARRAY,
   EMAIL,
   PHONE
 };

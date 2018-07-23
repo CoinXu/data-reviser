@@ -21,7 +21,7 @@
           unnum64: 6400,
           double: 1.11,
           float: 1.1,
-          str: "test123",
+          str: "test",
           mail: "2959581@qq.com",
           phone: 13561127191,
           numarr: [

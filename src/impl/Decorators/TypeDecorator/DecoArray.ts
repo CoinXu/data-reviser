@@ -28,47 +28,9 @@ import {VERI_TYPE} from "../../../script/staticData";
  * @param {number} level - n维数组，默认为1
  * @returns {(target, key) => {}}
  */
-export function DecoArray(arrayType: string,errMsg: string = null, level: number = 1) {
+export function DecoArray(arrayType: Function,errMsg: string = null, level: number = 1) {
   return function (target: object, key: string) {
-    let veriFun;
-    switch (arrayType) {
-      case VERI_TYPE.INT32:
-        veriFun = veriInt32;
-        break;
-      case VERI_TYPE.STRUCT:
-        veriFun = veriStruct;
-        break;
-      case VERI_TYPE.DOUBLE:
-        veriFun = veriDouble;
-        break;
-      case VERI_TYPE.FLOAT:
-        veriFun = veriFloat;
-        break;
-      case VERI_TYPE.INT64:
-        veriFun = veriInt64;
-        break;
-      case VERI_TYPE.STRING:
-        veriFun = veriString;
-        break;
-      case VERI_TYPE.UNINT32:
-        veriFun = veriUnInt32;
-        break;
-      case VERI_TYPE.UNINT64:
-        veriFun = veriUnInt64;
-        break;
-      case VERI_TYPE.BOOLEAN:
-        veriFun = veriBoolean;
-        break;
-      case VERI_TYPE.EMAIL:
-        veriFun = veriEmail;
-        break;
-      default:
-        veriFun = function (key, value) {
-          return false;
-        }
-        break;
-    }
-    setValidator.call(this, target, key, errMsg, veriArray, true, veriFun, level);
+    setValidator.call(this, target, key, errMsg, veriArray, true, arrayType, level);
     return;
   }
 }

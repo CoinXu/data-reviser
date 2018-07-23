@@ -3,6 +3,19 @@
  * @author zhuoyihan
  * @description 静态变量
  */
+import {
+  veriInt32,
+  veriInt64,
+  veriDouble,
+  veriFloat,
+  veriStruct,
+  veriString,
+  veriUnInt32,
+  veriUnInt64,
+  veriBoolean,
+  veriEmail,
+  veriPhone,
+} from "../impl/Validators/index";
 
 export const D_NAME = "_validator_";
 export const CLASS_TYPE = "_class_";
@@ -20,16 +33,15 @@ export const ERROR_TYPE = {
  * 参数类型
  */
 export const VERI_TYPE = {
-  INT32: "int32",
-  INT64: "int64",
-  DOUBLE: "double",
-  FLOAT: "float",
-  STRING: "string",
-  STRUCT: "struct",
-  UNINT32: "unsign int32",
-  UNINT64: "unsign int64",
-  BOOLEAN: "boolean",
-  ARRAY: "array",
-  EMAIL: "email",
-  PHONE: "phome"
+  INT32: veriInt32,
+  INT64: veriInt64,
+  DOUBLE: veriDouble,
+  FLOAT: veriFloat,
+  STRING: veriStruct,
+  STRUCT: veriString,
+  UNINT32: veriUnInt32,
+  UNINT64: veriUnInt64,
+  BOOLEAN: veriBoolean,
+  EMAIL: veriEmail,
+  PHONE: veriPhone
 };
