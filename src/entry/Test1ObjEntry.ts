@@ -12,7 +12,7 @@ class Test1ObjEntry extends paramVeri.Validator{
 
   @paramVeri.DecoStruct("wrong")
   @paramVeri.StructType(Test2ObjEntry)
-  obj1: object = {};
+  obj1: object = new Test2ObjEntry();
 }
 
 export default Test1ObjEntry;

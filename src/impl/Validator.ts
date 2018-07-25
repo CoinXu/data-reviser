@@ -29,18 +29,23 @@ export class Validator implements IValidator{
     this.errMsg = {};
     if(this.initModel) {
       let container;
-      let isRight = true;
+      let isRight: boolean = true;
       for (let key in this.initModel) {
         try {
           container = this[D_NAME][key];
           isRight = true;
-          for(var i = 0; i < container.length; i++) {
+          for(let i: number = 0; i < container.length; i++) {
             isRight = isRight && this[D_NAME][key][i].call(this, key, model[key]);
           }
           if(isRight) {
             this[key] = model[key];
           }
           if(typeof this[key] !== "undefined") {
+            if(typeof this[key] === "object" && this[key] !== null && typeof this[key].setModel === "function"){
+              this[key].setModel({});
+              this[key] = this[key].getModel();
+            }
+
             this.model[key] = this[key];
           }
         } catch (e) {

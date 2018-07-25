@@ -286,7 +286,7 @@ function testStructTypeWrong() {
   class TestEntry extends paramVeri.Validator{
     @paramVeri.DecoStruct("wrong")
     @paramVeri.StructType(TestobjEntry)
-    obj: object = {};
+    obj: object = new TestobjEntry();
   }
   let data = {
     obj: 11

@@ -173,7 +173,9 @@ describe('参数验证测试', function() {
   it('struct参数类型错误', function() {
     expect(paramveri.default.testStructTypeWrong()).to.be.deep.equal({
       model: {
-        obj: {}
+        obj: {
+          num: 1
+        }
       },
       errmsg: {
         obj: {

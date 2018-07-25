@@ -29,11 +29,7 @@
             [[2,2],[2,2]],
           ],
           boo: true,
-          obj: {
-            obj1: {
-              num: 11
-            }
-          }
+          obj: 1
         };
         let entry = new test1Entry();
         let errmsg = entry.setModel(data);
