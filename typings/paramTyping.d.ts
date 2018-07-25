@@ -34,7 +34,7 @@ declare module "param-veri"{
   }
 
   interface Iparamveri {
-    DecoArray(arrayType: string, errMsg?: string, level?: number),
+    DecoArray(arrayType: Function, errMsg?: string, level?: number),
     DecoBoolean(errMsg?: string),
     DecoDouble(errMsg?: string),
     DecoFloat(errMsg?: string),
