@@ -47,6 +47,37 @@ npm install param-veri --registry=http://npm.100.com
 或者
 yarn add param-veri --registry=http://npm.100.com
 ```
+
+### 添加es6,decorator支持
+安装decorator支持
+```
+npm install --save-dev babel-plugin-transform-decorators-legacy
+npm install --save-dev babel-plugin-transform-class-properties
+```
+
+使用babel6,设置.babelrc
+```
+{
+  "presets": [
+    ["env", {
+      "modules": "commonjs",
+      "targets": {
+        "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
+      }
+    }],
+    "stage-2",
+    "es2015"
+  ],
+  "plugins": [
+    "transform-decorators-legacy",//必须在transform-class-properties前
+    "transform-class-properties",
+    "transform-vue-jsx",
+    "transform-runtime"
+  ]
+}
+
+```
+
 ### 使用
 可参考src/page与src/entry的测试用例
 
