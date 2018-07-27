@@ -25,7 +25,8 @@
           mail: "2959581@qq.com",
           phone: 13561127191,
           numarr: [
-            1,2
+            {num: "12"},
+            {num: 13}
           ],
           boo: true,
           obj: {

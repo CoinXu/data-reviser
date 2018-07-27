@@ -46,7 +46,8 @@ class Test1Entry extends paramVeri.Validator{
   @paramVeri.DecoPhone("wrong")
   phone: number = null;
 
-  @paramVeri.DecoArray(paramVeri.VERI_TYPE.INT32,"wrong")
+  @paramVeri.DecoArray(paramVeri.VERI_TYPE.STRUCT,"wrong")
+  @paramVeri.StructType(Test2ObjEntry)
   numarr: Array<any> = [];
 
   @paramVeri.DecoStruct("wrong")

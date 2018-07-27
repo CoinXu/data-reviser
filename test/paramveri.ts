@@ -259,6 +259,32 @@ function testArraySubTypeWrong() {
   };
 }
 
+// 测试数组元素参数类型为struct
+function testArraySubTypeStruct() {
+  class TestEntry1 extends paramVeri.Validator{
+    @paramVeri.DecoInt32()
+    num: number = 1;
+  }
+  class TestEntry extends paramVeri.Validator{
+    @paramVeri.DecoArray(paramVeri.VERI_TYPE.STRUCT,"wrong")
+    @paramVeri.StructType(TestEntry1)
+    numarr: Array<any> = [];
+  }
+  let data = {
+    numarr: [
+      {num: 11},
+      {num: 12}
+    ]
+  };
+  let entry = new TestEntry();
+  let errmsg = entry.setModel(data);
+  let model = entry.getModel();
+  return {
+    model: model,
+    errmsg: errmsg
+  };
+}
+
 // 测试boolean参数类型错误
 function testBooleanTypeWrong() {
   class TestEntry extends paramVeri.Validator{
@@ -427,5 +453,6 @@ export default {
   testEmailTypeWrong,
   testPhoneTypeWrong,
   testMaxLengthWrong,
-  testMinLengthWrong
+  testMinLengthWrong,
+  testArraySubTypeStruct
 }

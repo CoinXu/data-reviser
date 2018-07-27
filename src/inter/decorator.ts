@@ -20,10 +20,12 @@ export interface Validator {
  *
  * @param {string} error - 验证结果
  * @param {string} index - 对应数组下标, 若维度大于1，以-分割
+ * @param {IVeri} key - 若为object情况下，返回错误数据对象
  */
 export interface IVeriIndex {
   error: string,
-  index: string
+  index: string,
+  key?: object
 }
 
 /**

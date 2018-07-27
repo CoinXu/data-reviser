@@ -24,10 +24,19 @@ export function dealVeri(ve: IVeri,key: string,value: any, errMsg: string) {
     if(ve.index){
       this.errMsg[key] = [];
       for (var i = 0; i < ve.index.length; i++){
-        err = {
-          type: ve.index[i].error,
-          msg: errMsg,
-          index: ve.index[i].index
+        if(typeof ve.index[i].key !== "undefined"){
+          err = {
+            type: ve.index[i].error,
+            msg: errMsg,
+            index: ve.index[i].index,
+            key: ve.index[i].key
+          }
+        }else {
+          err = {
+            type: ve.index[i].error,
+            msg: errMsg,
+            index: ve.index[i].index
+          }
         }
         this.errMsg[key].push(err);
       }

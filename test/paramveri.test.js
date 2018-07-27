@@ -157,6 +157,17 @@ describe('参数验证测试', function() {
       }
     });
   });
+  it('array参数元素类型为struct', function() {
+    expect(paramveri.default.testArraySubTypeStruct()).to.be.deep.equal({
+      model: {
+        numarr: [
+          {num: 11},
+          {num: 12}
+        ]
+      },
+      errmsg: {}
+    });
+  });
   it('boolean参数类型错误', function() {
     expect(paramveri.default.testBooleanTypeWrong()).to.be.deep.equal({
       model: {

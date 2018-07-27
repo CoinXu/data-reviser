@@ -4,7 +4,7 @@
  * @description array验证器
  */
 
-import {ERROR_TYPE} from "../../script/staticData";
+import {ERROR_TYPE, VERI_TYPE} from "../../script/staticData";
 import {IVeri, IVeriIndex} from "../../inter/decorator";
 
 
@@ -84,7 +84,8 @@ function readArrayData(data: Array<any>, level: number, nowLevel: number, key: s
         if (!ve.value) {
           errIndex.push({
             index: setErrorIndex(indexPath, i),
-            error: ve.error
+            error: ve.error,
+            key: ve.key
           });
         }else{
           if(typeof this[key] !== 'undefined' && this[key] instanceof Array) {
