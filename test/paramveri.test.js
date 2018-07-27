@@ -146,7 +146,7 @@ describe('参数验证测试', function() {
   it('array参数元素类型错误', function() {
     expect(paramveri.default.testArraySubTypeWrong()).to.be.deep.equal({
       model: {
-        numarr: []
+        numarr: [1,2,3]
       },
       errmsg: {
         numarr: [{

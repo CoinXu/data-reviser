@@ -1,7 +1,7 @@
 {
   "name": "param-veri",
   "description": "check ajax param",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "zhuoyihan",
   "license": "MIT",
   "private": false,

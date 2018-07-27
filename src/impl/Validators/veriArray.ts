@@ -25,9 +25,11 @@ export function veriArray(key: string, value: any, veriFun: Function, level: num
       error: ERROR_TYPE.TYPE_ERROR
     };
   }else{
-    this[key] = [];
+    if(typeof this[key] !== 'undefined') {
+      this[key] = [];
+    }
     let ve: IVeri;
-    let errIndex = readArrayData(value, level, 1, key, veriFun, "");
+    let errIndex = readArrayData.call(this,value, level, 1, key, veriFun, "");
     // for (let i = 0; i < value.length; i++) {
     //   ve = veriFun.call(this, key, value[i]);
     //   if (!ve.value) {
@@ -74,7 +76,7 @@ function readArrayData(data: Array<any>, level: number, nowLevel: number, key: s
           error: ERROR_TYPE.TYPE_ERROR
         });
       }else{
-        errIndex = errIndex.concat(readArrayData(data[i], level, nowLevel + 1, key, veriFun, setErrorIndex(indexPath, i)));
+        errIndex = errIndex.concat(readArrayData.call(this,data[i], level, nowLevel + 1, key, veriFun, setErrorIndex(indexPath, i)));
       }
     }else{
       if(level <= nowLevel){
@@ -84,6 +86,10 @@ function readArrayData(data: Array<any>, level: number, nowLevel: number, key: s
             index: setErrorIndex(indexPath, i),
             error: ve.error
           });
+        }else{
+          if(typeof this[key] !== 'undefined' && this[key] instanceof Array) {
+            this[key].push(data[i]);
+          }
         }
       }else {
         errIndex.push({

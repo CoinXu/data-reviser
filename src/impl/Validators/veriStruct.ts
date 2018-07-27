@@ -20,7 +20,9 @@ export function veriStruct(key: string, value: any): IVeri {
     let error = obj.setModel(value);
     let model = obj.getModel();
     if(Object.keys(error).length !== 0){
-      this[key] = model;
+      if(typeof this[key] !== 'undefined' && !(this[key] instanceof Array)) {
+        this[key] = model;
+      }
       return {
         value: false,
         key: error,

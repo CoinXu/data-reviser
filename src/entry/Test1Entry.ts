@@ -6,6 +6,7 @@
 
 import paramVeri from "../script/index";
 import Test1ObjEntry from "./Test1ObjEntry";
+import Test2ObjEntry from "./Test2ObjEntry";
 
 // 测试用实体类
 class Test1Entry extends paramVeri.Validator{
@@ -45,7 +46,7 @@ class Test1Entry extends paramVeri.Validator{
   @paramVeri.DecoPhone("wrong")
   phone: number = null;
 
-  @paramVeri.DecoArray(paramVeri.VERI_TYPE.INT32,"wrong",3)
+  @paramVeri.DecoArray(paramVeri.VERI_TYPE.INT32,"wrong")
   numarr: Array<any> = [];
 
   @paramVeri.DecoStruct("wrong")

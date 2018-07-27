@@ -25,11 +25,14 @@
           mail: "2959581@qq.com",
           phone: 13561127191,
           numarr: [
-            [[1,1],[1,1]],
-            [[2,2],[2,2]],
+            1,2
           ],
           boo: true,
-          obj: 1
+          obj: {
+            obj1: {
+              num: 10
+            }
+          }
         };
         let entry = new test1Entry();
         let errmsg = entry.setModel(data);
