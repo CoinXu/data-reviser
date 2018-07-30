@@ -168,6 +168,31 @@ describe('参数验证测试', function() {
       errmsg: {}
     });
   });
+  it('array参数元素类型为struct,错误设为默认值', function() {
+    expect(paramveri.default.testArraySubTypeWrongStruct()).to.be.deep.equal({
+      model: {
+        numarr: [
+          {num: 11},
+          {num: 1}
+        ]
+      },
+      errmsg: {
+        numarr: [
+          {
+            type: "type error",
+            msg: "wrong",
+            index: "1",
+            key: {
+              num: {
+                type: "type error",
+                msg: "wrong int"
+              }
+            }
+          }
+        ]
+      }
+    });
+  });
   it('boolean参数类型错误', function() {
     expect(paramveri.default.testBooleanTypeWrong()).to.be.deep.equal({
       model: {

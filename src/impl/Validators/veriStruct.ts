@@ -20,12 +20,9 @@ export function veriStruct(key: string, value: any): IVeri {
     let error = obj.setModel(value);
     let model = obj.getModel();
     if(Object.keys(error).length !== 0){
-      if(typeof this[key] !== 'undefined') {
-        if(!(this[key] instanceof Array)) {
-          this[key] = model;
-        }else{
-          this[key].push(model);
-        }
+      if(typeof this[key] !== 'undefined' && typeof this[key].setModel === "function") {
+        this[key].setModel(value);
+        this[key] = this[key].getModel();
       }
       return {
         value: false,
@@ -38,6 +35,10 @@ export function veriStruct(key: string, value: any): IVeri {
       };
     }
   }else{
+    if(typeof this[key] !== 'undefined' && typeof this[key].setModel === "function"){
+      this[key].setModel({});
+      this[key] = this[key].getModel();
+    }
     return {
       value: false,
       error: ERROR_TYPE.TYPE_ERROR

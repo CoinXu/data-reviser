@@ -41,11 +41,6 @@ export class Validator implements IValidator{
             this[key] = model[key];
           }
           if(typeof this[key] !== "undefined") {
-            if(typeof this[key] === "object" && this[key] !== null && typeof this[key].setModel === "function"){
-              this[key].setModel({});
-              this[key] = this[key].getModel();
-            }
-
             this.model[key] = this[key];
           }
         } catch (e) {

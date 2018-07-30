@@ -4,7 +4,7 @@
  * @description array验证器
  */
 
-import {ERROR_TYPE, VERI_TYPE} from "../../script/staticData";
+import {CLASS_TYPE, ERROR_TYPE, VERI_TYPE} from "../../script/staticData";
 import {IVeri, IVeriIndex} from "../../inter/decorator";
 
 
@@ -25,20 +25,18 @@ export function veriArray(key: string, value: any, veriFun: Function, level: num
       error: ERROR_TYPE.TYPE_ERROR
     };
   }else{
+    let defaultData;
     if(typeof this[key] !== 'undefined') {
-      this[key] = [];
+      if(this[key] instanceof Array && this[key].length > 0) {
+        defaultData = this[key][0];
+      }
     }
     let ve: IVeri;
-    let errIndex = readArrayData.call(this,value, level, 1, key, veriFun, "");
-    // for (let i = 0; i < value.length; i++) {
-    //   ve = veriFun.call(this, key, value[i]);
-    //   if (!ve.value) {
-    //     errIndex.push({
-    //       index: i,
-    //       error: ve.error
-    //     });
-    //   }
-    // }
+    let tagArray = [];
+    let errIndex = readArrayData.call(this,value, tagArray, level, 1, key, veriFun, "", defaultData);
+    if(typeof this[key] !== 'undefined') {
+      this[key] = tagArray;
+    }
 
     if(errIndex.length){
       return {
@@ -62,37 +60,46 @@ export function veriArray(key: string, value: any, veriFun: Function, level: num
  * @param {string} key - 键值
  * @param {Function} veriFun - 验证数组根项类型
  * @param {string} indexPath - 数组下标集合
+ * @param {any} defaultData - 数组默认值
  * @returns {IVeriIndex[]}
  */
-function readArrayData(data: Array<any>, level: number, nowLevel: number, key: string, veriFun: Function, indexPath: string) {
+function readArrayData(data: Array<any>, tagArray: Array<any>, level: number, nowLevel: number, key: string, veriFun: Function, indexPath: string, defaultData: any) {
   let errIndex = new Array<IVeriIndex>();
   let ve: IVeri;
 
   for(var i = 0; i < data.length; i++){
     if(data[i] instanceof Array){
       if(level <= nowLevel){
+        setDefault.call(this, tagArray, defaultData, veriFun, key);
         errIndex.push({
           index: setErrorIndex(indexPath, i),
           error: ERROR_TYPE.TYPE_ERROR
         });
       }else{
-        errIndex = errIndex.concat(readArrayData.call(this,data[i], level, nowLevel + 1, key, veriFun, setErrorIndex(indexPath, i)));
+        tagArray.push([]);
+        errIndex = errIndex.concat(readArrayData.call(this,data[i], tagArray[tagArray.length - 1], level, nowLevel + 1, key, veriFun, setErrorIndex(indexPath, i), defaultData));
       }
     }else{
       if(level <= nowLevel){
         ve = veriFun.call(this, key, data[i]);
         if (!ve.value) {
+          setDefault.call(this, tagArray, defaultData, veriFun, key);
           errIndex.push({
             index: setErrorIndex(indexPath, i),
             error: ve.error,
             key: ve.key
           });
         }else{
-          if(typeof this[key] !== 'undefined' && this[key] instanceof Array) {
-            this[key].push(data[i]);
-          }
+          tagArray.push(data[i]);
         }
       }else {
+        data[i] = [];
+        let tag = data[i];
+        for(var p = nowLevel; p < level; p++){
+          tag.push([]);
+          tag = tag[0];
+        }
+        setDefault.call(this, tagArray, defaultData, veriFun, key);
         errIndex.push({
           index: setErrorIndex(indexPath, i),
           error: ERROR_TYPE.TYPE_ERROR
@@ -116,5 +123,17 @@ function setErrorIndex(indexPath: string, index: number) {
     return indexPath + index;
   }else{
     return indexPath + "-" + index;
+  }
+}
+
+function setDefault(tag: Array<any>, defultData: any, veriFun: Function, key: string) {
+  if(veriFun === VERI_TYPE.STRUCT){
+    let entry = new this[CLASS_TYPE][key]();
+    entry.setModel({});
+    tag.push(entry.getModel());
+  }else{
+    if(typeof defultData !== 'undefined'){
+      tag.push(defultData);
+    }
   }
 }
