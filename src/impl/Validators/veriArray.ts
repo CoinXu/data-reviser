@@ -83,7 +83,7 @@ function readArrayData(data: Array<any>, tagArray: Array<any>, level: number, no
       if(level <= nowLevel){
         ve = veriFun.call(this, key, data[i]);
         if (!ve.value) {
-          setDefault.call(this, tagArray, defaultData, veriFun, key);
+          setDefault.call(this, tagArray, defaultData, veriFun, key, data[i]);
           errIndex.push({
             index: setErrorIndex(indexPath, i),
             error: ve.error,
@@ -126,10 +126,10 @@ function setErrorIndex(indexPath: string, index: number) {
   }
 }
 
-function setDefault(tag: Array<any>, defultData: any, veriFun: Function, key: string) {
+function setDefault(tag: Array<any>, defultData: any, veriFun: Function, key: string, data: any = null) {
   if(veriFun === VERI_TYPE.STRUCT){
     let entry = new this[CLASS_TYPE][key]();
-    entry.setModel({});
+    entry.setModel(data);
     tag.push(entry.getModel());
   }else{
     if(typeof defultData !== 'undefined'){
