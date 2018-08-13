@@ -128,17 +128,17 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
+  module.exports.devtool = '#source-map';
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.entry = {
     index: './src/script/index.js'
-  }
+  };
   module.exports.output = {
     path: path.resolve(__dirname, './publish/paramveri/'),
     publicPath: '/',
     filename: '[name].js',
     libraryTarget: "commonjs2"
-  }
+  };
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {

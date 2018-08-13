@@ -83,13 +83,11 @@ function testAllRight() {
 function testRequireWrong() {
   class TestEntry extends paramVeri.Validator{
     @paramVeri.DecoRequire("require")
-    num1: number;
+    num1: number = 1;
   }
-  let data = {
-  };
-  let entry = new TestEntry();
-  let errmsg = entry.setModel(data);
-  let model = entry.getModel();
+  const entry = new TestEntry();
+  const errmsg = entry.setModel({});
+  const model = entry.getModel();
   return {
     model: model,
     errmsg: errmsg

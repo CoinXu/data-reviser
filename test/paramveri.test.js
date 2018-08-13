@@ -30,6 +30,7 @@ describe('参数验证测试', function() {
   it('参数require错误', function() {
     expect(paramveri.default.testRequireWrong()).to.be.deep.equal({
       model: {
+        num1: 1
       },
       errmsg: {
         num1: {
