@@ -7,7 +7,7 @@
 
 import {IVeri} from "../../inter/decorator";
 import {IParamWrongMsg} from "../../inter/decorator";
-import {D_NAME} from "../../script/staticData";
+import {D_NAME,VALID_MEMBER} from "../../script/staticData";
 
 /**
  * 处理验证器返回结果
@@ -72,6 +72,19 @@ export function initValidator(target: object, key: string) {
   if(!initModel[key]) {
     initModel[key] = false;
   }
+  if(!Object.prototype.hasOwnProperty.call(target.constructor, VALID_MEMBER)){
+    Object.defineProperty(target.constructor, VALID_MEMBER, {
+        value: {},
+        writable: true,
+        enumerable: true
+      }
+    );
+  }
+  Object.defineProperty(target.constructor[VALID_MEMBER], key, {
+      writable: true,
+      enumerable: true
+    }
+  );
   const container = map[key] || (map[key] = []);
   return container;
 }

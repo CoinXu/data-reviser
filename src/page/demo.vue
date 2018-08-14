@@ -6,6 +6,7 @@
 
 <script>
   import test1Entry from '../entry/Test1Entry';
+  import {Test1ExtendEntry} from '../entry/Test1ExtendEntry';
 
   export default {
     name: "demo",
@@ -36,9 +37,14 @@
           }
         };
         const entry = new test1Entry();
+        const entry1 = new Test1ExtendEntry();
         const errmsg = entry.setModel(data);
+        const errmsg1 = entry1.setModel(Object.assign({},data,{
+          numExtend: 10
+        }));
         const model = entry.getModel();
         console.log(entry, model,errmsg);
+        console.log(entry1, errmsg1)
       }
     }
   }

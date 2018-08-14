@@ -14,7 +14,7 @@ class Test1Entry extends paramVeri.Validator{
 
   @paramVeri.DecoInt32("wrong")
   @paramVeri.DecoRequire("require")
-  num1: number = 1;
+  num1: number;
 
   @paramVeri.DecoInt64("wrong")
   @paramVeri.DecoRequire()
