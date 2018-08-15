@@ -1,3 +1,9 @@
+/**
+* @date 2018-08-15
+* @author zhuoyihan
+* @description 测试用page
+*/
+
 <template>
   <div>
     <button @click="checkParam">验证</button>
@@ -5,8 +11,7 @@
 </template>
 
 <script>
-  import test1Entry from '../entry/Test1Entry';
-  import {Test1ExtendEntry} from '../entry/Test1ExtendEntry';
+  import Entries from '../entry/TestReadOnlyEntry';
 
   export default {
     name: "demo",
@@ -16,7 +21,7 @@
     methods: {
       checkParam: function () {
         let data = {
-          // num1: 10,
+          num1: 10,
           num64: 64,
           unnum32: 100,
           unnum64: 6400,
@@ -36,15 +41,17 @@
             }
           }
         };
-        const entry = new test1Entry();
-        const entry1 = new Test1ExtendEntry();
+        const entry = new Entries.Test1Entry();
+        const entry1 = new Entries.Test1ExtendEntry();
         const errmsg = entry.setModel(data);
         const errmsg1 = entry1.setModel(Object.assign({},data,{
-          numExtend: 10
+          numExtend: 10,
+          numExtend1: 11
         }));
         const model = entry.getModel();
+        const model1 = entry1.getModel();
         console.log(entry, model,errmsg);
-        console.log(entry1, errmsg1)
+        console.log(entry1, model1, errmsg1)
       }
     }
   }

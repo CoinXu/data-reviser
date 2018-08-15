@@ -49,11 +49,18 @@ export class Validator implements IValidator{
           isRight = isRight
             && this[D_NAME][key][i].call(this, key, model[key]);
         }
+        // if(isRight) {
+        //   this[key] = model[key];
+        // }
+        // if(typeof this[key] !== "undefined") {
+        //   this.model[key] = this[key];
+        // }
         if(isRight) {
-          this[key] = model[key];
-        }
-        if(typeof this[key] !== "undefined") {
-          this.model[key] = this[key];
+          this.model[key] = model[key];
+        } else {
+          if(typeof this[key] !== "undefined") {
+            this.model[key] = this[key];
+          }
         }
       } catch (e) {
         console.log(e);
