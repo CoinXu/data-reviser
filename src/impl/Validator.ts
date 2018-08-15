@@ -4,7 +4,7 @@
  * @description 实体类父类
  */
 
-import {D_NAME} from "../script/staticData"
+import {D_NAME, VALID_MEMBER} from "../script/staticData"
 import {Validator as IValidator} from "../inter/decorator"
 
 /*
@@ -28,30 +28,47 @@ export class Validator implements IValidator{
   public setModel(model) {
     this.errMsg = {};
     if(this.initModel) {
-      let container;
-      let isRight: boolean = true;
-      for (let key in this.initModel) {
-        if (Object.prototype.hasOwnProperty.call(this, key)){
-          try {
-            container = this[D_NAME][key];
-            isRight = true;
-            for(let i: number = 0; i < container.length; i++) {
-              isRight = isRight
-                && this[D_NAME][key][i].call(this, key, model[key]);
-            }
-            if(isRight) {
-              this[key] = model[key];
-            }
-            if(typeof this[key] !== "undefined") {
-              this.model[key] = this[key];
-            }
-          } catch (e) {
-            console.log(e);
-          }
-        }
-      }
+      this.checkMember.call(this, this['__proto__'].constructor, model);
     }
     return this.errMsg;
+  }
+
+  /**
+   * 验证参数
+   * @param {constructor} tar - this['__proto__'].constructor
+   * @param {object} model - 验证参数模型
+   */
+  private checkMember(tar, model) {
+    let container;
+    let isRight: boolean = true;
+    for (let key in tar[VALID_MEMBER]) {
+      try {
+        container = this[D_NAME][key];
+        isRight = true;
+        for(let i: number = 0; i < container.length; i++) {
+          isRight = isRight
+            && this[D_NAME][key][i].call(this, key, model[key]);
+        }
+        // if(isRight) {
+        //   this[key] = model[key];
+        // }
+        // if(typeof this[key] !== "undefined") {
+        //   this.model[key] = this[key];
+        // }
+        if(isRight) {
+          this.model[key] = model[key];
+        } else {
+          if(typeof this[key] !== "undefined") {
+            this.model[key] = this[key];
+          }
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    if (tar['__proto__'] !== Validator) {
+      this.checkMember.call(this, tar['__proto__'], model);
+    }
   }
 
 
@@ -61,46 +78,6 @@ export class Validator implements IValidator{
    * @returns {{}}
    */
   public getModel() {
-    // let retModel = {};
-    // for(let key in this.model){
-    //   if(typeof this.model[key] === "object" && this.model[key] !== null){
-    //     if(this.model[key] instanceof Array){
-    //       retModel[key] = this.getArrayModel(this.model[key]);
-    //     }else {
-    //       try {
-    //         retModel[key] = this.model[key].getModel();
-    //       } catch (e) {
-    //         console.log(e);
-    //       }
-    //     }
-    //   }else{
-    //     if(typeof this.model[key] !== "undefined") {
-    //       retModel[key] = this.model[key];
-    //     }
-    //   }
-    // }
     return this.model;
-  }
-
-  /**
-   * 递归读取数组
-   *
-   * @param {Array} data - 要递归读取的数组
-   * @returns {any[]}
-   */
-  private getArrayModel(data: Array<any>){
-    let retData = [];
-    for(let i = 0; i < data.length; i++){
-      if(typeof data[i] === "object"){
-        if(data[i] instanceof Array){
-          retData.push(this.getArrayModel(data[i]));
-        }else{
-          retData.push(data[i].getModel());
-        }
-      }else{
-        retData.push(data[i]);
-      }
-    }
-    return retData;
   }
 }

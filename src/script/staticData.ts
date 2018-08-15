@@ -19,6 +19,7 @@ import {
 
 export const D_NAME = "_validator_";
 export const CLASS_TYPE = "_class_";
+export const VALID_MEMBER = '_member_';
 /*
  * 错误类型
  */
