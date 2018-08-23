@@ -4,7 +4,7 @@
  * @description array验证器
  */
 
-import {CLASS_TYPE, ERROR_TYPE, VERI_TYPE} from "../../script/staticData";
+import {CLASS_TYPE, ERROR_TYPE, VERI_TYPE} from "@/constants";
 import {IVeri, IVeriIndex} from "../../inter/decorator";
 
 
@@ -32,8 +32,8 @@ export function veriArray(key: string, value: any, veriFun: Function, level: num
       }
     }
     let ve: IVeri;
-    let tagArray = [];
-    let errIndex = readArrayData.call(this,value, tagArray, level, 1, key, veriFun, "", defaultData);
+    let tagArray: any[] = [];
+    let errIndex: any = readArrayData.call(this,value, tagArray, level, 1, key, veriFun, "", defaultData);
     if(typeof this[key] !== 'undefined') {
       this[key] = tagArray;
     }

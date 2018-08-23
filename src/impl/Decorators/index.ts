@@ -7,7 +7,7 @@
 
 import {IVeri} from "../../inter/decorator";
 import {IParamWrongMsg} from "../../inter/decorator";
-import {D_NAME,VALID_MEMBER} from "../../script/staticData";
+import {D_NAME,VALID_MEMBER} from "@/constants";
 
 /**
  * 处理验证器返回结果

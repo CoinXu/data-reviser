@@ -6,7 +6,7 @@
 
 import {initValidator} from "../index";
 import {dealVeri} from "../index";
-import {ERROR_TYPE} from "../../../script/staticData";
+import {ERROR_TYPE} from "@/constants";
 
 /**
  * 验证参数长度MAX
@@ -19,14 +19,14 @@ export function DecoMaxLength(size: number,errMsg: string = null) {
   return function (target: object, key: string) {
     const container = initValidator.call(this,target,key);
 
-    container.push(function (key, value) {
-      try{
+    container.push(function (key: string, value: any) {
+      try {
         if(value.length <= size){
           return true;
         }else {
           return dealVeri.call(this, {value: false, error: ERROR_TYPE.LENGTH_MAX_ERRO}, key, value, errMsg);
         }
-      }catch (e) {
+      } catch (e) {
         return dealVeri.call(this, {value: false, error: ERROR_TYPE.TYPE_ERROR}, key, value, errMsg);
       }
     });

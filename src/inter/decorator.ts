@@ -8,11 +8,8 @@
  * entry基类
  */
 export interface Validator {
-  initModel: object;
-  model: object;
-  errMsg: object;
-  setModel(model: object);
-  getModel();
+  setModel(model: any): any;
+  getModel(): any;
 }
 
 /**
@@ -25,7 +22,7 @@ export interface Validator {
 export interface IVeriIndex {
   error: string,
   index: string,
-  key?: object
+  key?: any
 }
 
 /**
@@ -39,8 +36,8 @@ export interface IVeriIndex {
 export interface IVeri {
   value: boolean,
   error?: string,
-  index?: Array<IVeriIndex>
-  key?: object
+  index?: IVeriIndex[],
+  key?: any
 }
 
 /**
@@ -55,5 +52,5 @@ export interface IParamWrongMsg {
   type: string,
   msg?: string,
   index?: string,
-  key?: object
+  key?: any
 }

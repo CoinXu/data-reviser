@@ -1,15 +1,29 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "target": "es5",
+    "sourceMap": true,
+    "noUnusedParameters": false,
+    "noUnusedLocals": false,
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "module": "es6",
-    "target": "es5", // 将ts编译成什么规范
-    "allowJs": true, // 是否允许js语法在ts中
-    "outDir": "./dist/"
+    "sourceMap": true,
+    "declaration": true,
+    "declarationDir": "./@types",
+    "paths": {
+      "@/*": ["src/*"],
+      "@impl/*": ["src/impl/*"],
+      "@inter/*": ["src/inter/*"]
+    }
   },
-  "include": [
-    "./src/*" // 编译包含哪些文件
-  ],
   "exclude": [
-    "./node_modules/" // 编译除去哪些文件
+    "test",
+    "node_modules",
+    "**/*.spec.ts"
   ]
 }

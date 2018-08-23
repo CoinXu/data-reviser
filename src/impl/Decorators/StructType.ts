@@ -4,7 +4,7 @@
  * @description 设置struct类型装饰器
  */
 
-import {CLASS_TYPE} from "../../script/staticData";
+import {CLASS_TYPE} from "@/constants";
 
 /**
  * 设置struct类型

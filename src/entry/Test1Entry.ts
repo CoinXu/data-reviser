@@ -4,7 +4,7 @@
  * @description 测试用实体类
  */
 
-import paramVeri from "../script/index";
+import paramVeri from "@/index";
 import Test1ObjEntry from "./Test1ObjEntry";
 import Test2ObjEntry from "./Test2ObjEntry";
 

@@ -18,7 +18,7 @@ import {
   veriBoolean,
   veriEmail
 } from "../../Validators/index";
-import {VERI_TYPE} from "../../../script/staticData";
+import {VERI_TYPE} from "@/constants";
 
 /**
  * int32装饰器

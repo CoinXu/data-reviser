@@ -4,20 +4,16 @@
  * @description 实体类父类
  */
 
-import {D_NAME, VALID_MEMBER} from "../script/staticData"
+import {D_NAME, VALID_MEMBER} from "@/constants"
 import {Validator as IValidator} from "../inter/decorator"
 
 /*
  * 实体类父类
  */
 export class Validator implements IValidator{
-  initModel: object;
-  model: object = {};
-  errMsg: object;
-
-  constructor(){
-
-  }
+  private initModel: object;
+  private model: object = {};
+  private errMsg: object;
 
   /**
    * 设置model，获取错误信息

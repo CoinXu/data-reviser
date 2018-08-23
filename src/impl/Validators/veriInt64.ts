@@ -4,7 +4,7 @@
  * @description int64验证器
  */
 
-import {ERROR_TYPE} from "../../script/staticData";
+import {ERROR_TYPE} from "@/constants";
 import {IVeri} from "../../inter/decorator";
 
 /**

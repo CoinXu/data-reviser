@@ -4,7 +4,7 @@
  * @description 测试用，参数类型为struct时，struct对应实体类
  */
 
-import paramVeri from "../script/index";
+import paramVeri from "@/index";
 import Test2ObjEntry from "./Test2ObjEntry";
 
 // 测试用实体类

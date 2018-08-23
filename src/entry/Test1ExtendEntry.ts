@@ -1,4 +1,4 @@
-import paramVeri from '../script/index';
+import paramVeri from "@/index";
 import Test1Entry from  './Test1Entry';
 
 export class Test1ExtendEntry extends Test1Entry{

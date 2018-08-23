@@ -4,7 +4,7 @@
  * @description struct验证器
  */
 
-import {ERROR_TYPE,CLASS_TYPE} from "../../script/staticData";
+import {ERROR_TYPE,CLASS_TYPE} from "@/constants";
 import {IVeri, IVeriIndex} from "../../inter/decorator";
 
 /**

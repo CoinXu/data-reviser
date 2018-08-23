@@ -3,6 +3,7 @@
  * @author zhuoyihan
  * @description 静态变量
  */
+
 import {
   veriInt32,
   veriInt64,
@@ -15,11 +16,12 @@ import {
   veriBoolean,
   veriEmail,
   veriPhone,
-} from "../impl/Validators/index";
+} from "@impl/Validators/index";
 
 export const D_NAME = "_validator_";
 export const CLASS_TYPE = "_class_";
 export const VALID_MEMBER = '_member_';
+
 /*
  * 错误类型
  */
@@ -30,6 +32,7 @@ export const ERROR_TYPE = {
   LENGTH_MIN_ERRO: "length less than min",
   LENGTH_MAX_ERRO: "length more than max",
 };
+
 /*
  * 参数类型
  */

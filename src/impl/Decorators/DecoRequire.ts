@@ -6,7 +6,7 @@
 
 import {initValidator} from "./index";
 import {dealVeri} from "./index";
-import {ERROR_TYPE} from "../../script/staticData";
+import {ERROR_TYPE} from "@/constants";
 
 /**
  * 设置参数为必须

@@ -6,7 +6,7 @@
 
 import {initValidator} from "../index";
 import {dealVeri} from "../index";
-import {ERROR_TYPE} from "../../../script/staticData";
+import {ERROR_TYPE} from "@/constants";
 
 /**
  * 验证参数长度MIN
@@ -19,7 +19,7 @@ export function DecoMinLength(size: number,errMsg: string = null) {
   return function (target: object, key: string) {
     const container = initValidator.call(this,target,key);
 
-    container.push(function (key, value) {
+    container.push(function (key: string, value: any) {
       try{
         if(value.length >= size){
           return true;
