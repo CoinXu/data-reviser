@@ -4,8 +4,11 @@
  * @description mocha测试方法
  */
 
-var paramveri = require('./build');
-let expect = require('chai').expect;
+import "mocha";
+import reviser from "@/index";
+import { expect } from "chia";
+
+
 
 describe('参数验证测试', function() {
   it('参数无错误', function() {

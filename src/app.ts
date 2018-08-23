@@ -4,6 +4,6 @@
  * @description For developer test at browser.
  */
 
-import * as Reviser from "./index.ts";
+import * as Reviser from "@/index";
 
 console.log("app started");

@@ -12,9 +12,9 @@ const WebpackConfigBase = require('./webpack.config.base');
 
 module.exports = merge(WebpackConfigBase, {
   devtool: '#source-map',
-  entry: path.resolve('test/index.js'),
+  entry: path.resolve('test/index.ts'),
   output: {
-    path: path.resolve(__dirname, 'test'),
+    path: path.resolve('test/build'),
     filename: 'test.bundle.js',
     libraryTarget: 'commonjs2'
   },

@@ -4,7 +4,11 @@
  * @description
  */
 
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+
+
 module.exports = {
+  target: 'node',
   devtool: '#eval-source-map',
   module: {
     rules: [
@@ -45,15 +49,13 @@ module.exports = {
       },
       {
         test: /\.ts$/,
-        loader: "ts-loader"
+        loader: 'ts-loader'
       }
     ]
   },
   resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue.esm.js'
-    },
-    extensions: ['*', '.js', '.vue', '.json','.ts']
+    plugins: [new TsconfigPathsPlugin({ /*configFile: "./path/to/tsconfig.json" */ })],
+    extensions: ['.css', '.scss', '.sass', '.js', '.json','.ts']
   },
   performance: {
     hints: false

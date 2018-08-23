@@ -14,7 +14,8 @@
     "experimentalDecorators": true,
     "sourceMap": true,
     "declaration": true,
-    "declarationDir": "./@types",
+    "traceResolution": true,
+    "declarationDir": "@types",
     "paths": {
       "@/*": ["src/*"],
       "@impl/*": ["src/impl/*"],
