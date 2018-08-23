@@ -8,7 +8,6 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 
 module.exports = {
-  target: 'node',
   devtool: '#eval-source-map',
   module: {
     rules: [
@@ -54,7 +53,9 @@ module.exports = {
     ]
   },
   resolve: {
-    plugins: [new TsconfigPathsPlugin({ /*configFile: "./path/to/tsconfig.json" */ })],
+    plugins: [
+      new TsconfigPathsPlugin()
+    ],
     extensions: ['.css', '.scss', '.sass', '.js', '.json','.ts']
   },
   performance: {

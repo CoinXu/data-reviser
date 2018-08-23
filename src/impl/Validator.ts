@@ -4,16 +4,26 @@
  * @description 实体类父类
  */
 
-import {D_NAME, VALID_MEMBER} from "@/constants"
-import {Validator as IValidator} from "../inter/decorator"
+import { D_NAME, VALID_MEMBER, VALIDATOR_PRIVATE_PROPERTY_NAME } from "@/constants"
+import {
+  Validator as IValidator,
+  ValidatorDecorator,
+  ValidatorDecoratorHooks,
+  ValidatorMessage
+} from "@inter/decorator"
 
 /*
  * 实体类父类
  */
-export class Validator implements IValidator{
-  private initModel: object;
-  private model: object = {};
-  private errMsg: object;
+export class Validator<T = any> implements IValidator<T> {
+  private initModel: any;
+  private model: any = {};
+  private errMsg: any;
+  private maps: T;
+
+  public constructor() {
+    this.maps = <T>{};
+  }
 
   /**
    * 设置model，获取错误信息
@@ -42,15 +52,8 @@ export class Validator implements IValidator{
         container = this[D_NAME][key];
         isRight = true;
         for(let i: number = 0; i < container.length; i++) {
-          isRight = isRight
-            && this[D_NAME][key][i].call(this, key, model[key]);
+          isRight = isRight && this[D_NAME][key][i].call(this, key, model[key]);
         }
-        // if(isRight) {
-        //   this[key] = model[key];
-        // }
-        // if(typeof this[key] !== "undefined") {
-        //   this.model[key] = this[key];
-        // }
         if(isRight) {
           this.model[key] = model[key];
         } else {
@@ -75,5 +78,31 @@ export class Validator implements IValidator{
    */
   public getModel() {
     return this.model;
+  }
+
+  public get(): T {
+    return this.maps as T;
+  }
+
+  public set(): ValidatorMessage<T> {
+    return null;
+  }
+
+  public map(data: any): ValidatorMessage<T> {
+    const Hooks: ValidatorDecoratorHooks<T> = this[VALIDATOR_PRIVATE_PROPERTY_NAME];
+    const ObjectProto = Object.prototype;
+    const maps: T = this.maps;
+
+    for (const propKey in Hooks) {
+      if (!ObjectProto.hasOwnProperty.call(Hooks, propKey)) {
+        continue;
+      }
+
+      for (const decorator of Hooks[propKey]) {
+        decorator(maps, propKey, data[propKey])
+      }
+    }
+
+    return null;
   }
 }

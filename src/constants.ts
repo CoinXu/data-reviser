@@ -49,3 +49,5 @@ export const VERI_TYPE = {
   EMAIL: veriEmail,
   PHONE: veriPhone
 };
+
+export const VALIDATOR_PRIVATE_PROPERTY_NAME = '__validator_private_property_name__';

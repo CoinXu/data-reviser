@@ -4,13 +4,38 @@
  * @description 接口类
  */
 
-/*
- * entry基类
+type ValidatorErrorMessage<T> = {
+  [P in keyof T]?: string
+};
+
+export type ValidatorMessage<T> = ValidatorErrorMessage<T> | null;
+
+/**
+ * Define class Validator
  */
-export interface Validator {
+export interface Validator<T> {
   setModel(model: any): any;
   getModel(): any;
-}
+  get(): T;
+  set(model: any): ValidatorMessage<T>;
+  map(model: any): ValidatorMessage<T>;
+};
+
+export interface PropertyDecorator {
+  (target: any, key: string, descriptor?: any): any
+};
+
+/**
+ * Define Validator Decorator
+ */
+export interface ValidatorDecorator {
+  (target: any, key: string, value: any): any;
+};
+
+export type ValidatorDecoratorHooks<T> = {
+  [P in keyof T]?: ValidatorDecorator[];
+};
+
 
 /**
  * 验证器数组时，验证器接口index字段数组类型
@@ -54,3 +79,4 @@ export interface IParamWrongMsg {
   index?: string,
   key?: any
 }
+

@@ -11,6 +11,7 @@ const merge = require('webpack-merge');
 const WebpackConfigBase = require('./webpack.config.base');
 
 module.exports = merge(WebpackConfigBase, {
+  target: 'node',
   devtool: '#source-map',
   entry: path.resolve('test/index.ts'),
   output: {
