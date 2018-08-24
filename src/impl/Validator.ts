@@ -12,10 +12,12 @@ import {
   ValidatorMessage
 } from "@inter/decorator"
 
+const hasOwnProperty = Object.prototype.hasOwnProperty;
+
 /*
  * 实体类父类
  */
-export class Validator<T = any> implements IValidator<T> {
+export class Validator<T = {}> implements IValidator<T> {
   private initModel: any;
   private model: any = {};
   private errMsg: any;
@@ -31,7 +33,7 @@ export class Validator<T = any> implements IValidator<T> {
    * @param {object} model - 参数模型
    * @returns {any}
    */
-  public setModel(model) {
+  public setModel(model): any {
     this.errMsg = {};
     if(this.initModel) {
       this.checkMember.call(this, this['__proto__'].constructor, model);
@@ -44,7 +46,7 @@ export class Validator<T = any> implements IValidator<T> {
    * @param {constructor} tar - this['__proto__'].constructor
    * @param {object} model - 验证参数模型
    */
-  private checkMember(tar, model) {
+  private checkMember(tar, model): void {
     let container;
     let isRight: boolean = true;
     for (let key in tar[VALID_MEMBER]) {
@@ -70,39 +72,88 @@ export class Validator<T = any> implements IValidator<T> {
     }
   }
 
+  private static isEmpty(object: any): boolean {
+    return Object.keys(object).length < 1;
+  }
+
 
   /**
    * 获取model
    *
    * @returns {{}}
    */
-  public getModel() {
+  public getModel(): any {
     return this.model;
   }
 
+  private getDecoratorHooks(): ValidatorDecoratorHooks<T> {
+    const hooks: any = this[VALIDATOR_PRIVATE_PROPERTY_NAME] ||
+      (this[VALIDATOR_PRIVATE_PROPERTY_NAME] = {});
+
+    return (hooks) as ValidatorDecoratorHooks<T>
+  }
+
   public get(): T {
-    return this.maps as T;
-  }
+    // compatible getModel
+    const model: any = { ...this.model };
 
-  public set(): ValidatorMessage<T> {
-    return null;
-  }
-
-  public map(data: any): ValidatorMessage<T> {
-    const Hooks: ValidatorDecoratorHooks<T> = this[VALIDATOR_PRIVATE_PROPERTY_NAME];
-    const ObjectProto = Object.prototype;
+    const hooks: ValidatorDecoratorHooks<T> = this.getDecoratorHooks();
+    const messages: ValidatorMessage<T> = {};
     const maps: T = this.maps;
+    const values: any = Object.keys(hooks).reduce((object, name) => {
+      object[name] = this[name];
+      return object;
+    }, {});
+    const data: any = { ...values, ...(maps as any) };
 
-    for (const propKey in Hooks) {
-      if (!ObjectProto.hasOwnProperty.call(Hooks, propKey)) {
+    for (const propKey in hooks) {
+      if (!hasOwnProperty.call(hooks, propKey) || !hasOwnProperty.call(data, propKey)) {
         continue;
       }
 
-      for (const decorator of Hooks[propKey]) {
-        decorator(maps, propKey, data[propKey])
+      for (const decorator of hooks[propKey]) {
+        decorator(maps, propKey, data[propKey]);
       }
     }
 
-    return null;
+    return { ...model, ...(maps as any) } as T;
+  }
+
+  public set(data: any): ValidatorMessage<T> {
+    return this.map(data);
+  }
+
+  public map(data: any): ValidatorMessage<T> {
+    const maps: T = this.maps;
+    const hooks: ValidatorDecoratorHooks<T> = this.getDecoratorHooks();
+    const messages: ValidatorMessage<T> = {};
+
+    // # compatible setModel method
+    const setModelReturns: any = this.setModel(data);
+    let hasMessage = !Validator.isEmpty(setModelReturns);
+
+    // copy setModel returns to messages.
+    if (hasMessage) {
+      Object.keys(setModelReturns).forEach(function(key: string) {
+        messages[key] = setModelReturns[key];
+      });
+    }
+
+    // # execute new standard decorators.
+    for (const propKey in hooks) {
+      if (!hasOwnProperty.call(hooks, propKey) || !hasOwnProperty.call(data, propKey)) {
+        continue;
+      }
+
+      for (const decorator of hooks[propKey]) {
+        let m = decorator(maps, propKey, data[propKey]);
+        if (m !== null) {
+          messages[propKey] = m;
+          hasMessage = true;
+        }
+      }
+    }
+
+    return hasMessage ? messages : null;
   }
 }

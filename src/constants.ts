@@ -51,3 +51,22 @@ export const VERI_TYPE = {
 };
 
 export const VALIDATOR_PRIVATE_PROPERTY_NAME = '__validator_private_property_name__';
+
+export const IEEE754Limits = {
+  Double: {
+    Max: 1.7976931348623157e+308,
+    Min: -1.7976931348623157e+308
+  },
+  Float: {
+    Max: 3.402823669209385e+38,
+    Min: -3.402823669209385e+38
+  },
+  Int32: {
+    Max: 2147483647,
+    Min: -2147483647
+  },
+  Int64: {
+    Max: 9223372036854775807,
+    Min: -9223372036854775807
+  }
+};

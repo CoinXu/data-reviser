@@ -11,10 +11,10 @@ import {
 } from "@/inter/decorator";
 import { VALIDATOR_PRIVATE_PROPERTY_NAME as PROPERTY_NAME } from "@/constants";
 
-export function factory<T = any>(decorator: ValidatorDecorator): PropertyDecorator {
+export function factory<T = {}>(decorator: ValidatorDecorator<T>): PropertyDecorator {
   return function(target: any, key: string, descriptor?: any): any {
     const hooks: ValidatorDecoratorHooks<T> = target[PROPERTY_NAME] || (target[PROPERTY_NAME] = {});
-    const list:  ValidatorDecorator[] = hooks[key] || (hooks[key] = []);
+    const list: ValidatorDecorator<T>[] = hooks[key] || (hooks[key] = []);
 
     list.push(decorator);
     return ;

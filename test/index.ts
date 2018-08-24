@@ -5,15 +5,14 @@
  */
 
 import "mocha";
-import { expect } from "chai";
-import { Validator, DecoRequire, DecoInt32 } from "@/index";
-import { PropertyDecorator } from "@inter/decorator";
+import { expect, assert } from "chai";
+import { PropertyDecorator, ValidatorMessage } from "@inter/decorator";
 import { factory } from "@/decorator-factory";
-
-const TestDecoratorToSet = "TestDecoratorToSet";
-const TestDecorator: PropertyDecorator = factory(function(target: any, key: string, value: any): any {
-  target[key] = TestDecoratorToSet;
-});
+import { IEEE754Limits } from "@/constants";
+import {
+  Validator, DecoRequire, DecoInt32,
+  ToDouble, ToFloat, ToInt32, ToInt64, ToString
+} from "@/index";
 
 describe("Class Validator", function() {
   // Legal data
@@ -25,20 +24,74 @@ describe("Class Validator", function() {
     };
 
     const m = new M();
-    const message: any = m.setModel({ n: 2 });
+    const message: ValidatorMessage<any> = m.setModel({ n: 2 });
     expect(message).to.be.deep.equal({});
   });
 
-  it("Should update target value while use TestDecorator", function() {
+
+  it("Should translate value to double while set @ToDouble decorator", function() {
     class M extends Validator<any> {
-      @TestDecorator
-      str = "";
+      @ToDouble
+      n = "";
     };
 
     const m = new M();
-    m.map({ str: 1 });
+
+    let message = m.map({ n: '1' });
+    expect(message).to.be.equal(null);
+
+    let data = m.get();
+    expect(data.n).to.be.equal(1);
+
+    message = m.map({ n: Infinity });
+    expect(message).to.be.equal(null);
+
+    data = m.get();
+    assert(data.n < Infinity);
+  });
+
+  it("Should translate value to float while set @ToFloat decorator", function() {
+    class M extends Validator<any> {
+      @ToFloat
+      f = "";
+    };
+
+    const m = new M();
+
+    const message = m.map({ f: '1' });
+    expect(message).to.be.equal(null);
 
     const data = m.get();
-    expect(data.str).to.be.equal(TestDecoratorToSet);
+    expect(data.f).to.be.equal(1);
+  });
+
+  it("Should translate value to int32 while set @ToInt32 decorator", function() {
+    class M extends Validator<any> {
+      @ToInt32
+      f = "";
+    };
+
+    const m = new M();
+
+    const message = m.map({ f: '1' });
+    expect(message).to.be.equal(null);
+
+    const data = m.get();
+    expect(data.f).to.be.equal(1);
+  });
+
+  it("Should translate value to int64 while set @ToInt64 decorator", function() {
+    class M extends Validator<any> {
+      @ToInt64
+      f = "";
+    };
+
+    const m = new M();
+
+    const message = m.map({ f: '1' });
+    expect(message).to.be.equal(null);
+
+    const data = m.get();
+    expect(data.f).to.be.equal(1);
   });
 });
