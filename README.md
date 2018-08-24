@@ -1,238 +1,67 @@
-# paramveri
+# reviser
+1. Validate data type and data structure.
+2. Translate data type.
 
-> check ajax param
-
-## Build Setup
-
+# Build Setup
 ``` bash
-# install dependencies
-npm install
+# Dependecies
+yarn install
 
-# 开发测试运行，localhost:80
-npm run dev
+# Dev
+yarn run dev
 
-# 构建发布
-npm run build
+# Build
+yarn run build
 
-# 测试
-npm run test
+# Test
+yarn run test
 ```
 
-
-## 项目结构
-```
-src----inter:定义接口
- |-----impl:接口实现
-         |-----validators: 验证器
-         |-----Decorators: 装饰器
-                    |--------TypeDecorators: 验证参数类型装饰器
-                    |--------DecoRequire.ts: 验证参数是否必须
-                    |--------index.ts: 装饰器入口
-                    |--------StructType: 配合struct类型验证使用装饰器
-         |-----Validator.ts: 所有实体类父类
- |-----script
-         |-----index.js: 总入口
-         |-----staticData: 全局静态变量
- |-----page:开发使用，测试页面
- |-----entry:开发使用，实体类
- |-----router:开发使用，路由
-test: 测试用例
-publish: 发布的包所在
-```
-
-## 安装与使用
-### 安装
+# Installation
 ```
 npm install param-veri --registry=http://npm.100.com
-或者
+# or
 yarn add param-veri --registry=http://npm.100.com
 ```
 
-### 添加es6,decorator支持
-安装decorator支持
-```
-npm install --save-dev babel-plugin-transform-decorators-legacy
-npm install --save-dev babel-plugin-transform-class-properties
-```
+# Usage
 
-使用babel6,设置.babelrc
-```
-{
-  "presets": [
-    ["env", {
-      "modules": "commonjs",
-      "targets": {
-        "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
-      }
-    }],
-    "stage-2",
-    "es2015"
-  ],
-  "plugins": [
-    "transform-decorators-legacy",//必须在transform-class-properties前
-    "transform-class-properties",
-    "transform-vue-jsx",
-    "transform-runtime"
-  ]
-}
-
-```
-
-### 使用
-可参考src/page与src/entry的测试用例
-
-#### 验证装饰器
-+ `@decoInt32(errMsg:string)`： 检测修饰的值是否为合法的int32
-+ `@decoInt64(errMsg:string)`:  检测修饰的值是否为合法的int64
-+ `@decoDouble(errMsg:string)`:  检测修饰的值是否为合法的double
-+ `@decoFloat(errMsg:string)`:  检测修饰的值是否为合法的float
-+ `@decoString(errMsg:string)`:  检测修饰的值是否为合法的string
-+ `@decoStruct(errMsg:string)`:  检测修饰的值是否为合法的struct
-+ `@decoUnInt32(errMsg:string)`:  检测修饰的值是否为合法的unsign int32
-+ `@decoUnInt64(errMsg:string)`:  检测修饰的值是否为合法的unsign int64
-+ `@decoBoolean(errMsg:string)`:  检测修饰的值是否为合法的boolean
-+ `@decoEmail(errMsg:string)`:  检测修饰的值是否为合法的email
-+ `@decoPhone(errMsg:string)`:  检测修饰的值是否为合法的phone
-+ `@decoArray(arrayType:string, errMsg:string，level: number)`:  检测修饰的值是否为合法的array
-
-```
-
-errMsg：自定义错误信息，默认为空
-arrayType: 数组项类型,参考VERI_TYPE
-level: 数组维度，默认为1
-
-```
-
-#### require装饰器
-+ `@DecoRequire(errMsg:string)`: 检测修饰的值为require,注：require装饰器需放在验证装饰器下方
-
-```
-
-errMsg：自定义错误信息，默认为空
-
-```
-eg:
-```ts
-  @paramVeri.DecoInt32("num is wrong")
-  @paramVeri.DecoRequire("require")
-  num1: number = 1;
-```
-
-#### 实体装饰器
-+ `@structType(class)`: 配合@decoStruct使用，用于声明struct参数格式
-
-#### 长度装饰器
-+ `@DecoMaxLength(size, errMsg)`: 声明参数最大长度
-+ `@DecoMinLength(size, errMsg)`: 声明参数最小长度
-
-```ts
-  @paramVeri.DecoMaxLength(4,"length wrong")
-  @paramVeri.DecoMinLength(2,"length wrong")
-  str: string = "demo";
-```
-
-#### Validator
-+ `setModel(model: object)`: 设置model，返回错误信息
-
-```ts
-//返回值
-{
-    key1: IParamWrongMsg,
-    key2: IParamWrongMsg,
-    key3: [IParamWrongMsg,IParamWrongMsg]
-}
-
-```
-
-+ `getModel`: 返回Model
-
-eg:
+## Basic Usage
 ```js
- let data = {
-   num1: 10,
-   num64: 64,
-   unnum32: 100,
-   unnum64: 6400,
-   double: 1.11,
-   float: 1.1,
-   str: "test",
-   mail: "2959581@qq.com",
-   phone: 13561127191,
-   numarr: [
-     [[1,1],[1,1]],
-     [[2,2],[2,2]],
-   ],
-   boo: true,
-   obj: {
-     obj1: {
-       num: 11
-     }
-   }
- };
- let entry = new test1Entry();
- let errmsg = entry.setModel(data);
- let model = entry.getModel();
- console.log(model,errmsg);
+import { Validator, DecoInt32, ToInt32 } from 'param-veri';
+
+class M extends Validator {
+  @ToInt32
+  @DecoInt32()
+  num = 1;
+};
+
+const m = new M();
+const message = m.set({ num: '123'});
+
+console.log(message);  // { num: { type: string, message: string }}
+console.log(m.get());  // { num: 123 }
 ```
 
-eg:
-```ts
-import paramVeri from "../script/index";
-import Test1ObjEntry from "./Test1ObjEntry";
-
-// 测试用实体类
-class Test1Entry extends paramVeri.Validator{
-
-
-  @paramVeri.DecoInt32("wrong")
-  @paramVeri.DecoRequire("require")
-  num1: number = 1;
-
-  @paramVeri.DecoInt64("wrong")
-  @paramVeri.DecoRequire()
-  num64: number = 1;
-
-  @paramVeri.DecoUnInt32("wrong")
-  unnum32: number = 1;
-
-  @paramVeri.DecoUnInt64("wrong")
-  unnum64: number = 1;
-
-  @paramVeri.DecoDouble("wrong")
-  double: number = 1.0;
-
-  @paramVeri.DecoFloat("wrong")
-  float: number = 1.0;
-
-  @paramVeri.DecoMaxLength(4,"length wrong")
-  @paramVeri.DecoMinLength(2,"length wrong")
-  @paramVeri.DecoString("wrong")
-  str: string = "demo";
-
-  @paramVeri.DecoBoolean("wrong")
-  boo: boolean = false;
-
-  @paramVeri.DecoEmail("wrong")
-  mail: string = "";
-
-  @paramVeri.DecoPhone("wrong")
-  phone: number = null;
-
-  @paramVeri.DecoArray(paramVeri.VERI_TYPE.INT32,"wrong",3)
-  numarr: Array<any> = [];
-
-  @paramVeri.DecoStruct("wrong")
-  @paramVeri.StructType(Test1ObjEntry)
-  obj: object = new Test1ObjEntry(); //也可直接设置默认值为{}
-
-}
-```
-
-
-#### 静态变量与接口
-+ `VERI_TYPE`: 参数类型
-
+## Inherit
 ```js
+class N extends M {
+  @ToInt32
+  str = '';
+};
+
+const n = new N();
+const message = m.set({ str: 123 });
+
+console.log(message);  // null
+console.log(m.get());  // { num: 1, str: '123'}
+```
+
+# API documentation
+## Constatns
+
+### VERI_TYPE
+```ts
 enum VERI_TYPE = {
   INT32,
   INT64,
@@ -247,29 +76,22 @@ enum VERI_TYPE = {
   PHONE
 };
 ```
-+ `ERROR_TYPE`: 错误类型
 
-```js
+### ERROR_TYPE
+```ts
 enum ERROR_TYPE = {
   TYPE_ERROR,
   SIZE_ERROR,
   REQUIRE_ERROR,
   LENGTH_MIN_ERRO
   LENGTH_MAX_ERRO,
-};
+}
 ```
 
-+ `IParamWrongMsg`: 错误信息
+## Interface
 
+### IParamWrongMsg
 ```ts
-/**
- * 错误信息
- *
- * @param {string} type - 错误类型
- * @param {string} msg - 用户自定义错误信息
- * @param {string} index - 若为数组情况下，返回错误数据index, 若数组维度大于1， 以-分割
- * @param {IParamWrongMsg} key - 若为object情况下，返回错误数据对象
- */
 interface IParamWrongMsg {
   type: string,
   msg?: string,
@@ -277,3 +99,56 @@ interface IParamWrongMsg {
   key?: object
 }
 ```
+
+## class Validator
+Base class. Your class must extends of this if your want use decorators in this library.
+#### #setModel(data: object): object
+`deprecated`
+
+#### #getModel(): object
+`deprecated`
+
+#### #get(): object
+Get values that proccessed by decorators.
+
+#### #set(data: object): object | null
+Upgrade model through data. Will return object that contains messages
+if occur error other wish null.
+
+#### #map(data: object): object
+Alais of `set` method.
+
+## Decorators
+### Data Type & Structure validators
+
++ @DecoArray(type: VERI_TYPE, message?: string, deep: number)
++ @DecoBoolean(message: string)
++ @DecoDouble(message: string)
++ @DecoFloat(message: string)
++ @DecoInt32(message: string)
++ @DecoInt64(message: string)
++ @DecoStruct(message: string)
++ @DecoString(message: string)
++ @DecoUnInt32(message: string)
++ @DecoUnInt64(message: string)
++ @StructType(base: Validator)
++ @DecoRequire(message: string)
++ @DecoEmail(message: string)
++ @DecoPhone(message: string)
++ @DecoMinLength(limit: number, message: string)
++ @DecoMaxLength(limit: number, message: string)
+
+### Data Type Translators
+
++ `@ToDouble`
++ `@ToFloat`
++ `@ToInt32`
++ `@ToInt64`
++ `@ToString`
+
+# For developer
+
+TODO
+
+# Licence
+[MIT](https://opensource.org/licenses/MIT)
