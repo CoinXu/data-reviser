@@ -1,11 +1,11 @@
 {
   "name": "param-veri",
   "description": "Check data types and structure",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "author": "zhuoyihan",
   "license": "MIT",
   "private": false,
-  "main": "./publish/paramveri/index.js",
+  "main": "./build/reviser.js",
   "scripts": {
     "dev": "webpack-dev-server --color --progress --info --config ./support/webpack.config.dev.js",
     "build": "webpack --color --progress --config ./support/webpack.config.prod.js",
