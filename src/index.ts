@@ -31,6 +31,9 @@ import ToInt32 from "@/impl/translators/to-int32";
 import ToInt64 from "@/impl/translators/to-int64";
 import ToString from "@/impl/translators/to-string";
 
+// types
+import TypeBoolean from "@/impl/types/type-boolean";
+
 // 兼容之前版本导出方式
 export default {
   DecoArray,
@@ -74,9 +77,12 @@ export {
   DecoPhone,
   DecoMinLength,
   DecoMaxLength,
+
   ToDouble,
   ToFloat,
   ToInt32,
   ToInt64,
-  ToString
+  ToString,
+
+  TypeBoolean
 };
