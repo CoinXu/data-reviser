@@ -12,7 +12,8 @@
     "test:build": "webpack --color --progress --config ./support/webpack.config.test.js",
     "test:runner": "mocha test/build/test.bundle.js",
     "test:clean": "rm -rf test/build",
-    "test": "npm run test:build && npm run test:runner && npm run test:clean"
+    "test": "npm run test:build && npm run test:runner && npm run test:clean",
+    "prepublishOnly": "npm run test && npm run build"
   },
   "browserslist": [
     "> 1%",

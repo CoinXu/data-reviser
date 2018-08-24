@@ -4,10 +4,14 @@
  * @description 实体类父类
  */
 
-import { D_NAME, VALID_MEMBER, VALIDATOR_PRIVATE_PROPERTY_NAME } from "@/constants"
+import {
+  D_NAME, VALID_MEMBER,
+  VALIDATOR_PRIVATE_PROPERTY_NAME as PROPERTY_NAME
+} from "@/constants"
 import {
   Validator as IValidator,
   ValidatorDecorator,
+  ValidatorDecoratorReturns,
   ValidatorDecoratorHooks,
   ValidatorMessage
 } from "@inter/decorator"
@@ -86,11 +90,25 @@ export class Validator<T = {}> implements IValidator<T> {
     return this.model;
   }
 
-  private getDecoratorHooks(): ValidatorDecoratorHooks<T> {
-    const hooks: any = this[VALIDATOR_PRIVATE_PROPERTY_NAME] ||
-      (this[VALIDATOR_PRIVATE_PROPERTY_NAME] = {});
+  private getDecoratedProperties(): string[] {
+    return Object.keys(this.getDecoratorHooks());
+  }
 
-    return (hooks) as ValidatorDecoratorHooks<T>
+  private getDecoratedValues(): Partial<T> {
+    const values: any = {};
+
+    this.getDecoratedProperties().reduce((object, name) => {
+      object[name] = this[name];
+      return object;
+    }, values);
+
+    return values as Partial<T>;
+  }
+
+  private getDecoratorHooks(): ValidatorDecoratorHooks<T> {
+    const aHooks: any = this[D_NAME] || (this[D_NAME] = {});
+    const bHooks: any = this[PROPERTY_NAME] || (this[PROPERTY_NAME] = {});
+    return ({ ...aHooks, ...bHooks }) as ValidatorDecoratorHooks<T>
   }
 
   public get(): T {
@@ -99,12 +117,9 @@ export class Validator<T = {}> implements IValidator<T> {
 
     const hooks: ValidatorDecoratorHooks<T> = this.getDecoratorHooks();
     const messages: ValidatorMessage<T> = {};
-    const maps: T = this.maps;
-    const values: any = Object.keys(hooks).reduce((object, name) => {
-      object[name] = this[name];
-      return object;
-    }, {});
-    const data: any = { ...values, ...(maps as any) };
+    const values: any = this.getDecoratedValues();
+    const maps: any = this.maps;
+    const data: any = { ...values, ...maps };
 
     for (const propKey in hooks) {
       if (!hasOwnProperty.call(hooks, propKey) || !hasOwnProperty.call(data, propKey)) {
@@ -116,7 +131,7 @@ export class Validator<T = {}> implements IValidator<T> {
       }
     }
 
-    return { ...model, ...(maps as any) } as T;
+    return { ...values, ...model, ...maps } as T;
   }
 
   public set(data: any): ValidatorMessage<T> {
@@ -146,7 +161,7 @@ export class Validator<T = {}> implements IValidator<T> {
       }
 
       for (const decorator of hooks[propKey]) {
-        let m = decorator(maps, propKey, data[propKey]);
+        const m: ValidatorDecoratorReturns<T> = decorator(maps, propKey, data[propKey]);
         if (m !== null) {
           messages[propKey] = m;
           hasMessage = true;

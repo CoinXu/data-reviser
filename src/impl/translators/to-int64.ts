@@ -24,7 +24,6 @@ function decorator(target: any, key: string, value: any): null {
     num = IEEE754Limits.Int64.Min;
   }
 
-  console.log('result.num', num);
   target[key] = num;
   return null;
 }
