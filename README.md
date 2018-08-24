@@ -1,4 +1,4 @@
-# reviser
+# Features
 1. Validate data type and data structure.
 2. Translate data type.
 
@@ -26,7 +26,7 @@ yarn add param-veri --registry=http://npm.100.com
 
 # Usage
 
-## Basic Usage
+### Basic Usage
 ```js
 import { Validator, DecoInt32, ToInt32 } from 'param-veri';
 
@@ -43,7 +43,7 @@ console.log(message);  // { num: { type: string, message: string }}
 console.log(m.get());  // { num: 123 }
 ```
 
-## Inherit
+### Inherit
 ```js
 class N extends M {
   @ToInt32
@@ -58,9 +58,9 @@ console.log(m.get());  // { num: 1, str: '123'}
 ```
 
 # API documentation
-## Constatns
+### Constatns
 
-### VERI_TYPE
+#### VERI_TYPE
 ```ts
 enum VERI_TYPE = {
   INT32,
@@ -77,7 +77,7 @@ enum VERI_TYPE = {
 };
 ```
 
-### ERROR_TYPE
+#### ERROR_TYPE
 ```ts
 enum ERROR_TYPE = {
   TYPE_ERROR,
@@ -88,9 +88,9 @@ enum ERROR_TYPE = {
 }
 ```
 
-## Interface
+### Interface
 
-### IParamWrongMsg
+#### IParamWrongMsg
 ```ts
 interface IParamWrongMsg {
   type: string,
@@ -100,7 +100,7 @@ interface IParamWrongMsg {
 }
 ```
 
-## class Validator
+### class Validator
 Base class. Your class must extends of this if your want use decorators in this library.
 #### #setModel(data: object): object
 `deprecated`
@@ -140,11 +140,11 @@ Alais of `set` method.
 
 ### Data Type Translators
 
-+ `@ToDouble`
-+ `@ToFloat`
-+ `@ToInt32`
-+ `@ToInt64`
-+ `@ToString`
++ @ToDouble
++ @ToFloat
++ @ToInt32
++ @ToInt64
++ @ToString
 
 # For developer
 
