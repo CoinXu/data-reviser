@@ -3,22 +3,15 @@
 2. Translate data type.
 
 # Build Setup
-``` bash
-# Dependecies
-yarn install
-
-# Dev
-yarn run dev
-
-# Build
-yarn run build
-
-# Test
-yarn run test
+```bash
+yarn install    # Dependecies
+yarn run dev    # Dev
+yarn run build  # Build
+yarn run test   # Test
 ```
 
 # Installation
-```
+```bash
 npm install param-veri --registry=http://npm.100.com
 # or
 yarn add param-veri --registry=http://npm.100.com
