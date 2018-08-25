@@ -15,13 +15,13 @@ function TypePhone(message?: string): PropertyDecorator {
     const type: string = getPrimitiveType(value);
 
     if (type !== PrimitiveTypes.String && type !== PrimitiveTypes.Number) {
-      return `expected a String or Number but got ${type}`;
+      return message || `expected a String or Number but got ${type}`;
     }
 
     const str: string = '' + value;
 
     if (str.length < 1) {
-      return `expected a phone number`;
+      return message || `expected a phone number`;
     }
 
     target[key] = value;

@@ -4,5 +4,7 @@
  * @description
  */
 
-import "./validator.test";
 import "./decorator-translator.test";
+import "./decorator-type.test";
+import "./decorator-validator.test";
+import "./validator.test";

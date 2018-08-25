@@ -15,7 +15,7 @@ import {
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 
-export class Validator<T = {}> implements IValidator<T> {
+export class Validator<T = any> implements IValidator<T> {
   private maps: T;
 
   public constructor() {

@@ -19,7 +19,7 @@ function TypeUnInt64(message?: string): PropertyDecorator {
 
     // # check integer
     if (value % 1 !== 0) {
-      return message || `expected a Integer bug got a Decimal`;
+      return message || `expected a Integer bug got ${value}`;
     }
 
     if (value > IEEE754Limits.UnInt64.Max) {
