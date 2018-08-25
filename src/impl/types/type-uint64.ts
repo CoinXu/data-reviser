@@ -1,5 +1,5 @@
 /**
- * @date 2018-08-24
+ * @date 2018-08-25
  * @author xuchuanping
  * @description
  */
@@ -9,20 +9,25 @@ import { PropertyDecorator, ValidatorDecoratorReturns } from "@inter/decorator";
 import { PrimitiveTypes, getPrimitiveType } from "@impl/utils";
 import { IEEE754Limits } from "@/constants";
 
-function TypeDouble(message?: string): PropertyDecorator {
+function TypeUnInt64(message?: string): PropertyDecorator {
   function decorator(target: any, key: string, value: any): ValidatorDecoratorReturns<{}> {
     const type: string = getPrimitiveType(value);
 
     if (type !== PrimitiveTypes.Number) {
-      return message || `expected a Number but got ${type}`;
+      return `expected a Number but got ${type}`;
     }
 
-    if (value > IEEE754Limits.Double.Max) {
-      return message || `type double must less than ${IEEE754Limits.Double.Max} but got ${value}`;
+    // # check integer
+    if (value % 1 !== 0) {
+      return message || `expected a Integer bug got a Decimal`;
     }
 
-    if (value < IEEE754Limits.Double.Min) {
-      return message || `type double must great than ${IEEE754Limits.Double.Min} but got ${value}`;
+    if (value > IEEE754Limits.UnInt64.Max) {
+      return `type double must less than ${IEEE754Limits.UnInt64.Max} but got ${value}`;
+    }
+
+    if (value < IEEE754Limits.UnInt64.Min) {
+      return `type double must great than ${IEEE754Limits.UnInt64.Min} but got ${value}`;
     }
 
     target[key] = value;
@@ -32,4 +37,4 @@ function TypeDouble(message?: string): PropertyDecorator {
   return factory(decorator);
 }
 
-export default TypeDouble;
+export default TypeUnInt64;

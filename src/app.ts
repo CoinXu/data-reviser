@@ -5,57 +5,56 @@
  */
 
 import * as Reviser from "@/index";
-import { Validator, DecoRequire, DecoInt32, DecoString, TypeBoolean } from "@/index";
 import { ValidatorMessage } from "@inter/decorator";
+import {
+  Validator, DecoRequire, DecoString,
+  ToDouble, ToFloat, ToInt32, ToString,
+  TypeBoolean, TypeStructure
+} from "@/index";
 
-// class M extends Validator {
-//   @DecoString()
-//   str = "";
-// };
+class M extends Validator {
+  @ToString
+  str = "";
+};
 
-// const m = new M();
-// const mMessage: ValidatorMessage<any> = m.map({ str: 1 });
-// const mData = m.get();
+const m = new M();
+const mMessage = m.map({ str: 1 });
+const mData = m.get();
 
-// console.log('mMessage', mMessage);
-// console.log('mData', mData);
+console.log('mMessage', mMessage);
+console.log('mData', mData);
 
 
-// class N extends M {
-//   @DecoInt32()
-//   @DecoRequire()
-//   num = 1;
-// };
+class N extends M {
+  @ToInt32
+  num = 1;
+};
 
-// const n = new N();
-// const nMessage: ValidatorMessage<any> = n.map({ str: 1 });
-// const nData = n.get();
+const n = new N();
+const nMessage = n.map({ str: 1 });
+const nData = n.get();
 
-// console.log('nMessage', nMessage);
-// console.log('nData', nData);
+console.log('nMessage', nMessage);
+console.log('nData', nData);
 
 
 class O extends Validator {
   @TypeBoolean()
   b = true;
+
+  @TypeStructure(N)
+  s = {};
 };
 
 const o = new O();
-const oMessage = o.map({ b: false });
+const oMessage = o.map({
+  b: 1,
+  s: {
+    str: 2,
+    num: "2"
+  }
+});
 const oData = o.get();
-
 console.log('oMessage', oMessage);
 console.log('oData', oData);
-
-class P extends Validator {
-  @TypeBoolean()
-  b = true;
-};
-
-const p = new P();
-const pMessage = p.map({ b: false });
-const pData = p.get();
-
-console.log('pMessage', oMessage);
-console.log('pData', oData);
 

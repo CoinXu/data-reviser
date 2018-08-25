@@ -14,9 +14,11 @@ export enum PrimitiveTypes {
   Undefined = "Undefined",
   String = "String",
   Number = "Number",
-  Boolean = "Boolean"
+  Boolean = "Boolean",
+  Null = "Null"
 };
 
 export function getPrimitiveType(value: any): string {
   return ObjectToString.call(value).slice(8, -1);
 }
+

@@ -1,25 +1,23 @@
 /**
- * @date 2018-08-24
+ * @date 2018-08-25
  * @author xuchuanping
  * @description
  */
 
 import { factory } from "@/decorator-factory";
 import { PropertyDecorator, ValidatorDecoratorReturns } from "@inter/decorator";
-import { PrimitiveTypes, getPrimitiveType } from "@impl/utils";
 
-const Pattern = /^([\w-_]+(?:\.[\w-_]+)*)@((?:[a-z0-9]+(?:-[a-zA-Z0-9]+)*)+\.[a-z]{2,6})$/;
-
-function TypeEmail(message?: string): PropertyDecorator {
+function MinLength(length: number, message?: string): PropertyDecorator {
   function decorator(target: any, key: string, value: any): ValidatorDecoratorReturns<{}> {
     const type: string = getPrimitiveType(value);
 
+    // string
     if (type !== PrimitiveTypes.String) {
       return message || `expected a String but got ${type}`;
     }
 
-    if (!Pattern.test(value)) {
-      return message || `expected a mail address`;
+    if (value.length < length) {
+      return message || `length of ${key} must great than ${length}`;
     }
 
     target[key] = value;
@@ -29,4 +27,4 @@ function TypeEmail(message?: string): PropertyDecorator {
   return factory(decorator);
 }
 
-export default TypeEmail;
+export default MinLength;
