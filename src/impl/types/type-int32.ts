@@ -14,15 +14,20 @@ function TypeInt32(message?: string): PropertyDecorator {
     const type: string = getPrimitiveType(value);
 
     if (type !== PrimitiveTypes.Number) {
-      return `expected a Number but got ${type}`;
+      return message || `expected a Number but got ${type}`;
+    }
+
+    // # check integer
+    if (value % 1 !== 0) {
+      return message || `expected a Integer bug got a Decimal`;
     }
 
     if (value > IEEE754Limits.Int32.Max) {
-      return `type double must less than ${IEEE754Limits.Int32.Max} but got ${value}`;
+      return message || `type double must less than ${IEEE754Limits.Int32.Max} but got ${value}`;
     }
 
     if (value < IEEE754Limits.Int32.Min) {
-      return `type double must great than ${IEEE754Limits.Int32.Min} but got ${value}`;
+      return message || `type double must great than ${IEEE754Limits.Int32.Min} but got ${value}`;
     }
 
     target[key] = value;

@@ -14,15 +14,15 @@ function TypeFloat(message?: string): PropertyDecorator {
     const type: string = getPrimitiveType(value);
 
     if (type !== PrimitiveTypes.Number) {
-      return `expected a Number but got ${type}`;
+      return message || `expected a Number but got ${type}`;
     }
 
     if (value > IEEE754Limits.Float.Max) {
-      return `type double must less than ${IEEE754Limits.Float.Max} but got ${value}`;
+      return message || `type double must less than ${IEEE754Limits.Float.Max} but got ${value}`;
     }
 
     if (value < IEEE754Limits.Float.Min) {
-      return `type double must great than ${IEEE754Limits.Float.Min} but got ${value}`;
+      return message || `type double must great than ${IEEE754Limits.Float.Min} but got ${value}`;
     }
 
     target[key] = value;

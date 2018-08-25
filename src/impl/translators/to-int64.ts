@@ -1,7 +1,7 @@
 /**
  * @date 2018-08-24
  * @author xuchuanping
- * @description Translate value be a int64 type.
+ * @description Translate value be an int64 type.
  */
 
 import { factory } from "@/decorator-factory";

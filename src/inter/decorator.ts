@@ -7,13 +7,22 @@
 /**
  * Define Validator message
  */
-type ValidatorErrorMessage<T> = {
-  [P in keyof T]?: string
+
+type ValidatorMessageType = string | null;
+
+type ValidatorPartialMessageType<T> = {
+  [P in keyof T]?: ValidatorMessageType;
 };
 
-export type ValidatorMessage<T> = ValidatorErrorMessage<T> | null;
+export type ValidatorDecoratorReturns<T> = ValidatorMessageType | ValidatorPartialMessageType<{}>;
 
-export type ValidatorDecoratorReturns<T> = string | null;
+type ValidatorPartialMessage<T> = {
+  [P in keyof T]?: ValidatorDecoratorReturns<T>;
+};
+
+export type ValidatorMessage<T> = ValidatorPartialMessage<T> |  null;
+
+
 
 /**
  * Define class Validator
@@ -25,6 +34,10 @@ export interface Validator<T> {
   set(model: any): ValidatorMessage<T>;
   map(model: any): ValidatorMessage<T>;
 };
+
+export interface ValidatorConstructor<T> {
+  new(): Validator<T>
+}
 
 export interface PropertyDecorator {
   (target: any, key: string, descriptor?: any): any

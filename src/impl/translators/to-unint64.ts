@@ -1,7 +1,7 @@
 /**
- * @date 2018-08-24
+ * @date 2018-08-25
  * @author xuchuanping
- * @description Translate value be an int32 type.
+ * @description Translate value be an uint64 type.
  */
 
 import { factory } from "@/decorator-factory";
@@ -16,18 +16,18 @@ function decorator(target: any, key: string, value: any): null {
     num = parseInt(num as any);
   }
 
-  if (num > IEEE754Limits.Int32.Max) {
-    num = IEEE754Limits.Int32.Max;
+  if (num > IEEE754Limits.UnInt64.Max) {
+    num = IEEE754Limits.UnInt64.Max;
   }
 
-  if (num < IEEE754Limits.Int32.Min) {
-    num = IEEE754Limits.Int32.Min;
+  if (num < IEEE754Limits.UnInt64.Min) {
+    num = IEEE754Limits.UnInt64.Min;
   }
 
   target[key] = num;
   return null;
 }
 
-const DecoToInt32: PropertyDecorator = factory(decorator);
+const DecoToUnInt64: PropertyDecorator = factory(decorator);
 
-export default DecoToInt32;
+export default DecoToUnInt64;

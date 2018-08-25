@@ -5,19 +5,27 @@
  */
 
 import { factory } from "@/decorator-factory";
-import { Validator } from "@impl/Validator";
 import { VALIDATOR_PRIVATE_PROPERTY_NAME } from "@/constants";
 import {
-  PropertyDecorator, ValidatorDecoratorReturns, ValidatorDecoratorHooks
+  PropertyDecorator, ValidatorDecoratorReturns, ValidatorMessage,
+  Validator, ValidatorConstructor
 } from "@inter/decorator";
 
-// function TypeStructure(Clazz: Validator, message?: string): PropertyDecorator {
-//   function decorator(target: any, key: string, value: any): ValidatorDecoratorReturns<{}> {
-//     // const hooks: ValidatorDecoratorHooks<Clazz> = Clazz.prototype[VALIDATOR_PRIVATE_PROPERTY_NAME];
+function TypeStructure<T = {}>(Clazz: ValidatorConstructor<T>): PropertyDecorator {
+  class ClazzClass extends Clazz {};
 
-//   }
+  const ins: Validator<T> = new ClazzClass();
 
-//   return factory(decorator);
-// }
+  function decorator(target: any, key: string, value: any): ValidatorDecoratorReturns<T> {
+    const message: ValidatorMessage<T> = ins.map(value);
+    if (message !== null) {
+      return message;
+    }
+    target[key] = ins.get();
+    return null;
+  }
 
-// export default TypeStructure;
+  return factory(decorator);
+}
+
+export default TypeStructure;

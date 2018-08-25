@@ -33,6 +33,14 @@ import ToString from "@/impl/translators/to-string";
 
 // types
 import TypeBoolean from "@/impl/types/type-boolean";
+import TypeDouble from "@/impl/types/type-double";
+import TypeEmail from "@/impl/types/type-email";
+import TypeFloat from "@/impl/types/type-float";
+import TypeInt32 from "@/impl/types/type-int32";
+import TypeInt64 from "@/impl/types/type-int64";
+import TypePhone from "@/impl/types/type-phone";
+import TypeString from "@/impl/types/type-string";
+import TypeStructure from "@/impl/types/type-structure";
 
 // 兼容之前版本导出方式
 export default {
@@ -84,5 +92,13 @@ export {
   ToInt64,
   ToString,
 
-  TypeBoolean
+  TypeBoolean,
+  TypeDouble,
+  TypeEmail,
+  TypeFloat,
+  TypeInt32,
+  TypeInt64,
+  TypePhone,
+  TypeString,
+  TypeStructure
 };
