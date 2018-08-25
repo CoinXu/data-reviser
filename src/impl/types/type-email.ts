@@ -19,7 +19,7 @@ function TypeEmail(message?: string): PropertyDecorator {
     }
 
     if (!Pattern.test(value)) {
-      return message || `expected a mail address`;
+      return message || `expected a mail address but got${value}`;
     }
 
     target[key] = value;
