@@ -5,6 +5,7 @@
  */
 
 import { factory } from "@/decorator-factory";
+import { PrimitiveTypes, getPrimitiveType } from "@/impl/utils";
 import { PropertyDecorator, ValidatorDecoratorReturns } from "@inter/decorator";
 
 function MaxLength(length: number, message?: string): PropertyDecorator {

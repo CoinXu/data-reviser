@@ -11,7 +11,7 @@ import { IEEE754Limits } from "@/constants";
 function decorator(target: any, key: string, value: any): null {
   let num: number = Number(value).valueOf() || 0;
 
-  if (num % 1 !== 0) {
+  if (num !== Infinity && num !== -Infinity && num % 1 !== 0) {
     // TODO why compile error?
     num = parseInt(num as any);
   }
