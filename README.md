@@ -1,3 +1,5 @@
+[![Build Status](https://www.travis-ci.org/CoinXu/reviser.svg?branch=master)](https://www.travis-ci.org/CoinXu/reviser)
+
 # Features
 1. Validate data type and data structure.
 2. Translate data type.
