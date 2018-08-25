@@ -7,54 +7,27 @@
 import * as Reviser from "@/index";
 import { ValidatorMessage } from "@inter/decorator";
 import {
-  Validator, DecoRequire, DecoString,
+  Validator, DecoRequired, DecoString, ToBoolean,
   ToDouble, ToFloat, ToInt32, ToString,
-  TypeBoolean, TypeStructure
+  TypeBoolean, TypeStruct
 } from "@/index";
 
 class M extends Validator {
-  @ToString
+  @ToBoolean
   str = "";
 };
 
 const m = new M();
-const mMessage = m.map({ str: 1 });
-const mData = m.get();
+
+let mData = m.get();
+let mMessage = m.map({ str: Infinity });
 
 console.log('mMessage', mMessage);
 console.log('mData', mData);
 
 
-class N extends M {
-  @ToInt32
-  num = 1;
-};
+mMessage = m.map({ str: -Infinity });
+mData = m.get();
 
-const n = new N();
-const nMessage = n.map({ str: 1 });
-const nData = n.get();
-
-console.log('nMessage', nMessage);
-console.log('nData', nData);
-
-
-class O extends Validator {
-  @TypeBoolean()
-  b = true;
-
-  @TypeStructure(N)
-  s = {};
-};
-
-const o = new O();
-const oMessage = o.map({
-  b: 1,
-  s: {
-    str: 2,
-    num: "2"
-  }
-});
-const oData = o.get();
-console.log('oMessage', oMessage);
-console.log('oData', oData);
-
+console.log('mMessage', mMessage);
+console.log('mData', mData);

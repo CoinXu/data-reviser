@@ -7,36 +7,22 @@
 import "mocha";
 import { expect, assert } from "chai";
 import { ValidatorMessage } from "@inter/decorator";
-import { Validator, DecoRequire, DecoInt32 } from "@/index";
+import { Validator, DecoRequired, DecoInt32 } from "@/index";
 
 describe("Class Validator", function() {
-  // Legal data
-  // TODO deprecated
-  it("Should return empty object while set legal data by method Validator.setModel", function() {
-    class M extends Validator<any> {
-      @DecoInt32()
-      @DecoRequire()
-      n = 1;
-    };
-
-    const m = new M();
-    const message: ValidatorMessage<any> = m.setModel({ n: 2 });
-    expect(message).to.be.deep.equal({});
-  });
-
-  // get
+  // #get
   it("Should has method named get on Validator instance", function() {
     const v = new Validator();
     expect(v.get).to.be.a('function');
   });
 
-  // set
+  // #set
   it("Should has method named set on Validator instance", function() {
     const v = new Validator();
     expect(v.set).to.be.a('function');
   });
 
-  // map
+  // # map
   it("Should has method named map on Validator instance", function() {
     const v = new Validator();
     expect(v.map).to.be.a('function');
@@ -51,7 +37,7 @@ describe("Class Validator", function() {
 
   it("Should return object while method map called while error accored", function() {
     class M extends Validator {
-      @DecoRequire()
+      @DecoRequired()
       n = 1;
     };
 
@@ -63,10 +49,10 @@ describe("Class Validator", function() {
   // # get
   it("Should return object that contains all properties that decorated while call method get", function() {
     class M extends Validator {
-      @DecoRequire()
+      @DecoRequired()
       a = 1;
 
-      @DecoRequire()
+      @DecoRequired()
       b = 2;
 
       c = 3;
