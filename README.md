@@ -50,36 +50,9 @@ console.log(message);  // null
 console.log(m.get());  // { num: 1, str: '123'}
 ```
 
+More example see test case.
+
 # API documentation
-### Constatns
-
-#### VERI_TYPE
-```ts
-enum VERI_TYPE = {
-  INT32,
-  INT64,
-  DOUBLE,
-  FLOAT,
-  STRING,
-  STRUCT,
-  UNINT32,
-  UNINT64,
-  BOOLEAN,
-  EMAIL,
-  PHONE
-};
-```
-
-#### ERROR_TYPE
-```ts
-enum ERROR_TYPE = {
-  TYPE_ERROR,
-  SIZE_ERROR,
-  REQUIRE_ERROR,
-  LENGTH_MIN_ERRO
-  LENGTH_MAX_ERRO,
-}
-```
 
 ### Interface
 
@@ -112,35 +85,56 @@ if occur error other wish null.
 Alais of `set` method.
 
 ## Decorators
-### Data Type & Structure validators
 
-+ @DecoArray(type: VERI_TYPE, message?: string, deep: number)
-+ @DecoBoolean(message: string)
-+ @DecoDouble(message: string)
-+ @DecoFloat(message: string)
-+ @DecoInt32(message: string)
-+ @DecoInt64(message: string)
-+ @DecoStruct(message: string)
-+ @DecoString(message: string)
-+ @DecoUnInt32(message: string)
-+ @DecoUnInt64(message: string)
-+ @StructType(base: Validator)
-+ @DecoRequire(message: string)
-+ @DecoEmail(message: string)
-+ @DecoPhone(message: string)
-+ @DecoMinLength(limit: number, message: string)
-+ @DecoMaxLength(limit: number, message: string)
+### Types
++ @TypeBoolean(message?: string)
++ @TypeDouble(message?: string)
++ @TypeEmail(message?: string)
++ @TypeFloat(message?: string)
++ @TypeInt32(message?: string)
++ @TypeInt64(message?: string)
++ @TypePhone(message?: string)
++ @TypeString(message?: string)
++ @TypeStruct(message?: string)
++ @TypeUnInt32(message?: string)
++ @TypeUnInt64(message?: string)
 
-### Data Type Translators
-
+### Translators
++ @ToBoolean
 + @ToDouble
 + @ToFloat
 + @ToInt32
 + @ToInt64
 + @ToString
++ @ToUnInt32
++ @ToUnInt64
 
-# For developer
+### Validators
++ @DecoMaxLength(message?: string)
++ @DecoMinLength(message?: string)
++ @DecoRequired(message?: string)
 
+### Will remove at next version
++ @DecoBoolean(message: string) `deprecated`
++ @DecoDouble(message: string) `deprecated`
++ @DecoFloat(message: string) `deprecated`
++ @DecoInt32(message: string) `deprecated`
++ @DecoInt64(message: string) `deprecated`
++ @DecoStruct(message: string) `deprecated`
++ @DecoString(message: string) `deprecated`
++ @DecoUnInt32(message: string) `deprecated`
++ @DecoUnInt64(message: string) `deprecated`
++ @StructType(base: Validator) `deprecated`
++ @DecoRequire(message: string) `deprecated`
++ @DecoEmail(message: string) `deprecated`
++ @DecoPhone(message: string) `deprecated`
++ @DecoMinLength(limit: number, message: string) `deprecated`
++ @DecoMaxLength(limit: number, message: string) `deprecated`
+
+### Removed
++ @DecoArray(type: VERI_TYPE, message?: string, deep: number)
+
+# For contributors
 TODO
 
 # Licence
