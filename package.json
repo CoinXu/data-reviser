@@ -2,7 +2,18 @@
   "name": "data-reviser",
   "description": "Validate data type & data structure. Translate data type automatically",
   "version": "0.0.10",
-  "author": "coinxu",
+  "author": {
+    "name": "coinxu",
+    "email": "duanxian0605@gmail.com",
+    "url": "https://github.com/coinxu"
+  },
+  "contributors": [
+    {
+      "name" : "yaniky",
+      "email" : "295958179@qq.com",
+      "url" : "https://github.com/yaniky"
+    }
+  ],
   "license": "MIT",
   "private": false,
   "main": "./build/reviser.js",
