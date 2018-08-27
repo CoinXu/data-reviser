@@ -52,7 +52,7 @@ console.log(message);  // null
 console.log(m.get());  // { num: 1, str: '123'}
 ```
 
-More example see test case.
+More example see [test case](./test/index.ts).
 
 # API documentation
 
