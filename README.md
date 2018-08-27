@@ -21,7 +21,7 @@ yarn add data-reviser
 
 # Usage
 
-### Basic Usage
+## Basic Usage
 ```js
 import { Reviser, TypeInt32, ToInt32 } from 'data-reviser';
 
@@ -38,7 +38,7 @@ console.log(message);  // { num: { type: string, message: string }}
 console.log(m.get());  // { num: 123 }
 ```
 
-### Inherit
+## Inherit
 ```js
 class N extends M {
   @ToInt32
@@ -56,38 +56,125 @@ More example see [test case](./test/index.ts).
 
 # API documentation
 
-### Interface
+## Interface
 TODO
 
-### class Reviser
-Base class. Your class must extends of this if your want use decorators in this library.
+## class Reviser
+Basic class. Your class must extends of this if your want use decorators in this library.
 
-#### #get(): object
+### #get(): object
 Get values that proccessed by decorators.
 
-#### #set(data: object): object | null
+### #set(data: object): object | null
 Upgrade model through data. Will return object that contains messages
 if occur error other wish null.
 
-#### #map(data: object): object
+### #map(data: object): object
 Alais of `set` method.
 
-## Decorators
+# Decorators
 
-### Types
-+ @TypeBoolean(message?: string)
-+ @TypeDouble(message?: string)
-+ @TypeEmail(message?: string)
-+ @TypeFloat(message?: string)
-+ @TypeInt32(message?: string)
-+ @TypeInt64(message?: string)
-+ @TypePhone(message?: string)
-+ @TypeString(message?: string)
-+ @TypeStruct(message?: string)
-+ @TypeUnInt32(message?: string)
-+ @TypeUnInt64(message?: string)
+## Types
 
-### Translators
+### @TypeBoolean(template?: string)
+Params for template:
++ key: string
++ value: any
++ type: string
+
+Example:
+```js
+@TypeBoolean('{{key}} expected a Boolean but got {{type}}: {{value}}');
+```
+
+### @TypeDouble(message?: string | object)
+Params for template:
++ type: type error.
+  + key: string
+  + value: any
+  + type: string
+
++ gt: great than max value.
+  + key: string
+  + value: number
+  + limit: number - number of max value
+
++ lt: less than min value.
+  + key: string
+  + value: number
+  + limit: number - number of min value
+
+Example:
+```js
+@TypeDouble('not a double value')
+@TypeDouble({ type: 'expected a Number but got {{type}}' })
+@TypeDouble({ gt: 'type double must less than {{limit}} but got {{value}}' })
+@TypeDouble({ lt: 'type double must great than {{limit}} but got {{value}}' })
+
+// or
+@TypeDouble({
+  type: 'expected a Number but got {{type}}',
+  gt: 'type double must less than {{limit}} but got {{value}}',
+  lt: 'type double must great than {{limit}} but got {{value}}'
+})
+```
+
+### @TypeEmail(template?: string | object)
+Params for template:
++ type: type error.
+  + key: string
+  + value: any
+  + type: string
+
++ pattern: pattern error.
+  + key: string
+  + value: string
+
+### @TypeFloat(template?: string | object)
+See [@TypeDouble](#@typedouble)
+
+### @TypeInt32(template?: string | object)
+See [@TypeDouble](#@typedouble)
+
+### @TypeInt64(template?: string | object)
+See [@TypeDouble](#@typedouble)
+
+### @TypePhone(template?: string | object)
+Params for template:
++ type: type error.
+  + key: string
+  + value: any
+  + type: string
+
++ empty: zero length.
+  + key: string
+  + value: string
+
+### @TypeString(template?: string)
+See [@TypeBoolean](#@typeboolean)
+
+### @TypeStruct(Clazz: Reviser)
+Example:
+```js
+import { Reviser, TypeString, TypeStruct } from 'data-reviser';
+
+class M extends Reviser {
+  @TypeString("Property {{key}} expected String but got {{type}}")
+  foo = "";
+};
+
+class N extends Reivser {
+  @TypeStruct(M)
+  bar = {};
+};
+```
+### @TypeUnInt32(template?: string | object)
+See [@TypeDouble](#@typedouble)
+
+### @TypeUnInt64(template?: string | object)
+See [@TypeDouble](#@typedouble)
+
+## Translators
 + @ToBoolean
 + @ToDouble
 + @ToFloat
@@ -97,10 +184,32 @@ Alais of `set` method.
 + @ToUnInt32
 + @ToUnInt64
 
-### Validators
-+ @DecoMaxLength(message?: string)
-+ @DecoMinLength(message?: string)
-+ @DecoRequired(message?: string)
+## Validators
+### @DecoMaxLength(template?: string | object)
+Params for template:
++ type: type error.
+  + key: string
+  + value: any
+  + type: string
+
++ gt: great than max length
+  + key: string
+  + value: string
+  + limit: number
+
+### @DecoMinLength(template?: string | object)
+See [@DecoMaxLength](#@decomaxlength)
+
+### @DecoRequired(template?: string | object)
+Params for template:
++ type: type error.
+  + key: string
+  + value: any
+  + type: string
+
++ empty: zero length
+  + key: string
+  + value: any
 
 # For contributors
 TODO

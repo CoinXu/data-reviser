@@ -13,7 +13,7 @@ type ReviserPartialMessageType<T> = {
   [P in keyof T]?: ReviserMessageType;
 };
 
-export type ReviserDecoratorReturns<T> = ReviserMessageType | ReviserPartialMessageType<{}>;
+export type ReviserDecoratorReturns<T> = ReviserMessageType | ReviserPartialMessageType<T>;
 
 type ReviserPartialMessage<T> = {
   [P in keyof T]?: ReviserDecoratorReturns<T>;
@@ -49,3 +49,7 @@ export type ReviserDecoratorHooks<T> = {
   [P in keyof T]?: ReviserDecorator<T>[];
 };
 
+export interface ReviserMessageData<T = any> {
+  key: string;
+  value: T;
+};

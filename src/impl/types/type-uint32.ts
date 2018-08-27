@@ -8,26 +8,43 @@ import { factory } from "@/decorator-factory";
 import { PropertyDecorator, ReviserDecoratorReturns } from "@inter/decorator";
 import { PrimitiveTypes, getPrimitiveType } from "@impl/utils";
 import { IEEE754Limits } from "@/constants";
+import { parse, getTemplate } from "@impl/message";
 
-function TypeUnInt32(message?: string): PropertyDecorator {
+interface Templates {
+  type?: string;
+  gt?: string;
+  lt?: string;
+}
+
+const Def: Templates = {
+  // { key, value, type }
+  type: "expected a Number but got {{type}}",
+  // { key, value, limit }
+  gt: "type uint32 must less than {{limit}} but got {{value}}",
+  // { key, value, limit }
+  lt: "type uint32 must great than {{limit}} but got {{value}}"
+};
+
+function TypeUnInt32(template?: string | Templates): PropertyDecorator {
+  const Temps = {
+    type: getTemplate(Def.type, "type", template),
+    gt: getTemplate(Def.gt, "gt", template),
+    lt: getTemplate(Def.lt, "less", template)
+  };
+
   function decorator(target: any, key: string, value: any): ReviserDecoratorReturns<{}> {
     const type: string = getPrimitiveType(value);
 
     if (type !== PrimitiveTypes.Number) {
-      return `expected a Number but got ${type}`;
-    }
-
-    // # check integer
-    if (value % 1 !== 0) {
-      return message || `expected a Integer bug got ${value}`;
+      return parse(Temps.type, { key, value, type });
     }
 
     if (value > IEEE754Limits.UnInt32.Max) {
-      return `type double must less than ${IEEE754Limits.UnInt32.Max} but got ${value}`;
+      return parse(Temps.gt, { key, value, limit: IEEE754Limits.UnInt32.Max });
     }
 
     if (value < IEEE754Limits.UnInt32.Min) {
-      return `type double must great than ${IEEE754Limits.UnInt32.Min} but got ${value}`;
+      return parse(Temps.lt, { key, value, limit: IEEE754Limits.UnInt32.Min });
     }
 
     target[key] = value;

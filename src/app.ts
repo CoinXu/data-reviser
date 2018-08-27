@@ -5,13 +5,10 @@
  */
 
 import { ReviserMessage } from "@inter/decorator";
-import {
-  Reviser, DecoRequired,  TypeBoolean, TypeStruct,
-  ToBoolean, ToDouble, ToFloat, ToInt32, ToString,
-} from "@/index";
+import { Reviser, DecoMinLength } from "@/index";
 
 class M extends Reviser {
-  @ToBoolean
+  @DecoMinLength(2, "custom message")
   str = "";
 };
 
@@ -20,12 +17,5 @@ const m = new M();
 let mData = m.get();
 let mMessage = m.map({ str: Infinity });
 
-console.log('mMessage', mMessage);
 console.log('mData', mData);
-
-
-mMessage = m.map({ str: -Infinity });
-mData = m.get();
-
 console.log('mMessage', mMessage);
-console.log('mData', mData);

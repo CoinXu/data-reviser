@@ -15,7 +15,7 @@ function TypeStructure<T = {}>(Clazz: ReviserConstructor<T>): PropertyDecorator 
 
   const ins: Reviser<T> = new ClazzClass();
 
-  function decorator(target: any, key: string, value: any): ReviserDecoratorReturns<T> {
+  function decorator(target: any, key: string, value: any): ReviserDecoratorReturns<{}> {
     const message: ReviserMessage<T> = ins.map(value);
     if (message !== null) {
       return message;
