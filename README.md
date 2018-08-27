@@ -14,9 +14,9 @@ yarn run test   # Test
 
 # Installation
 ```bash
-npm install param-veri --registry=http://npm.100.com
+npm install data-reviser
 # or
-yarn add param-veri --registry=http://npm.100.com
+yarn add data-reviser
 ```
 
 # Usage
