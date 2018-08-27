@@ -23,7 +23,7 @@ yarn add data-reviser
 
 ### Basic Usage
 ```js
-import { Validator, DecoInt32, ToInt32 } from 'param-veri';
+import { Validator, DecoInt32, ToInt32 } from 'data-reviser';
 
 class M extends Validator {
   @ToInt32
@@ -57,16 +57,7 @@ More example see test case.
 # API documentation
 
 ### Interface
-
-#### IParamWrongMsg
-```ts
-interface IParamWrongMsg {
-  type: string,
-  msg?: string,
-  index?: string,
-  key?: object
-}
-```
+TODO
 
 ### class Validator
 Base class. Your class must extends of this if your want use decorators in this library.
