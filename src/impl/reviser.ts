@@ -4,38 +4,22 @@
  * @description 实体类父类
  */
 
-import { VALIDATOR_PRIVATE_PROPERTY_NAME as PROPERTY_NAME } from "@/constants";
+import { REVISER_PRIVATE_PROPERTY_NAME as PROPERTY_NAME } from "@/constants";
 import {
-  Validator as IValidator,
-  ValidatorDecorator,
-  ValidatorDecoratorReturns,
-  ValidatorDecoratorHooks,
-  ValidatorMessage
+  Reviser as IReviser,
+  ReviserDecorator,
+  ReviserDecoratorReturns,
+  ReviserDecoratorHooks,
+  ReviserMessage
 } from "@inter/decorator"
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 
-export class Validator<T = any> implements IValidator<T> {
+export class Reviser<T = any> implements IReviser<T> {
   private maps: T;
 
   public constructor() {
     this.maps = <T>{};
-  }
-
-  /**
-   * Alias of Validator#map
-   * @deprecated
-   */
-  public setModel(data: any): ValidatorMessage<T> {
-    return this.map(data);
-  }
-
-  /**
-   * Alias of Validator#get
-   * @deprecated
-   */
-  public getModel(): T {
-    return this.get();
   }
 
   private getDecoratedProperties(): string[] {
@@ -53,13 +37,13 @@ export class Validator<T = any> implements IValidator<T> {
     return values as Partial<T>;
   }
 
-  private getDecoratorHooks(): ValidatorDecoratorHooks<T> {
+  private getDecoratorHooks(): ReviserDecoratorHooks<T> {
     const hooks: any = this[PROPERTY_NAME] || (this[PROPERTY_NAME] = {});
-    return ({ ...hooks }) as ValidatorDecoratorHooks<T>;
+    return ({ ...hooks }) as ReviserDecoratorHooks<T>;
   }
 
   public get(): T {
-    const hooks: ValidatorDecoratorHooks<T> = this.getDecoratorHooks();
+    const hooks: ReviserDecoratorHooks<T> = this.getDecoratorHooks();
     const values: any = this.getDecoratedValues();
     const maps: any = this.maps;
     const data: any = { ...values, ...maps };
@@ -77,14 +61,14 @@ export class Validator<T = any> implements IValidator<T> {
     return { ...values, ...maps } as T;
   }
 
-  public set(data: any): ValidatorMessage<T> {
+  public set(data: any): ReviserMessage<T> {
     return this.map(data);
   }
 
-  public map(data: any): ValidatorMessage<T> {
+  public map(data: any): ReviserMessage<T> {
     const maps: T = this.maps;
-    const hooks: ValidatorDecoratorHooks<T> = this.getDecoratorHooks();
-    const messages: ValidatorMessage<T> = {};
+    const hooks: ReviserDecoratorHooks<T> = this.getDecoratorHooks();
+    const messages: ReviserMessage<T> = {};
 
     let hasMessage = false;
 
@@ -94,7 +78,7 @@ export class Validator<T = any> implements IValidator<T> {
       }
 
       for (const decorator of hooks[propKey]) {
-        const m: ValidatorDecoratorReturns<T> = decorator(maps, propKey, data[propKey]);
+        const m: ReviserDecoratorReturns<T> = decorator(maps, propKey, data[propKey]);
         if (m !== null) {
           messages[propKey] = m;
           hasMessage = true;

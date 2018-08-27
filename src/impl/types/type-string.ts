@@ -5,11 +5,11 @@
  */
 
 import { factory } from "@/decorator-factory";
-import { PropertyDecorator, ValidatorDecoratorReturns } from "@inter/decorator";
+import { PropertyDecorator, ReviserDecoratorReturns } from "@inter/decorator";
 import { PrimitiveTypes, getPrimitiveType } from "@impl/utils";
 
 function TypeString(message?: string): PropertyDecorator {
-  function decorator(target: any, key: string, value: any): ValidatorDecoratorReturns<{}> {
+  function decorator(target: any, key: string, value: any): ReviserDecoratorReturns<{}> {
     const type: string = getPrimitiveType(value);
 
     if (type === PrimitiveTypes.String) {

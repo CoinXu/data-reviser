@@ -7,7 +7,7 @@
 import "mocha";
 import { expect, assert } from "chai";
 import {
-  Validator, TypeBoolean, TypeDouble, TypeEmail, TypeFloat, TypeInt32,
+  Reviser, TypeBoolean, TypeDouble, TypeEmail, TypeFloat, TypeInt32,
   TypeInt64, TypePhone, TypeString, TypeStruct, TypeUnInt32, TypeUnInt64
 } from "@/index";
 
@@ -18,7 +18,7 @@ describe("Data type decorators", function() {
   // TypeBoolean
   describe("@TypeBoolean", function() {
     it("Should return string message while map a non-boolean data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @TypeBoolean()
         p = true;
       };
@@ -29,7 +29,7 @@ describe("Data type decorators", function() {
     });
 
     it("Should return null while map a boolean data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @TypeBoolean()
         p = true;
       };
@@ -42,7 +42,7 @@ describe("Data type decorators", function() {
     it("Should return custom message while map a non-boolean data", function() {
       const customMesage = 'custom message';
 
-      class M extends Validator {
+      class M extends Reviser {
         @TypeBoolean(customMesage)
         p = true;
       };
@@ -56,7 +56,7 @@ describe("Data type decorators", function() {
   // TypeDouble
   describe("@TypeDouble", function() {
     it("Should return string message while map a non-double data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @TypeDouble()
         p = 1;
       };
@@ -67,7 +67,7 @@ describe("Data type decorators", function() {
     });
 
     it("Should return null while map a double data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @TypeDouble()
         p = 1;
       };
@@ -80,7 +80,7 @@ describe("Data type decorators", function() {
     it("Should return custom message while map a non-double data", function() {
       const customMesage = 'custom message';
 
-      class M extends Validator {
+      class M extends Reviser {
         @TypeDouble(customMesage)
         p = 1;
       };
@@ -94,7 +94,7 @@ describe("Data type decorators", function() {
   // TypeEmail
   describe("@TypeEmail", function() {
     it("Should return string message while map a non-email data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @TypeEmail()
         p = "";
       };
@@ -105,7 +105,7 @@ describe("Data type decorators", function() {
     });
 
     it("Should return null while map a email data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @TypeEmail()
         p = "";
       };
@@ -118,7 +118,7 @@ describe("Data type decorators", function() {
     it("Should return custom message while map a non-email data", function() {
       const customMesage = 'custom message';
 
-      class M extends Validator {
+      class M extends Reviser {
         @TypeEmail(customMesage)
         p = 1;
       };
@@ -132,7 +132,7 @@ describe("Data type decorators", function() {
   // TypeFloat
   describe("@TypeFloat", function() {
     it("Should return string message while map a non-float data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @TypeFloat()
         p = 1.2;
       };
@@ -143,7 +143,7 @@ describe("Data type decorators", function() {
     });
 
     it("Should return null while map a float data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @TypeFloat()
         p = 1.2;
       };
@@ -156,7 +156,7 @@ describe("Data type decorators", function() {
     it("Should return custom message while map a non-float data", function() {
       const customMesage = 'custom message';
 
-      class M extends Validator {
+      class M extends Reviser {
         @TypeFloat(customMesage)
         p = 1;
       };
@@ -170,7 +170,7 @@ describe("Data type decorators", function() {
   // TypeInt32
   describe("@TypeInt32", function() {
     it("Should return string message while map a non-int32 data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @TypeInt32()
         p = 1;
       };
@@ -181,7 +181,7 @@ describe("Data type decorators", function() {
     });
 
     it("Should return null while map a int32 data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @TypeInt32()
         p = 1;
       };
@@ -194,7 +194,7 @@ describe("Data type decorators", function() {
     it("Should return custom message while map a non-int32 data", function() {
       const customMesage = 'custom message';
 
-      class M extends Validator {
+      class M extends Reviser {
         @TypeInt32(customMesage)
         p = 1;
       };
@@ -208,7 +208,7 @@ describe("Data type decorators", function() {
   // TypeInt64
   describe("@TypeInt64", function() {
     it("Should return string message while map a non-int64 data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @TypeInt64()
         p = 1;
       };
@@ -219,7 +219,7 @@ describe("Data type decorators", function() {
     });
 
     it("Should return null while map a int64 data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @TypeInt64()
         p = 1;
       };
@@ -232,7 +232,7 @@ describe("Data type decorators", function() {
     it("Should return custom message while map a non-int64 data", function() {
       const customMesage = 'custom message';
 
-      class M extends Validator {
+      class M extends Reviser {
         @TypeInt64(customMesage)
         p = 1;
       };
@@ -246,7 +246,7 @@ describe("Data type decorators", function() {
   // TypePhone
   describe("@TypePhone", function() {
     it("Should return string message while map a non-phone data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @TypePhone()
         p = "";
       };
@@ -257,7 +257,7 @@ describe("Data type decorators", function() {
     });
 
     it("Should return null while map a phone data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @TypePhone()
         p = 1;
       };
@@ -270,7 +270,7 @@ describe("Data type decorators", function() {
     it("Should return custom message while map a non-phone data", function() {
       const customMesage = 'custom message';
 
-      class M extends Validator {
+      class M extends Reviser {
         @TypePhone(customMesage)
         p = 1;
       };
@@ -284,7 +284,7 @@ describe("Data type decorators", function() {
   // TypeString
   describe("@TypeString", function() {
     it("Should return string message while map a non-string data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @TypeString()
         p = "";
       };
@@ -295,7 +295,7 @@ describe("Data type decorators", function() {
     });
 
     it("Should return null while map a string data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @TypeString()
         p = 1;
       };
@@ -308,7 +308,7 @@ describe("Data type decorators", function() {
     it("Should return custom message while map a non-string data", function() {
       const customMesage = 'custom message';
 
-      class M extends Validator {
+      class M extends Reviser {
         @TypeString(customMesage)
         p = 1;
       };
@@ -322,7 +322,7 @@ describe("Data type decorators", function() {
   // TypeStruct
   describe("@TypeStruct", function() {
     it("Should return string message while map a non-structure class", function() {
-      class B extends Validator {
+      class B extends Reviser {
         @TypeInt32()
         foo = 1;
 
@@ -330,7 +330,7 @@ describe("Data type decorators", function() {
         bar = "";
       };
 
-      class M extends Validator {
+      class M extends Reviser {
         @TypeStruct(B)
         b = {};
       };
@@ -343,7 +343,7 @@ describe("Data type decorators", function() {
     });
 
     it("Should return null while map a structure class", function() {
-      class B extends Validator {
+      class B extends Reviser {
         @TypeInt32()
         foo = 1;
 
@@ -351,7 +351,7 @@ describe("Data type decorators", function() {
         bar = "";
       };
 
-      class M extends Validator {
+      class M extends Reviser {
         @TypeStruct(B)
         b = {};
       };
@@ -370,7 +370,7 @@ describe("Data type decorators", function() {
   // TypeUnInt32
   describe("@TypeUnInt32", function() {
     it("Should return string message while map a non-uint32 data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @TypeUnInt32()
         p = 1;
       };
@@ -381,7 +381,7 @@ describe("Data type decorators", function() {
     });
 
     it("Should return null while map a uint32 data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @TypeUnInt32()
         p = 1;
       };
@@ -394,7 +394,7 @@ describe("Data type decorators", function() {
     it("Should return custom message while map a non-uint32 data", function() {
       const customMesage = 'custom message';
 
-      class M extends Validator {
+      class M extends Reviser {
         @TypeUnInt32(customMesage)
         p = 1;
       };

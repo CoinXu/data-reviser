@@ -5,13 +5,13 @@
  */
 
 import { factory } from "@/decorator-factory";
-import { PropertyDecorator, ValidatorDecoratorReturns } from "@inter/decorator";
+import { PropertyDecorator, ReviserDecoratorReturns } from "@inter/decorator";
 import { PrimitiveTypes, getPrimitiveType } from "@impl/utils";
 
 const Pattern = /^([\w-_]+(?:\.[\w-_]+)*)@((?:[a-z0-9]+(?:-[a-zA-Z0-9]+)*)+\.[a-z]{2,6})$/;
 
 function TypeEmail(message?: string): PropertyDecorator {
-  function decorator(target: any, key: string, value: any): ValidatorDecoratorReturns<{}> {
+  function decorator(target: any, key: string, value: any): ReviserDecoratorReturns<{}> {
     const type: string = getPrimitiveType(value);
 
     if (type !== PrimitiveTypes.String) {

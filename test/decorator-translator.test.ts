@@ -8,14 +8,14 @@ import "mocha";
 import { expect, assert } from "chai";
 import { IEEE754Limits } from "@/constants";
 import {
-  Validator, ToBoolean, ToDouble, ToFloat, ToInt32, ToInt64, ToString,
+  Reviser, ToBoolean, ToDouble, ToFloat, ToInt32, ToInt64, ToString,
   ToUnInt32, ToUnInt64
 } from "@/index";
 
 describe("Translate decorators", function() {
   // Boolean
   it("Should translate value to boolean while set @ToBoolean decorator", function() {
-    class M extends Validator<any> {
+    class M extends Reviser<any> {
       @ToBoolean
       n = 1;
     };
@@ -34,7 +34,7 @@ describe("Translate decorators", function() {
 
   // Double
   it("Should translate value to double while set @ToDouble decorator", function() {
-    class M extends Validator<any> {
+    class M extends Reviser<any> {
       @ToDouble
       n = "";
     };
@@ -62,7 +62,7 @@ describe("Translate decorators", function() {
 
   // Float
   it("Should translate value to float while set @ToFloat decorator", function() {
-    class M extends Validator<any> {
+    class M extends Reviser<any> {
       @ToFloat
       n = "";
     };
@@ -90,7 +90,7 @@ describe("Translate decorators", function() {
 
   // Int32
   it("Should translate value to int32 while set @ToInt32 decorator", function() {
-    class M extends Validator<any> {
+    class M extends Reviser<any> {
       @ToInt32
       n = "";
     };
@@ -118,7 +118,7 @@ describe("Translate decorators", function() {
 
   // Int64
   it("Should translate value to int64 while set @ToInt64 decorator", function() {
-    class M extends Validator<any> {
+    class M extends Reviser<any> {
       @ToInt64
       n = "";
     };
@@ -146,7 +146,7 @@ describe("Translate decorators", function() {
 
   // String
   it("Should translate value to string while set @ToString decorator", function() {
-    class M extends Validator<any> {
+    class M extends Reviser<any> {
       @ToString
       n = "";
     };
@@ -174,7 +174,7 @@ describe("Translate decorators", function() {
 
   // UnInt32
   it("Should translate value to uint32 while set @ToUnInt32 decorator", function() {
-    class M extends Validator<any> {
+    class M extends Reviser<any> {
       @ToUnInt32
       n = "";
     };
@@ -202,7 +202,7 @@ describe("Translate decorators", function() {
 
   // UnInt64
   it("Should translate value to uint64 while set @UnInt64 decorator", function() {
-    class M extends Validator<any> {
+    class M extends Reviser<any> {
       @ToUnInt64
       n = "";
     };

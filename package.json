@@ -1,6 +1,6 @@
 {
   "name": "data-reviser",
-  "description": "Check data types and structure",
+  "description": "Validate data type & data structure. Translate data type automatically",
   "version": "0.0.10",
   "author": "coinxu",
   "license": "MIT",

@@ -5,19 +5,18 @@
  */
 
 import { factory } from "@/decorator-factory";
-import { VALIDATOR_PRIVATE_PROPERTY_NAME } from "@/constants";
 import {
-  PropertyDecorator, ValidatorDecoratorReturns, ValidatorMessage,
-  Validator, ValidatorConstructor
+  PropertyDecorator, ReviserDecoratorReturns, ReviserMessage,
+  Reviser, ReviserConstructor
 } from "@inter/decorator";
 
-function TypeStructure<T = {}>(Clazz: ValidatorConstructor<T>): PropertyDecorator {
+function TypeStructure<T = {}>(Clazz: ReviserConstructor<T>): PropertyDecorator {
   class ClazzClass extends Clazz {};
 
-  const ins: Validator<T> = new ClazzClass();
+  const ins: Reviser<T> = new ClazzClass();
 
-  function decorator(target: any, key: string, value: any): ValidatorDecoratorReturns<T> {
-    const message: ValidatorMessage<T> = ins.map(value);
+  function decorator(target: any, key: string, value: any): ReviserDecoratorReturns<T> {
+    const message: ReviserMessage<T> = ins.map(value);
     if (message !== null) {
       return message;
     }
