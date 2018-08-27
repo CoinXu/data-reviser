@@ -1,5 +1,5 @@
 [![Build Status](https://www.travis-ci.org/CoinXu/reviser.svg?branch=master)](https://www.travis-ci.org/CoinXu/reviser)
-
+[![npm version](https://badge.fury.io/js/data-reviser.svg)](https://badge.fury.io/js/data-reviser)
 # Features
 1. Validate data type and data structure.
 2. Translate data type.
@@ -23,11 +23,11 @@ yarn add data-reviser
 
 ### Basic Usage
 ```js
-import { Validator, DecoInt32, ToInt32 } from 'data-reviser';
+import { Reviser, TypeInt32, ToInt32 } from 'data-reviser';
 
-class M extends Validator {
+class M extends Reviser {
   @ToInt32
-  @DecoInt32()
+  @TypeInt32()
   num = 1;
 };
 
@@ -106,26 +106,6 @@ Alais of `set` method.
 + @DecoMaxLength(message?: string)
 + @DecoMinLength(message?: string)
 + @DecoRequired(message?: string)
-
-### Will remove at next version
-+ @DecoBoolean(message: string) `deprecated`
-+ @DecoDouble(message: string) `deprecated`
-+ @DecoFloat(message: string) `deprecated`
-+ @DecoInt32(message: string) `deprecated`
-+ @DecoInt64(message: string) `deprecated`
-+ @DecoStruct(message: string) `deprecated`
-+ @DecoString(message: string) `deprecated`
-+ @DecoUnInt32(message: string) `deprecated`
-+ @DecoUnInt64(message: string) `deprecated`
-+ @StructType(base: Validator) `deprecated`
-+ @DecoRequire(message: string) `deprecated`
-+ @DecoEmail(message: string) `deprecated`
-+ @DecoPhone(message: string) `deprecated`
-+ @DecoMinLength(limit: number, message: string) `deprecated`
-+ @DecoMaxLength(limit: number, message: string) `deprecated`
-
-### Removed
-+ @DecoArray(type: VERI_TYPE, message?: string, deep: number)
 
 # For contributors
 TODO
