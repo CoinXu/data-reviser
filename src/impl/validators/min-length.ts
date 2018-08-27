@@ -6,10 +6,10 @@
 
 import { factory } from "@/decorator-factory";
 import { PrimitiveTypes, getPrimitiveType } from "@/impl/utils";
-import { PropertyDecorator, ValidatorDecoratorReturns } from "@inter/decorator";
+import { PropertyDecorator, ReviserDecoratorReturns } from "@inter/decorator";
 
 function MinLength(length: number, message?: string): PropertyDecorator {
-  function decorator(target: any, key: string, value: any): ValidatorDecoratorReturns<{}> {
+  function decorator(target: any, key: string, value: any): ReviserDecoratorReturns<{}> {
     const type: string = getPrimitiveType(value);
 
     // string

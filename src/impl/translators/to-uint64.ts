@@ -5,7 +5,7 @@
  */
 
 import { factory } from "@/decorator-factory";
-import { PropertyDecorator, ValidatorMessage } from "@inter/decorator";
+import { PropertyDecorator, ReviserMessage } from "@inter/decorator";
 import { IEEE754Limits } from "@/constants";
 
 function decorator(target: any, key: string, value: any): null {

@@ -5,7 +5,7 @@
  */
 
 // basic
-import { Validator } from "@impl/validator";
+import { Reviser } from "@impl/reviser";
 
 // translators
 import ToBoolean from "@impl/translators/to-boolean";
@@ -35,28 +35,8 @@ import DecoMaxLength from "@impl/validators/max-length";
 import DecoMinLength from "@impl/validators/min-length";
 import DecoRequired from "@impl/validators/required";
 
-// 兼容之前版本导出方式
-export default {
-  Validator,
-  DecoMaxLength,
-  DecoMinLength,
-  DecoRequire: DecoRequired,
-
-  DecoBoolean: TypeBoolean,
-  DecoDouble: TypeDouble,
-  DecoEmail: TypeEmail,
-  DecoFloat: TypeFloat,
-  DecoInt32: TypeInt32,
-  DecoInt64: TypeInt64,
-  DecoPhone: TypePhone,
-  DecoString: TypeString,
-  DecoStruct: TypeStruct,
-  DecoUnInt32: TypeUnInt32,
-  DecoUnInt64: TypeUnInt64
-};
-
 export {
-  Validator,
+  Reviser,
   DecoMaxLength,
   DecoMinLength,
   DecoRequired,
@@ -80,17 +60,5 @@ export {
   TypeString,
   TypeStruct,
   TypeUnInt32,
-  TypeUnInt64,
-
-  TypeBoolean as DecoBoolean,
-  TypeDouble as DecoDouble,
-  TypeEmail as DecoEmail,
-  TypeFloat as DecoFloat,
-  TypeInt32 as DecoInt32,
-  TypeInt64 as DecoInt64,
-  TypePhone as DecoPhone,
-  TypeString as DecoString,
-  TypeStruct as DecoStruct,
-  TypeUnInt32 as DecoUnInt32,
-  TypeUnInt64 as DecoUnInt64
+  TypeUnInt64
 };

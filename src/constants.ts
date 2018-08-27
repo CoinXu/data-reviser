@@ -4,7 +4,7 @@
  * @description
  */
 
-export const VALIDATOR_PRIVATE_PROPERTY_NAME = '__validator_private_property_name__';
+export const REVISER_PRIVATE_PROPERTY_NAME = '__reviser_private_property_name__';
 
 export const IEEE754Limits = {
   Double: {

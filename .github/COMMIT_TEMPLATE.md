@@ -24,7 +24,7 @@
 
 - build
 - core
-- validator
+- reviser
 - decorator
 
 ## Subject

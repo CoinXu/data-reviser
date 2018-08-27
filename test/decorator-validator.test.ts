@@ -6,13 +6,13 @@
 
 import "mocha";
 import { expect, assert } from "chai";
-import { Validator, DecoMaxLength, DecoMinLength, DecoRequired } from "@/index";
+import { Reviser, DecoMaxLength, DecoMinLength, DecoRequired } from "@/index";
 
-describe("Validator decorators", function() {
+describe("Reviser decorators", function() {
   // DecoMaxLength
   describe("@DecoMaxLength", function() {
     it("Should return message if pass a non-string data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @DecoMaxLength(2)
         foo = "";
       };
@@ -23,7 +23,7 @@ describe("Validator decorators", function() {
     });
 
     it("Should return message if pass a long string", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @DecoMaxLength(2)
         foo = "";
       };
@@ -34,7 +34,7 @@ describe("Validator decorators", function() {
     });
 
     it("Should return null if pass a legal string", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @DecoMaxLength(2)
         foo = "";
       };
@@ -47,7 +47,7 @@ describe("Validator decorators", function() {
     it("Should return custom message while map a non-double data", function() {
       const customMesage = 'custom message';
 
-      class M extends Validator {
+      class M extends Reviser {
         @DecoMaxLength(2, customMesage)
         p = 1;
       };
@@ -61,7 +61,7 @@ describe("Validator decorators", function() {
   // DecoMinLength
   describe("@DecoMinLength", function() {
     it("Should return message if pass a non-string data", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @DecoMinLength(2)
         foo = "";
       };
@@ -72,7 +72,7 @@ describe("Validator decorators", function() {
     });
 
     it("Should return message if pass a short string", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @DecoMinLength(2)
         foo = "";
       };
@@ -83,7 +83,7 @@ describe("Validator decorators", function() {
     });
 
     it("Should return null if pass a legal string", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @DecoMinLength(2)
         foo = "";
       };
@@ -96,7 +96,7 @@ describe("Validator decorators", function() {
     it("Should return custom message while map a non-double data", function() {
       const customMesage = 'custom message';
 
-      class M extends Validator {
+      class M extends Reviser {
         @DecoMinLength(2, customMesage)
         p = 1;
       };
@@ -110,7 +110,7 @@ describe("Validator decorators", function() {
   // DecoRequired
   describe("@DecoRequired", function() {
     it("Should return message if pass undefined or null", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @DecoRequired()
         foo = "";
       };
@@ -125,7 +125,7 @@ describe("Validator decorators", function() {
     });
 
     it("Should return message if pass empty string", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @DecoRequired()
         foo = "";
       };
@@ -136,7 +136,7 @@ describe("Validator decorators", function() {
     });
 
     it("Should return null if pass a string", function() {
-      class M extends Validator {
+      class M extends Reviser {
         @DecoRequired()
         foo = "";
       };

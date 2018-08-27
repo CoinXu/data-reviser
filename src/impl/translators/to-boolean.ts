@@ -5,7 +5,7 @@
  */
 
 import { factory } from "@/decorator-factory";
-import { PropertyDecorator, ValidatorMessage } from "@inter/decorator";
+import { PropertyDecorator, ReviserMessage } from "@inter/decorator";
 
 function decorator(target: any, key: string, value: any): null {
   target[key] = Boolean(value).valueOf();

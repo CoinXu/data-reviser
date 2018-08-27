@@ -4,15 +4,13 @@
  * @description For developer test at browser.
  */
 
-import * as Reviser from "@/index";
-import { ValidatorMessage } from "@inter/decorator";
+import { ReviserMessage } from "@inter/decorator";
 import {
-  Validator, DecoRequired, DecoString, ToBoolean,
-  ToDouble, ToFloat, ToInt32, ToString,
-  TypeBoolean, TypeStruct
+  Reviser, DecoRequired,  TypeBoolean, TypeStruct,
+  ToBoolean, ToDouble, ToFloat, ToInt32, ToString,
 } from "@/index";
 
-class M extends Validator {
+class M extends Reviser {
   @ToBoolean
   str = "";
 };
