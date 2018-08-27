@@ -5,6 +5,9 @@ tmp
 
 npm-debug.log
 yarn-error.log
+package-lock.json
+yarn.lock
+switch-gitconfig.sh
 .DS_Store
 
 # Editor directories and files
