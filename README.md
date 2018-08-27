@@ -59,13 +59,8 @@ More example see test case.
 ### Interface
 TODO
 
-### class Validator
+### class Reviser
 Base class. Your class must extends of this if your want use decorators in this library.
-#### #setModel(data: object): object
-`deprecated`
-
-#### #getModel(): object
-`deprecated`
 
 #### #get(): object
 Get values that proccessed by decorators.
