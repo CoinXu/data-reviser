@@ -5,20 +5,38 @@
  */
 
 import { factory } from "@/decorator-factory";
-import { PrimitiveTypes, getPrimitiveType } from "@/impl/utils";
+import { PrimitiveTypes, getPrimitiveType } from "@impl/utils";
+import { parse, getTemplate } from "@impl/message";;
 import { PropertyDecorator, ReviserDecoratorReturns } from "@inter/decorator";
 
-function MaxLength(length: number, message?: string): PropertyDecorator {
+interface Templates {
+  type?: string;  // type error
+  gt: string; // length error
+}
+
+const Def: Templates = {
+  // { key, value, type }
+  type: "expected a String but got {{type}}",
+  // { key, value, limit }
+  gt: "length of {{key}} must less than {{limit}}"
+};
+
+function MaxLength(limit: number, template?: string | Templates): PropertyDecorator {
+  const Temps = {
+    type: getTemplate(Def.type, "type", template),
+    gt:  getTemplate(Def.gt, "length", template)
+  }
+
   function decorator(target: any, key: string, value: any): ReviserDecoratorReturns<{}> {
     const type: string = getPrimitiveType(value);
 
     // string
     if (type !== PrimitiveTypes.String) {
-      return message || `expected a String but got ${type}`;
+      return parse(Temps.type, { key, value, type });
     }
 
-    if (value.length > length) {
-      return message || `length of ${key} must less than ${length}`;
+    if (value.length > limit) {
+      return parse(Temps.gt, { key, value, limit });
     }
 
     target[key] = value;

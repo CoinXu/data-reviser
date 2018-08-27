@@ -5,23 +5,41 @@
  */
 
 import { factory } from "@/decorator-factory";
-import { PropertyDecorator, ReviserDecoratorReturns } from "@inter/decorator";
 import { PrimitiveTypes, getPrimitiveType } from "@impl/utils";
+import { parse, getTemplate } from "@impl/message";
+import { PropertyDecorator, ReviserDecoratorReturns, ReviserMessageData } from "@inter/decorator";
 
-function Required(message?: string): PropertyDecorator {
+interface Templates {
+  type?: string;  // type error
+  empty?: string; // length === 0
+}
+
+const Def: Templates = {
+  // { key, value, type }
+  type: "{{key}} not allow undefined or null",
+  // { key, value, length }
+  empty: "length of string must great than 0"
+};
+
+function Required(template?: string | Templates): PropertyDecorator {
+  const Temps = {
+    type: getTemplate(Def.type, "type", template),
+    empty: getTemplate(Def.empty, "empty", template)
+  };
+
   function decorator(target: any, key: string, value: any): ReviserDecoratorReturns<{}> {
     const type: string = getPrimitiveType(value);
 
     // undefined | null
     if (type === PrimitiveTypes.Undefined || type === PrimitiveTypes.Null) {
-      return message || `${key} required`;
+      return parse(Temps.type, { key, value, type });
     }
 
     // string
     if (type === PrimitiveTypes.String) {
       const str: string = value.trim();
       if (str.length < 1) {
-        return message || `length of string must great than 0`;
+        return parse(Temps.empty, { key, value });
       }
       target[key] = str;
     }
