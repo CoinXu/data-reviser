@@ -1,6 +1,6 @@
 # v0.0.12
 ## Fixed
-1. Template string parser error.
+1. Messate template parser bug.
 
 # v0.0.11
 ## Replace class name Validator to Reviser
