@@ -1,12 +1,12 @@
 # v0.0.12
-## Fixed
+### Fixed
 1. Messate template parser bug.
 
 # v0.0.11
-## Replace class name Validator to Reviser
-## Add decorators
+### Replace class name Validator to Reviser
+### Add decorators
 
-### Translators
+#### Translators
 + @ToBoolean
 + @ToDouble
 + @ToFloat
@@ -16,7 +16,7 @@
 + @ToUnInt32
 + @ToUnInt64
 
-### types
+#### types
 + @TypeBoolean
 + @TypeDouble
 + @TypeEmail
@@ -29,18 +29,18 @@
 + @TypeUnInt32
 + @TypeUnInt6
 
-### validators
+#### validators
 + @DecoMaxLength
 + @DecoMinLength
 + @DecoRequired
 
 # v0.0.10
-## Add get, set, map to class Validator
+### Add get, set, map to class Validator
 + map(data: any): object | null
 + set(data: any): object | null
 + get(): object
 
-## Add decorators for tanslate data type.
+### Add decorators for tanslate data type.
 + ToString
 + ToInt32
 + ToInt64
