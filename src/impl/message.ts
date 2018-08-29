@@ -1,7 +1,8 @@
 /**
  * @date 2018-08-27
  * @author coinxu
- * @description Mssage template parser
+ * @description Mssage template parser. faster than replact by regexp.
+ * benchmark: https://jsperf.com/replace-string-by-reg
  */
 
 import { PrimitiveTypes, getPrimitiveType } from "@impl/utils";
@@ -50,6 +51,7 @@ export function parse<T = {}>(template: string, values?: T): string {
     }
 
     if (!hasOwnProperty.call(values, name)) {
+      cache.push(template.slice(point, start));
       continue;
     }
 

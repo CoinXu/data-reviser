@@ -1,3 +1,15 @@
+# v0.0.13
+### Fixed
+1. Messate template parser bug.
+
+```js
+// do
+const str = parse('key is {{key}}', {});
+console.log(str);
+// previous: 'key is '
+// current: 'key is {{key}}'
+```
+
 # v0.0.12
 ### Fixed
 1. Messate template parser bug.

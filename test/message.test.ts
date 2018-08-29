@@ -70,7 +70,7 @@ describe("Message parser", function() {
     });
 
     it("Should not replace interpolation if values not contains", function() {
-      expect(parse("key is {{key}}", {})).to.be.equal("key is ");
+      expect(parse("key is {{key}}", {})).to.be.equal("key is {{key}}");
     });
 
     it("Should translate value to string if not a string type", function() {

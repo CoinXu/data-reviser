@@ -1,7 +1,7 @@
 {
   "name": "data-reviser",
   "description": "Validate data type & data structure. Translate data type automatically",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "keywords": [
     "validator",
     "data type",
