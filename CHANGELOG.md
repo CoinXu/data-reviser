@@ -1,6 +1,10 @@
-# v0.1.0
-## Validator类名替换为Reviser
-## 增加装饰器函数
+# v0.0.12
+## Fixed
+1. Template string parser error.
+
+# v0.0.11
+## Replace class name Validator to Reviser
+## Add decorators
 
 ### Translators
 + @ToBoolean
@@ -31,12 +35,12 @@
 + @DecoRequired
 
 # v0.0.10
-## Validator类增加 get, set, map方法
+## Add get, set, map to class Validator
 + map(data: any): object | null
 + set(data: any): object | null
 + get(): object
 
-## 增加数据类型转换装饰器
+## Add decorators for tanslate data type.
 + ToString
 + ToInt32
 + ToInt64

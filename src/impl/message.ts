@@ -32,7 +32,10 @@ export function parse<T = {}>(template: string, values?: T): string {
   let name: string = "";
 
   while((point = template.indexOf(InterpolationStartMark, start)) > -1) {
-    cache.push(template.slice(start, point));
+    if (point > start) {
+      cache.push(template.slice(start, point));
+    }
+
     end = template.indexOf(InterpolationEndMark, point);
 
     if (end < 0) {
@@ -53,9 +56,8 @@ export function parse<T = {}>(template: string, values?: T): string {
     cache.push(String(values[name]).valueOf());
   }
 
-  // no interpolations
-  if (cache.length === 0) {
-    return template;
+  if (start < template.length) {
+    cache.push(template.slice(start, template.length));
   }
 
   return cache.join("");

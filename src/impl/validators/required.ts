@@ -41,7 +41,6 @@ function Required(template?: string | Templates): PropertyDecorator {
       if (str.length < 1) {
         return parse(Temps.empty, { key, value });
       }
-      target[key] = str;
     }
 
     target[key] = value;

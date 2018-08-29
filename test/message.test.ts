@@ -31,6 +31,29 @@ describe("Message parser", function() {
       expect(parse(template, value)).to.be.equal(result);
     });
 
+    it("Should replace all interpolations at different positions", function() {
+      const templates = {
+        begin: "{{key}} and {{value}}",
+        middle: "key: {{ key }} value: {{ value }}",
+        end: "key and value are: {{ key }}-{{ value }}"
+      };
+
+      const values = {
+        key: 'k',
+        value: 'v'
+      };
+
+      const results = {
+        begin: `${values.key} and ${values.value}`,
+        middle: `key: ${ values.key } value: ${ values.value }`,
+        end: `key and value are: ${ values.key }-${ values.value }`
+      };
+
+      expect(parse(templates.begin, values)).to.be.equal(results.begin);
+      expect(parse(templates.middle, values)).to.be.equal(results.middle);
+      expect(parse(templates.end, values)).to.be.equal(results.end);
+    });
+
     it("Should ignore interpolation gaps", function() {
       expect(parse("key is {{ key }}", { key: 'k' })).to.be.equal("key is k");
     });
