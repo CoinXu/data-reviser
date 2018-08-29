@@ -1,4 +1,4 @@
-[![Build Status](https://www.travis-ci.org/CoinXu/reviser.svg?branch=master)](https://www.travis-ci.org/CoinXu/reviser)
+[![Build Status](https://www.travis-ci.org/CoinXu/data-reviser.svg?branch=master)](https://www.travis-ci.org/CoinXu/data-reviser)
 [![npm version](https://badge.fury.io/js/data-reviser.svg)](https://badge.fury.io/js/data-reviser)
 # Features
 1. Validate data type and data structure.
