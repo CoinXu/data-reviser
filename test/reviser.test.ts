@@ -46,7 +46,34 @@ describe("Class Reviser", function() {
     expect(message).to.be.a('object');
   });
 
-  // # get
+  // # extend
+  it("Should only validate own properties", function() {
+    class M extends Reviser {
+      @DecoRequired()
+      m = "";
+    };
+
+    class N extends M {
+      @DecoRequired()
+      n = "";
+    };
+
+    class O extends M {
+      @DecoRequired()
+      o = "";
+    };
+
+    const n = new N();
+    const nMessage = n.map({});
+    expect(Object.keys(nMessage)).to.be.deep.equal(['m', 'n']);
+    expect(Object.keys(n.get())).to.be.deep.equal(['m', 'n']);
+
+    const o = new O();
+    const oMessage = o.map({});
+    expect(Object.keys(oMessage)).to.be.deep.equal(['m', 'o']);
+    expect(Object.keys(o.get())).to.be.deep.equal(['m', 'o']);
+  });
+
   it("Should return object that contains all properties that decorated while call method get", function() {
     class M extends Reviser {
       @DecoRequired()

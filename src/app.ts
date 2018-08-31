@@ -8,14 +8,23 @@ import { ReviserMessage } from "@inter/decorator";
 import { Reviser, DecoMinLength } from "@/index";
 
 class M extends Reviser {
-  @DecoMinLength(2, "custom message")
-  str = "";
+  @DecoMinLength(2)
+  m = "";
 };
 
-const m = new M();
+class N extends M {
+  @DecoMinLength(2)
+  n = "";
+}
 
-let mData = m.get();
-let mMessage = m.map({ str: Infinity });
+class O extends M {
+  @DecoMinLength(2)
+  o = "";
+};
 
-console.log('mData', mData);
-console.log('mMessage', mMessage);
+const n = new N();
+const nData = n.get();
+const nMessage = n.map({});
+
+console.log('nData', nData);
+console.log('nMessage', nMessage);
