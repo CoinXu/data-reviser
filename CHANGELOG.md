@@ -1,3 +1,7 @@
+# v0.0.15
+### Fixed
+1. Fix properties confusion bug at mutiple class extend same class.
+
 # v0.0.13
 ### Fixed
 1. Messate template parser bug.
