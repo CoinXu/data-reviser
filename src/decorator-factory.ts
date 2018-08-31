@@ -9,11 +9,15 @@ import {
   ReviserDecorator,
   ReviserDecoratorHooks
 } from "@/inter/decorator";
-import { REVISER_PRIVATE_PROPERTY_NAME as PROPERTY_NAME } from "@/constants";
+import { REVISER_PRIVATE_PROPERTY_NAME } from "@/constants";
+
+const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 export function factory<T = {}>(decorator: ReviserDecorator<T>): PropertyDecorator {
   return function(target: any, key: string, descriptor?: any): any {
-    const hooks: ReviserDecoratorHooks<T> = target[PROPERTY_NAME] || (target[PROPERTY_NAME] = {});
+    const hooks: ReviserDecoratorHooks<T> = hasOwnProperty.call(target, REVISER_PRIVATE_PROPERTY_NAME)
+      ? target[REVISER_PRIVATE_PROPERTY_NAME]
+      : (target[REVISER_PRIVATE_PROPERTY_NAME] = {});
     const list: ReviserDecorator<T>[] = hooks[key] || (hooks[key] = []);
 
     list.push(decorator);

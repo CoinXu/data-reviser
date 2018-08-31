@@ -16,36 +16,44 @@ import {
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 export class Reviser<T = any> implements IReviser<T> {
-  private maps: T;
+  private _maps: T;
+  private _hooks: ReviserDecoratorHooks<T>;
 
   public constructor() {
-    this.maps = <T>{};
+    let hooks: any = {};
+    let proto: any = (<any>this).__proto__;
+
+    while (proto !== null) {
+      // Keep feature of extends semantics: Override.
+      // Do not interchange position between `proto[PROPERTY_NAME]` and `hooks`
+      hooks = {
+        ...proto[PROPERTY_NAME],
+        ...hooks
+      };
+      proto = proto.__proto__;
+    }
+
+    this._maps = <T>{};
+    this._hooks = <ReviserDecoratorHooks<T>>hooks;
   }
 
-  private getDecoratedProperties(): string[] {
-    return Object.keys(this.getDecoratorHooks());
+  private getDecoratedPropertyNames(): string[] {
+    return Object.keys(<any>this._hooks);
   }
 
-  private getDecoratedValues(): Partial<T> {
-    const values: any = {};
-
-    this.getDecoratedProperties().reduce((object, name) => {
+  private getDecoratedPropertyValues(): Partial<T> {
+    const values: any = this.getDecoratedPropertyNames().reduce((object, name) => {
       object[name] = this[name];
       return object;
-    }, values);
+    }, {});
 
     return values as Partial<T>;
   }
 
-  private getDecoratorHooks(): ReviserDecoratorHooks<T> {
-    const hooks: any = this[PROPERTY_NAME] || (this[PROPERTY_NAME] = {});
-    return ({ ...hooks }) as ReviserDecoratorHooks<T>;
-  }
-
   public get(): T {
-    const hooks: ReviserDecoratorHooks<T> = this.getDecoratorHooks();
-    const values: any = this.getDecoratedValues();
-    const maps: any = this.maps;
+    const hooks: ReviserDecoratorHooks<T> = this._hooks;
+    const values: any = this.getDecoratedPropertyValues();
+    const maps: any = this._maps;
     const data: any = { ...values, ...maps };
 
     for (const propKey in hooks) {
@@ -66,8 +74,8 @@ export class Reviser<T = any> implements IReviser<T> {
   }
 
   public map(data: any): ReviserMessage<T> {
-    const maps: T = this.maps;
-    const hooks: ReviserDecoratorHooks<T> = this.getDecoratorHooks();
+    const maps: T = this._maps;
+    const hooks: ReviserDecoratorHooks<T> = this._hooks;
     const messages: ReviserMessage<T> = {};
 
     let hasMessage = false;
