@@ -5,9 +5,14 @@
  */
 
 import { factory } from "@/decorator-factory";
-import { PrimitiveTypes, getPrimitiveType } from "@impl/utils";
+import { PrimitiveTypes, getPrimitiveType, isRequired } from "@impl/utils";
 import { parse, getTemplate } from "@impl/message";
-import { PropertyDecorator, ReviserDecoratorReturns, ReviserMessageData } from "@inter/decorator";
+import {
+  PropertyDecorator,
+  ReviserDecoratorReturns,
+  ReviserMessageData,
+  ReviserDecoratorOptions
+} from "@inter/decorator";
 
 interface Templates {
   type?: string;  // type error
@@ -27,7 +32,11 @@ function MinLength(limit: number, template?: string | Templates): PropertyDecora
     lt: getTemplate(Def.lt, "lt", template)
   };
 
-  function decorator(target: any, key: string, value: any): ReviserDecoratorReturns<{}> {
+  function decorator(target: any, key: string, value: any, options: ReviserDecoratorOptions): ReviserDecoratorReturns<{}> {
+    if (!options.required && !isRequired(value)) {
+      return null;
+    }
+
     const type: string = getPrimitiveType(value);
 
     // string

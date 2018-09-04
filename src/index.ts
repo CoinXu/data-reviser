@@ -41,6 +41,10 @@ export {
   DecoMinLength,
   DecoRequired,
 
+  DecoMaxLength as MaxLength,
+  DecoMinLength as MinLength,
+  DecoRequired as Required,
+
   ToBoolean,
   ToDouble,
   ToFloat,

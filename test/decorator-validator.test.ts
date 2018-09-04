@@ -6,7 +6,7 @@
 
 import "mocha";
 import { expect, assert } from "chai";
-import { Reviser, DecoMaxLength, DecoMinLength, DecoRequired } from "@/index";
+import { Reviser, DecoMaxLength, DecoMinLength, Required } from "@/index";
 
 describe("Reviser decorators", function() {
   // DecoMaxLength
@@ -49,6 +49,7 @@ describe("Reviser decorators", function() {
 
       class M extends Reviser {
         @DecoMaxLength(2, customMesage)
+        @Required()
         p = 1;
       };
 
@@ -98,6 +99,7 @@ describe("Reviser decorators", function() {
 
       class M extends Reviser {
         @DecoMinLength(2, customMesage)
+        @Required()
         p = 1;
       };
 
@@ -107,11 +109,11 @@ describe("Reviser decorators", function() {
     });
   });
 
-  // DecoRequired
-  describe("@DecoRequired", function() {
+  // Required
+  describe("@Required", function() {
     it("Should return message if pass undefined or null", function() {
       class M extends Reviser {
-        @DecoRequired()
+        @Required()
         foo = "";
       };
 
@@ -126,7 +128,7 @@ describe("Reviser decorators", function() {
 
     it("Should return message if pass empty string", function() {
       class M extends Reviser {
-        @DecoRequired()
+        @Required()
         foo = "";
       };
 
@@ -137,7 +139,7 @@ describe("Reviser decorators", function() {
 
     it("Should return null if pass a string", function() {
       class M extends Reviser {
-        @DecoRequired()
+        @Required()
         foo = "";
       };
 

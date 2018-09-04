@@ -5,13 +5,17 @@
  */
 
 import { factory } from "@/decorator-factory";
-import { PrimitiveTypes, getPrimitiveType } from "@impl/utils";
+import { PrimitiveTypes, getPrimitiveType, isRequired } from "@impl/utils";
 import { parse, getTemplate } from "@impl/message";;
-import { PropertyDecorator, ReviserDecoratorReturns } from "@inter/decorator";
+import {
+  PropertyDecorator,
+  ReviserDecoratorReturns,
+  ReviserDecoratorOptions
+} from "@inter/decorator";
 
 interface Templates {
   type?: string;  // type error
-  gt: string; // length error
+  gt: string;     // length error
 }
 
 const Def: Templates = {
@@ -27,7 +31,11 @@ function MaxLength(limit: number, template?: string | Templates): PropertyDecora
     gt:  getTemplate(Def.gt, "length", template)
   }
 
-  function decorator(target: any, key: string, value: any): ReviserDecoratorReturns<{}> {
+  function decorator(target: any, key: string, value: any, options: ReviserDecoratorOptions): ReviserDecoratorReturns<{}> {
+    if (!options.required && !isRequired(value)) {
+      return null;
+    }
+
     const type: string = getPrimitiveType(value);
 
     // string

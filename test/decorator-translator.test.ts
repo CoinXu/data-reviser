@@ -23,13 +23,30 @@ describe("Translate decorators", function() {
     const m = new M();
 
     let data: any = m.get();
-    expect(data.n).to.be.equal(true);
+    expect(data.n).to.be.equal(undefined);
 
     let message = m.map({ n: "1" });
     expect(message).to.be.equal(null);
 
     data = m.get();
     expect(data.n).to.be.equal(true);
+  });
+
+  it("Should ignore non-required property while pass a non-required value", function() {
+    class M extends Reviser<any> {
+      @ToBoolean
+      n = 1;
+    };
+
+    const m = new M();
+
+    let data: any = m.get();
+    expect(data.n).to.be.equal(undefined);
+
+    let message = m.map({ n: null });
+    expect(message).to.be.equal(null);
+
+    expect(m.get().n).to.be.equal(undefined);
   });
 
   // Double

@@ -5,8 +5,8 @@
  */
 
 import { factory } from "@/decorator-factory";
-import { PropertyDecorator, ReviserDecoratorReturns } from "@inter/decorator";
-import { PrimitiveTypes, getPrimitiveType } from "@impl/utils";
+import { PropertyDecorator, ReviserDecoratorReturns, ReviserDecoratorOptions } from "@inter/decorator";
+import { PrimitiveTypes, getPrimitiveType, isRequired } from "@impl/utils";
 import { IEEE754Limits } from "@/constants";
 import { parse, getTemplate } from "@impl/message";
 
@@ -32,7 +32,11 @@ function TypeUnInt32(template?: string | Templates): PropertyDecorator {
     lt: getTemplate(Def.lt, "less", template)
   };
 
-  function decorator(target: any, key: string, value: any): ReviserDecoratorReturns<{}> {
+  function decorator(target: any, key: string, value: any, options: ReviserDecoratorOptions): ReviserDecoratorReturns<{}> {
+    if (!options.required && !isRequired(value)) {
+      return null;
+    }
+
     const type: string = getPrimitiveType(value);
 
     if (type !== PrimitiveTypes.Number) {

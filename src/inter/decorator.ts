@@ -41,12 +41,21 @@ export interface PropertyDecorator {
 /**
  * Define Reviser Decorator
  */
+export interface ReviserDecoratorOptions {
+  required: boolean;
+};
+
 export interface ReviserDecorator<T> {
-  (target: any, key: string, value: any): ReviserDecoratorReturns<T>;
+  (target: any, key: string, value: any, options: ReviserDecoratorOptions): ReviserDecoratorReturns<T>;
+};
+
+export interface ReviserDecoratorStruct<T> {
+  decorators: ReviserDecorator<T>[];
+  options: ReviserDecoratorOptions
 };
 
 export type ReviserDecoratorHooks<T> = {
-  [P in keyof T]?: ReviserDecorator<T>[];
+  [P in keyof T]?: ReviserDecoratorStruct<T>;
 };
 
 export interface ReviserMessageData<T = any> {
