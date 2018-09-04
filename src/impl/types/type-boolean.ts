@@ -5,16 +5,24 @@
  */
 
 import { factory } from "@/decorator-factory";
-import { PropertyDecorator, ReviserDecoratorReturns } from "@inter/decorator";
 import { parse } from "@impl/message";
-import { PrimitiveTypes, getPrimitiveType } from "@impl/utils";
+import { PrimitiveTypes, getPrimitiveType, isRequired } from "@impl/utils";
+import { PropertyDecorator, ReviserDecoratorReturns, ReviserDecoratorOptions } from "@inter/decorator";
 
 function TypeBoolean(template?: string): PropertyDecorator {
-  function decorator(target: any, key: string, value: any): ReviserDecoratorReturns<{}> {
+  function decorator(target: any, key: string, value: any, options: ReviserDecoratorOptions): ReviserDecoratorReturns<{}> {
+    if (!options.required && !isRequired(value)) {
+      return null;
+    }
+
     const type: string = getPrimitiveType(value);
 
     if (type !== PrimitiveTypes.Boolean) {
-      return parse(template || "expected a Boolean but got {{type}}");
+      return parse(template || "expected a Boolean but got {{type}}", {
+        key,
+        value,
+        type
+      });
     }
 
     target[key] = value;

@@ -5,8 +5,8 @@
  */
 
 import { factory } from "@/decorator-factory";
-import { PropertyDecorator, ReviserDecoratorReturns } from "@inter/decorator";
-import { PrimitiveTypes, getPrimitiveType } from "@impl/utils";
+import { PropertyDecorator, ReviserDecoratorReturns, ReviserDecoratorOptions } from "@inter/decorator";
+import { PrimitiveTypes, getPrimitiveType, isRequired } from "@impl/utils";
 import { parse, getTemplate } from "@impl/message";
 
 // https://github.com/googlei18n/libphonenumber/blob/master/FALSEHOODS.md
@@ -29,7 +29,11 @@ function TypePhone(template?: string | Templates): PropertyDecorator {
     empty: getTemplate(Def.type, "empty", template)
   };
 
-  function decorator(target: any, key: string, value: any): ReviserDecoratorReturns<{}> {
+  function decorator(target: any, key: string, value: any, options: ReviserDecoratorOptions): ReviserDecoratorReturns<{}> {
+    if (!options.required && !isRequired(value)) {
+      return null;
+    }
+
     const type: string = getPrimitiveType(value);
 
     if (type !== PrimitiveTypes.String && type !== PrimitiveTypes.Number) {

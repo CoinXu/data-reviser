@@ -1,3 +1,19 @@
+# v0.0.16
+## Breaking changes
+1. All of decorators in this library will ignore non-required property while pass a non-required value.
+
+## Reviser#get
+Add a boolean param named defaults. default `false`. Will return property default value while `true`.
+```js
+class M extends Reviser {
+	@ToBoolean
+	n = 1;
+}
+const m = new M();
+console.log(m.get())     // {}
+console.log(m.get(true)) // { n: true }
+```
+
 # v0.0.15
 ### Fixed
 1. Fix properties confusion bug at mutiple class extend same class.

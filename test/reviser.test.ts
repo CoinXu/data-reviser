@@ -66,12 +66,12 @@ describe("Class Reviser", function() {
     const n = new N();
     const nMessage = n.map({});
     expect(Object.keys(nMessage)).to.be.deep.equal(['m', 'n']);
-    expect(Object.keys(n.get())).to.be.deep.equal(['m', 'n']);
+    expect(Object.keys(n.get(true))).to.be.deep.equal(['m', 'n']);
 
     const o = new O();
     const oMessage = o.map({});
     expect(Object.keys(oMessage)).to.be.deep.equal(['m', 'o']);
-    expect(Object.keys(o.get())).to.be.deep.equal(['m', 'o']);
+    expect(Object.keys(o.get(true))).to.be.deep.equal(['m', 'o']);
   });
 
   it("Should return object that contains all properties that decorated while call method get", function() {
@@ -86,7 +86,7 @@ describe("Class Reviser", function() {
     };
 
     const m = new M();
-    const data = m.get();
+    const data = m.get(true);
     expect(Object.keys(data)).to.be.deep.equal(['a', 'b']);
   });
 });

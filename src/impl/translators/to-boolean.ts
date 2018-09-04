@@ -5,9 +5,14 @@
  */
 
 import { factory } from "@/decorator-factory";
-import { PropertyDecorator, ReviserMessage } from "@inter/decorator";
+import { isRequired } from "@impl/utils";
+import { PropertyDecorator, ReviserMessage, ReviserDecoratorOptions } from "@inter/decorator";
 
-function decorator(target: any, key: string, value: any): null {
+function decorator(target: any, key: string, value: any, options: ReviserDecoratorOptions): null {
+  if (!options.required && !isRequired(value)) {
+    return null;
+  }
+
   target[key] = Boolean(value).valueOf();
   return null;
 }

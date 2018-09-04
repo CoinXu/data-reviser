@@ -22,3 +22,17 @@ export function getPrimitiveType(value: any): string {
   return ObjectToString.call(value).slice(8, -1);
 }
 
+export function isRequired(value: any): boolean {
+  const type: string = getPrimitiveType(value);
+  // undefined | null
+  if (type === PrimitiveTypes.Undefined || type === PrimitiveTypes.Null) {
+    return false;
+  }
+
+  if (type === PrimitiveTypes.String) {
+    return value.trim().length > 0;
+  }
+
+  return true;
+}
+

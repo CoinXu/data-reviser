@@ -4,27 +4,28 @@
  * @description For developer test at browser.
  */
 
+import { expect, assert } from "chai";
 import { ReviserMessage } from "@inter/decorator";
-import { Reviser, DecoMinLength } from "@/index";
+import { Reviser, DecoRequired, ToString, TypeString } from "@/index";
 
 class M extends Reviser {
-  @DecoMinLength(2)
+  @ToString
+  @DecoRequired()
   m = "";
 };
 
 class N extends M {
-  @DecoMinLength(2)
+  @TypeString()
   n = "";
-}
+};
 
 class O extends M {
-  @DecoMinLength(2)
+  @TypeString()
+  @DecoRequired()
   o = "";
 };
 
 const n = new N();
-const nData = n.get();
 const nMessage = n.map({});
-
-console.log('nData', nData);
-console.log('nMessage', nMessage);
+expect(Object.keys(nMessage)).to.be.deep.equal(['m']);
+expect(Object.keys(n.get())).to.be.deep.equal(['m', 'n']);

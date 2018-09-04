@@ -7,7 +7,12 @@
 import { factory } from "@/decorator-factory";
 import { PrimitiveTypes, getPrimitiveType } from "@impl/utils";
 import { parse, getTemplate } from "@impl/message";
-import { PropertyDecorator, ReviserDecoratorReturns, ReviserMessageData } from "@inter/decorator";
+import {
+  PropertyDecorator,
+  ReviserDecoratorReturns,
+  ReviserMessageData,
+  ReviserDecoratorOptions
+} from "@inter/decorator";
 
 interface Templates {
   type?: string;  // type error
@@ -27,7 +32,7 @@ function Required(template?: string | Templates): PropertyDecorator {
     empty: getTemplate(Def.empty, "empty", template)
   };
 
-  function decorator(target: any, key: string, value: any): ReviserDecoratorReturns<{}> {
+  function decorator(target: any, key: string, value: any, options: ReviserDecoratorOptions): ReviserDecoratorReturns<{}> {
     const type: string = getPrimitiveType(value);
 
     // undefined | null
@@ -47,7 +52,7 @@ function Required(template?: string | Templates): PropertyDecorator {
     return null;
   }
 
-  return factory(decorator);
+  return factory(decorator, { required: true });
 }
 
 export default Required;

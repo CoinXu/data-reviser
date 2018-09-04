@@ -10,13 +10,15 @@ import {
   ReviserDecorator,
   ReviserDecoratorReturns,
   ReviserDecoratorHooks,
-  ReviserMessage
+  ReviserMessage,
+  ReviserDecoratorStruct
 } from "@inter/decorator"
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 
 export class Reviser<T = any> implements IReviser<T> {
   private _maps: T;
+  private _defaults: T;
   private _hooks: ReviserDecoratorHooks<T>;
 
   public constructor() {
@@ -41,32 +43,47 @@ export class Reviser<T = any> implements IReviser<T> {
     return Object.keys(<any>this._hooks);
   }
 
-  private getDecoratedPropertyValues(): Partial<T> {
+  private getDecoratedPropertyValues(): T {
     const values: any = this.getDecoratedPropertyNames().reduce((object, name) => {
       object[name] = this[name];
       return object;
     }, {});
 
-    return values as Partial<T>;
+    return <T>values;
   }
 
-  public get(): T {
+  private getDecoratedPropertyDefaultValues(): T {
     const hooks: ReviserDecoratorHooks<T> = this._hooks;
-    const values: any = this.getDecoratedPropertyValues();
-    const maps: any = this._maps;
-    const data: any = { ...values, ...maps };
+    const data: any = this.getDecoratedPropertyValues();
+    const maps: any = { ...data };
 
     for (const propKey in hooks) {
       if (!hasOwnProperty.call(hooks, propKey)) {
         continue;
       }
 
-      for (const decorator of hooks[propKey]) {
-        decorator(maps, propKey, data[propKey]);
+      const struct: ReviserDecoratorStruct<T> = hooks[propKey];
+      for (const decorator of struct.decorators) {
+        decorator(maps, propKey, data[propKey], struct.options);
       }
     }
 
-    return { ...values, ...maps } as T;
+    return <T>maps;
+  }
+
+  public get(defaults = false): T {
+    if (defaults && !this._defaults) {
+      this._defaults = this.getDecoratedPropertyDefaultValues();
+    }
+
+    if (defaults) {
+      return <T>{
+        ...(<any>this._defaults),
+        ...(<any>this._maps)
+      };
+    }
+
+    return { ...(<any>this._maps) };
   }
 
   public set(data: any): ReviserMessage<T> {
@@ -85,8 +102,9 @@ export class Reviser<T = any> implements IReviser<T> {
         continue;
       }
 
-      for (const decorator of hooks[propKey]) {
-        const m: ReviserDecoratorReturns<T> = decorator(maps, propKey, data[propKey]);
+      const struct: ReviserDecoratorStruct<T> = hooks[propKey];
+      for (const decorator of struct.decorators) {
+        const m: ReviserDecoratorReturns<T> = decorator(maps, propKey, data[propKey], struct.options);
         if (m !== null) {
           messages[propKey] = m;
           hasMessage = true;
