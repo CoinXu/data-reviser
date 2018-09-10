@@ -62,3 +62,8 @@ export interface ReviserMessageData<T = any> {
   key: string;
   value: T;
 };
+
+export interface Enum {
+  enum: string;
+  value?: number
+}

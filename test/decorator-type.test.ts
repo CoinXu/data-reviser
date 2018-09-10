@@ -10,6 +10,8 @@ import {
   Reviser, TypeBoolean, TypeDouble, TypeEmail, TypeFloat, TypeInt32,
   TypeInt64, TypePhone, TypeString, TypeStruct, TypeUnInt32, TypeUnInt64, Required,
 } from "@/index";
+import {Enum} from "../src/inter/decorator";
+import {TypeEnum} from "../src";
 
 // TODO
 // Add numeric limits test case
@@ -445,5 +447,42 @@ describe("Data type decorators", function() {
       const message = m.map({ p: Infinity });
       expect(message.p).to.be.equal(customMesage);
     });
+  });
+
+  // TypeEnum
+  describe('@TypeEnum', function () {
+    const Week: Array<Enum> = [
+      {enum: 'Sun'},
+      {enum: 'Mon'},
+      {enum: 'Tue'},
+      {enum: 'Wed'},
+      {enum: 'Thu'},
+      {enum: 'Fri'},
+      {enum: 'Sat'}
+    ];
+    class E extends Reviser {
+      @TypeEnum(Week, 'error')
+      enum = '';
+    }
+    it('Should return data while map a enumType data', function () {
+      const e = new E();
+      const err = e.map({enum: 'Sat'});
+      expect(err).to.be.equal(null);
+      expect(JSON.stringify(e.get())).to.be.equal(JSON.stringify({enum: 'Sat'}));
+    });
+    it('Should return type message while map a string not include in enum', function () {
+      const e = new E();
+      const err = e.map({enum: 'S'});
+      expect(err.enum).to.be.equal('error');
+      expect(JSON.stringify(e.get())).to.be.equal('{}');
+      expect(JSON.stringify(e.get(true))).to.be.equal(JSON.stringify({enum: ''}));
+    });
+    it('Should return type message while map a number', function () {
+      const e = new E();
+      const err = e.map({enum: 1});
+      expect(err.enum).to.be.equal('error');
+      expect(JSON.stringify(e.get())).to.be.equal('{}');
+      expect(JSON.stringify(e.get(true))).to.be.equal(JSON.stringify({enum: ''}));
+    })
   });
 });

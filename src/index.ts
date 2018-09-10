@@ -29,6 +29,7 @@ import TypeString from "@impl/types/type-string";
 import TypeStruct from "@impl/types/type-structure";
 import TypeUnInt32 from "@impl/types/type-uint32";
 import TypeUnInt64 from "@impl/types/type-uint64";
+import TypeEnum from '@impl/types/type-enum';
 
 // # validators
 import DecoMaxLength from "@impl/validators/max-length";
@@ -64,5 +65,6 @@ export {
   TypeString,
   TypeStruct,
   TypeUnInt32,
-  TypeUnInt64
+  TypeUnInt64,
+  TypeEnum
 };
