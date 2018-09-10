@@ -1,3 +1,6 @@
+# v0.0.17
+1. Add TypeEnum
+
 # v0.0.16
 ## Breaking changes
 1. All of decorators in this library will ignore non-required property while pass a non-required value.

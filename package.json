@@ -1,7 +1,7 @@
 {
   "name": "data-reviser",
   "description": "Validate data type & data structure. Translate data type automatically",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "repository": "https://github.com/CoinXu/data-reviser",
   "keywords": [
     "validator",

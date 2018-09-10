@@ -5,7 +5,7 @@
  */
 
 import { expect, assert } from "chai";
-import {Enum, ReviserMessage} from "@inter/decorator";
+import { Enum, ReviserMessage } from "@inter/decorator";
 import { Reviser, DecoRequired, ToString, TypeString, TypeEnum } from "@/index";
 
 class M extends Reviser {
