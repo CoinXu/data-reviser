@@ -6,26 +6,23 @@
 
 import { expect, assert } from "chai";
 import { ReviserMessage } from "@inter/decorator";
-import { Reviser, DecoRequired, ToString, TypeString } from "@/index";
+import { Reviser, TypeInt32, TypeArray, TypeArrayStruct, Required, ToInt32 } from "@/index";
 
-class M extends Reviser {
-  @ToString
-  @DecoRequired()
-  m = "";
-};
+class Foo extends Reviser {
+  @TypeInt32()
+  @Required()
+  foo = 0;
+}
 
-class N extends M {
-  @TypeString()
-  n = "";
-};
+class Bar extends Reviser {
+  @TypeArrayStruct(Foo)
+  foo = [];
+  @TypeArray([Required(), TypeInt32(), ToInt32])
+  bar = 0;
+}
 
-class O extends M {
-  @TypeString()
-  @DecoRequired()
-  o = "";
-};
+const foo = new Foo();
+const bar = new Bar();
 
-const n = new N();
-const nMessage = n.map({});
-expect(Object.keys(nMessage)).to.be.deep.equal(['m']);
-expect(Object.keys(n.get())).to.be.deep.equal(['m', 'n']);
+(window as any).foo = foo;
+(window as any).bar = bar;

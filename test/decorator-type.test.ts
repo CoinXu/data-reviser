@@ -9,6 +9,7 @@ import { expect, assert } from "chai";
 import {
   Reviser, TypeBoolean, TypeDouble, TypeEmail, TypeFloat, TypeInt32,
   TypeInt64, TypePhone, TypeString, TypeStruct, TypeUnInt32, TypeUnInt64, Required,
+  TypeArray, TypeArrayStruct, ToInt32
 } from "@/index";
 
 // TODO
@@ -31,7 +32,6 @@ describe("Data type decorators", function() {
     it("Should return string message while map a non-boolean data", function() {
       class M extends Reviser {
         @TypeBoolean()
-        @Required()
         p = true;
       };
 
@@ -43,7 +43,6 @@ describe("Data type decorators", function() {
     it("Should return null while map a boolean data", function() {
       class M extends Reviser {
         @TypeBoolean()
-        @Required()
         p = true;
       };
 
@@ -57,7 +56,6 @@ describe("Data type decorators", function() {
 
       class M extends Reviser {
         @TypeBoolean(customMesage)
-        @Required()
         p = true;
       };
 
@@ -72,7 +70,6 @@ describe("Data type decorators", function() {
     it("Should return string message while map a non-double data", function() {
       class M extends Reviser {
         @TypeDouble()
-        @Required()
         p = 1;
       };
 
@@ -84,7 +81,6 @@ describe("Data type decorators", function() {
     it("Should return null while map a double data", function() {
       class M extends Reviser {
         @TypeDouble()
-        @Required()
         p = 1;
       };
 
@@ -98,12 +94,11 @@ describe("Data type decorators", function() {
 
       class M extends Reviser {
         @TypeDouble(customMesage)
-        @Required()
         p = 1;
       };
 
       const m = new M();
-      const message = m.map({ p: null });
+      const message = m.map({ p: "123" });
       expect(message.p).to.be.equal(customMesage);
     });
   });
@@ -113,19 +108,17 @@ describe("Data type decorators", function() {
     it("Should return string message while map a non-email data", function() {
       class M extends Reviser {
         @TypeEmail()
-        @Required()
         p = "";
       };
 
       const m = new M();
-      const message = m.map({ p: "" });
+      const message = m.map({ p: "123" });
       expect(message.p).to.be.a('string');
     });
 
     it("Should return null while map a email data", function() {
       class M extends Reviser {
         @TypeEmail()
-        @Required()
         p = "";
       };
 
@@ -139,12 +132,11 @@ describe("Data type decorators", function() {
 
       class M extends Reviser {
         @TypeEmail(customMesage)
-        @Required()
         p = 1;
       };
 
       const m = new M();
-      const message = m.map({ p: null });
+      const message = m.map({ p: "123" });
       expect(message.p).to.be.equal(customMesage);
     });
   });
@@ -154,19 +146,17 @@ describe("Data type decorators", function() {
     it("Should return string message while map a non-float data", function() {
       class M extends Reviser {
         @TypeFloat()
-        @Required()
         p = 1.2;
       };
 
       const m = new M();
-      const message = m.map({ p: "" });
+      const message = m.map({ p: "123" });
       expect(message.p).to.be.a('string');
     });
 
     it("Should return null while map a float data", function() {
       class M extends Reviser {
         @TypeFloat()
-        @Required()
         p = 1.2;
       };
 
@@ -180,7 +170,6 @@ describe("Data type decorators", function() {
 
       class M extends Reviser {
         @TypeFloat(customMesage)
-        @Required()
         p = 1;
       };
 
@@ -195,19 +184,17 @@ describe("Data type decorators", function() {
     it("Should return string message while map a non-int32 data", function() {
       class M extends Reviser {
         @TypeInt32()
-        @Required()
         p = 1;
       };
 
       const m = new M();
-      const message = m.map({ p: "" });
+      const message = m.map({ p: "123" });
       expect(message.p).to.be.a('string');
     });
 
-    it("Should return null while map a int32 data", function() {
+    it("Should return null while map an int32 data", function() {
       class M extends Reviser {
         @TypeInt32()
-        @Required()
         p = 1;
       };
 
@@ -236,19 +223,17 @@ describe("Data type decorators", function() {
     it("Should return string message while map a non-int64 data", function() {
       class M extends Reviser {
         @TypeInt64()
-        @Required()
         p = 1;
       };
 
       const m = new M();
-      const message = m.map({ p: "" });
+      const message = m.map({ p: "123" });
       expect(message.p).to.be.a('string');
     });
 
-    it("Should return null while map a int64 data", function() {
+    it("Should return null while map an int64 data", function() {
       class M extends Reviser {
         @TypeInt64()
-        @Required()
         p = 1;
       };
 
@@ -277,19 +262,17 @@ describe("Data type decorators", function() {
     it("Should return string message while map a non-phone data", function() {
       class M extends Reviser {
         @TypePhone()
-        @Required()
         p = "";
       };
 
       const m = new M();
-      const message = m.map({ p: "" });
+      const message = m.map({ p: {} });
       expect(message.p).to.be.a('string');
     });
 
     it("Should return null while map a phone data", function() {
       class M extends Reviser {
         @TypePhone()
-        @Required()
         p = 1;
       };
 
@@ -303,7 +286,6 @@ describe("Data type decorators", function() {
 
       class M extends Reviser {
         @TypePhone(customMesage)
-        @Required()
         p = 1;
       };
 
@@ -318,7 +300,6 @@ describe("Data type decorators", function() {
     it("Should return string message while map a non-string data", function() {
       class M extends Reviser {
         @TypeString()
-        @Required()
         p = "";
       };
 
@@ -330,7 +311,6 @@ describe("Data type decorators", function() {
     it("Should return null while map a string data", function() {
       class M extends Reviser {
         @TypeString()
-        @Required()
         p = 1;
       };
 
@@ -344,7 +324,6 @@ describe("Data type decorators", function() {
 
       class M extends Reviser {
         @TypeString(customMesage)
-        @Required()
         p = 1;
       };
 
@@ -359,11 +338,9 @@ describe("Data type decorators", function() {
     it("Should return string message while map a non-structure class", function() {
       class B extends Reviser {
         @TypeInt32()
-        @Required()
         foo = 1;
 
         @TypeString()
-        @Required()
         bar = "";
       };
 
@@ -373,7 +350,7 @@ describe("Data type decorators", function() {
       };
 
       const m = new M();
-      const message: any = m.map({ b: 1 });
+      const message: any = m.map({ b: { foo: "a", bar: 1 } });
       expect(message.b).to.be.a('object');
       expect(message.b.foo).to.be.a('string');
       expect(message.b.bar).to.be.a('string');
@@ -382,11 +359,9 @@ describe("Data type decorators", function() {
     it("Should return null while map a structure class", function() {
       class B extends Reviser {
         @TypeInt32()
-        @Required()
         foo = 1;
 
         @TypeString()
-        @Required()
         bar = "";
       };
 
@@ -411,19 +386,17 @@ describe("Data type decorators", function() {
     it("Should return string message while map a non-uint32 data", function() {
       class M extends Reviser {
         @TypeUnInt32()
-        @Required()
         p = 1;
       };
 
       const m = new M();
-      const message = m.map({ p: "" });
+      const message = m.map({ p: "123" });
       expect(message.p).to.be.a('string');
     });
 
-    it("Should return null while map a uint32 data", function() {
+    it("Should return null while map an uint32 data", function() {
       class M extends Reviser {
         @TypeUnInt32()
-        @Required()
         p = 1;
       };
 
@@ -437,7 +410,6 @@ describe("Data type decorators", function() {
 
       class M extends Reviser {
         @TypeUnInt32(customMesage)
-        @Required()
         p = 1;
       };
 
@@ -445,5 +417,104 @@ describe("Data type decorators", function() {
       const message = m.map({ p: Infinity });
       expect(message.p).to.be.equal(customMesage);
     });
+  });
+
+  // TypeArray
+  describe("@TypeArray", function() {
+    it("Should return string message while map a non-array data", function() {
+      class M extends Reviser {
+        @TypeArray()
+        p = 1;
+      };
+
+      const m = new M();
+      const message = m.map({ p: "123" });
+      expect(message.p).to.be.a('string');
+    });
+
+    it("Should return null while map an array", function() {
+      class M extends Reviser {
+        @TypeArray()
+        p = 1;
+      };
+
+      const m = new M();
+      const message = m.map({ p: [] });
+      expect(message).to.be.equal(null);
+    });
+
+    it("Should return message form pass decorators if map a illegal data", function() {
+      class M extends Reviser {
+        @TypeArray([Required(), ToInt32])
+        p = 1;
+      };
+
+      const m = new M();
+      const message = m.map({ p: [null] });
+      expect(message.p).to.be.a("object");
+      expect(message.p["[0]"]).to.be.a("string");
+      expect(m.get(true).p[0]).to.be.a("number");
+    });
+  });
+
+  // TypeArrayStruct
+  describe("@TypeArrayStruct", function() {
+    it("Should return string message while map a non-structure data", function() {
+     class N extends Reviser {
+        @TypeInt32()
+        p = 1;
+      };
+
+      class M extends Reviser {
+        @TypeArrayStruct(N)
+        n = [];
+      }
+
+      const m = new M();
+      const message = m.map({ n: "123" });
+      expect(message.n).to.be.a('string');
+    });
+
+    it("Should return null while map a structure data", function() {
+     class N extends Reviser {
+        @TypeInt32()
+        p = 1;
+      };
+
+      class M extends Reviser {
+        @TypeArrayStruct(N)
+        n = [];
+      }
+
+      const m = new M();
+      const message = m.map({ n: [] });
+      expect(message).to.be.equal(null);
+    });
+
+    it("Should return message that point array item while map a illega array", function() {
+     class N extends Reviser {
+        @TypeInt32()
+        p = 1;
+      };
+
+      class M extends Reviser {
+        @TypeArrayStruct(N)
+        n = [];
+      }
+
+      const m = new M();
+      const message = m.map({
+        n: [
+          { p: "123" },
+          { p: "123" }
+        ]
+      });
+      expect(message.n).to.be.a("object");
+      expect(message.n["[0]"]).to.be.a("object");
+      expect(message.n["[0]"].p).to.be.a("string");
+      expect(message.n["[1]"]).to.be.a("object");
+      expect(message.n["[1]"].p).to.be.a("string");
+    });
+
   });
 });

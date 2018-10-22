@@ -18,6 +18,8 @@ import ToUnInt32 from "@impl/translators/to-uint32";
 import ToUnInt64 from "@impl/translators/to-uint64";
 
 // types
+import TypeArrayStruct from "@impl/types/type-array-structure";
+import TypeArray from "@impl/types/type-array";
 import TypeBoolean from "@impl/types/type-boolean";
 import TypeDouble from "@impl/types/type-double";
 import TypeEmail from "@impl/types/type-email";
@@ -33,6 +35,8 @@ import TypeUnInt64 from "@impl/types/type-uint64";
 // # validators
 import DecoMaxLength from "@impl/validators/max-length";
 import DecoMinLength from "@impl/validators/min-length";
+import Max from "@impl/validators/max";
+import Min from "@impl/validators/min";
 import DecoRequired from "@impl/validators/required";
 
 export {
@@ -44,6 +48,8 @@ export {
   DecoMaxLength as MaxLength,
   DecoMinLength as MinLength,
   DecoRequired as Required,
+  Max,
+  Min,
 
   ToBoolean,
   ToDouble,
@@ -54,6 +60,8 @@ export {
   ToUnInt32,
   ToUnInt64,
 
+  TypeArrayStruct,
+  TypeArray,
   TypeBoolean,
   TypeDouble,
   TypeEmail,

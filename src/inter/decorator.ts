@@ -16,7 +16,7 @@ type ReviserPartialMessageType<T> = {
 export type ReviserDecoratorReturns<T> = ReviserMessageType | ReviserPartialMessageType<T>;
 
 type ReviserPartialMessage<T> = {
-  [P in keyof T]?: ReviserDecoratorReturns<T>;
+  [P in keyof T]?: ReviserDecoratorReturns<{}>;
 };
 
 export type ReviserMessage<T> = ReviserPartialMessage<T> |  null;
@@ -25,7 +25,7 @@ export type ReviserMessage<T> = ReviserPartialMessage<T> |  null;
  * Define class Reviser
  */
 export interface Reviser<T> {
-  get(): T;
+  get(defaults?: boolean): T;
   set(model: any): ReviserMessage<T>;
   map(model: any): ReviserMessage<T>;
 };

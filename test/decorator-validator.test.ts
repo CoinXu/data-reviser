@@ -6,7 +6,7 @@
 
 import "mocha";
 import { expect, assert } from "chai";
-import { Reviser, DecoMaxLength, DecoMinLength, Required } from "@/index";
+import { Reviser, DecoMaxLength, DecoMinLength, Required, Max, Min } from "@/index";
 
 describe("Reviser decorators", function() {
   // DecoMaxLength
@@ -44,7 +44,7 @@ describe("Reviser decorators", function() {
       expect(message).to.be.equal(null);
     });
 
-    it("Should return custom message while map a non-double data", function() {
+    it("Should return custom message if passed while map a non-double data", function() {
       const customMesage = 'custom message';
 
       class M extends Reviser {
@@ -94,7 +94,7 @@ describe("Reviser decorators", function() {
       expect(message).to.be.equal(null);
     });
 
-    it("Should return custom message while map a non-double data", function() {
+    it("Should return custom message if passed while map a non-double data", function() {
       const customMesage = 'custom message';
 
       class M extends Reviser {
@@ -147,5 +147,111 @@ describe("Reviser decorators", function() {
       const message = m.set({ foo: "a" });
       expect(message).to.be.equal(null);
     });
+
+    it("Should return custom message if passed while map a non-required data", function() {
+      class M extends Reviser {
+        @Required("foo")
+        foo = "";
+      };
+
+      const m = new M();
+      const message = m.set({ foo: "" });
+      expect(message.foo).to.be.equal("foo");
+    })
   });
+
+  // Max
+  describe("@Max", function() {
+    it("Should return message if pass a non-number data", function() {
+      class M extends Reviser {
+        @Max(2)
+        foo = 1;
+      };
+
+      const m = new M();
+      const message = m.set({ foo: [] });
+      expect(message.foo).to.be.a('string');
+    });
+
+    it("Should return message if pass a value that great than limit value", function() {
+      class M extends Reviser {
+        @Max(2)
+        foo = 1;
+      };
+
+      const m = new M();
+      const message = m.set({ foo: 3 });
+      expect(message.foo).to.be.a('string');
+    });
+
+    it("Should return null if pass a legal value", function() {
+      class M extends Reviser {
+        @Max(2)
+        foo = 1;
+      };
+
+      const m = new M();
+      const message = m.set({ foo: 1 });
+      expect(message).to.be.equal(null);
+    });
+
+    it("Should return custom message if passed while map a illegal data", function() {
+      class M extends Reviser {
+        @Max(2, "foo")
+        foo = 1;
+      };
+
+      const m = new M();
+      const message = m.set({ foo: 3 });
+      expect(message.foo).to.be.equal("foo");
+    });
+  });
+
+  // Min
+  describe("@Min", function() {
+    it("Should return message if pass a non-number data", function() {
+      class M extends Reviser {
+        @Min(2)
+        foo = 1;
+      };
+
+      const m = new M();
+      const message = m.set({ foo: {} });
+      expect(message.foo).to.be.a('string');
+    });
+
+    it("Should return message if pass a value that less than limit value", function() {
+      class M extends Reviser {
+        @Min(2)
+        foo = 1;
+      };
+
+      const m = new M();
+      const message = m.set({ foo: 1 });
+      expect(message.foo).to.be.a('string');
+    });
+
+    it("Should return null if pass a legal value", function() {
+      class M extends Reviser {
+        @Min(2)
+        foo = 1;
+      };
+
+      const m = new M();
+      const message = m.set({ foo: 2 });
+      expect(message).to.be.equal(null);
+    });
+
+    it("Should return custom message if passed while map a illegal data", function() {
+      class M extends Reviser {
+        @Min(2, "foo")
+        foo = 1;
+      };
+
+      const m = new M();
+      const message = m.set({ foo: 1 });
+      expect(message.foo).to.be.equal("foo");
+    });
+  });
+
 });

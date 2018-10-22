@@ -1,5 +1,5 @@
 /**
- * @date 2018-08-25
+ * @date 2018-10-22
  * @author xuchuanping
  * @description
  */
@@ -12,18 +12,18 @@ import {
 } from "@inter/decorator";
 
 interface Templates {
-  type?: string;  // type error
-  gt: string;     // length error
+  type?: string;
+  gt: string;
 }
 
 const Def: Templates = {
   // { key, value, type }
-  type: "expected a String but got {{type}}",
+  type: "expected a Number but got {{type}}",
   // { key, value, limit }
-  gt: "length of {{key}} must less than {{limit}}"
+  gt: "{{key}} must less than {{limit}}"
 };
 
-function MaxLength(limit: number, template?: string | Templates): PropertyDecorator {
+function Max(limit: number, template?: string | Templates): PropertyDecorator {
   const Temps = {
     type: getTemplate(Def.type, "type", template),
     gt:  getTemplate(Def.gt, "gt", template)
@@ -37,11 +37,11 @@ function MaxLength(limit: number, template?: string | Templates): PropertyDecora
     const type: string = getPrimitiveType(value);
 
     // string
-    if (type !== PrimitiveTypes.String) {
+    if (type !== PrimitiveTypes.Number) {
       return parse(Temps.type, { key, value, type });
     }
 
-    if (value.length > limit) {
+    if (value > limit) {
       return parse(Temps.gt, { key, value, limit });
     }
 
@@ -52,4 +52,4 @@ function MaxLength(limit: number, template?: string | Templates): PropertyDecora
   return factory(decorator);
 }
 
-export default MaxLength;
+export default Max;

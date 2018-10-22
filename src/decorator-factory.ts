@@ -5,11 +5,8 @@
  */
 
 import {
-  PropertyDecorator,
-  ReviserDecorator,
-  ReviserDecoratorHooks,
-  ReviserDecoratorStruct,
-  ReviserDecoratorOptions
+  PropertyDecorator, ReviserDecorator, ReviserDecoratorHooks,
+  ReviserDecoratorStruct, ReviserDecoratorOptions
 } from "@/inter/decorator";
 import { REVISER_PRIVATE_PROPERTY_NAME as NAME } from "@/constants";
 

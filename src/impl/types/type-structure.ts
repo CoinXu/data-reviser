@@ -12,9 +12,7 @@ import {
 } from "@inter/decorator";
 
 function TypeStructure<T = {}>(Clazz: ReviserConstructor<T>): PropertyDecorator {
-  class ClazzClass extends Clazz {};
-
-  const ins: Reviser<T> = new ClazzClass();
+  const ins: Reviser<T> = new Clazz();
 
   function decorator(target: any, key: string, value: any, options: ReviserDecoratorOptions): ReviserDecoratorReturns<{}> {
     if (!options.required && !isRequired(value)) {
@@ -25,7 +23,7 @@ function TypeStructure<T = {}>(Clazz: ReviserConstructor<T>): PropertyDecorator 
     if (message !== null) {
       return message;
     }
-    target[key] = ins.get();
+    target[key] = ins.get(true);
     return null;
   }
 

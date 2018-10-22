@@ -5,13 +5,10 @@
  */
 
 import { REVISER_PRIVATE_PROPERTY_NAME as PROPERTY_NAME } from "@/constants";
+import { PrimitiveTypes, getPrimitiveType } from "@impl/utils";
 import {
-  Reviser as IReviser,
-  ReviserDecorator,
-  ReviserDecoratorReturns,
-  ReviserDecoratorHooks,
-  ReviserMessage,
-  ReviserDecoratorStruct
+  Reviser as IReviser, ReviserDecorator, ReviserDecoratorReturns,
+  ReviserDecoratorHooks, ReviserMessage, ReviserDecoratorStruct
 } from "@inter/decorator"
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -91,6 +88,12 @@ export class Reviser<T = any> implements IReviser<T> {
   }
 
   public map(data: any): ReviserMessage<T> {
+    const type: string = getPrimitiveType(data);
+
+    if (type !== PrimitiveTypes.Object && type !== PrimitiveTypes.Array) {
+      throw new TypeError("Reviser#map expected an Object or an Array but got " + type);
+    }
+
     const maps: T = this._maps;
     const hooks: ReviserDecoratorHooks<T> = this._hooks;
     const messages: ReviserMessage<T> = {};

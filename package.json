@@ -1,7 +1,7 @@
 {
   "name": "data-reviser",
   "description": "Validate data type & data structure. Translate data type automatically",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "repository": "https://github.com/CoinXu/data-reviser",
   "keywords": [
     "validator",
@@ -16,9 +16,9 @@
   },
   "contributors": [
     {
-      "name" : "yaniky",
-      "email" : "295958179@qq.com",
-      "url" : "https://github.com/yaniky"
+      "name": "yaniky",
+      "email": "295958179@qq.com",
+      "url": "https://github.com/yaniky"
     }
   ],
   "license": "MIT",
@@ -39,7 +39,7 @@
     "not ie <= 8"
   ],
   "devDependencies": {
-    "@types/chai": "4.1.4",
+    "@types/chai": "^4.1.4",
     "@types/mocha": "5.2.5",
     "@types/node": "8.10.26",
     "babel-core": "^6.26.3",
