@@ -39,6 +39,8 @@ import Max from "@impl/validators/max";
 import Min from "@impl/validators/min";
 import DecoRequired from "@impl/validators/required";
 
+import { factory } from "@/decorator-factory";
+
 export {
   Reviser,
   DecoMaxLength,
@@ -72,5 +74,7 @@ export {
   TypeString,
   TypeStruct,
   TypeUnInt32,
-  TypeUnInt64
+  TypeUnInt64,
+
+  factory
 };
