@@ -5,7 +5,8 @@
  */
 
 import { factory } from "@/decorator-factory";
-import { isRequired } from "@impl/utils";
+import { isRequired, PrimitiveTypes, getPrimitiveType } from "@impl/utils";
+import { parse } from "@impl/message";
 import {
   PropertyDecorator, ReviserDecoratorReturns, ReviserMessage,
   Reviser, ReviserConstructor, ReviserDecoratorOptions
@@ -17,6 +18,12 @@ function TypeStructure<T = {}>(Clazz: ReviserConstructor<T>): PropertyDecorator 
   function decorator(target: any, key: string, value: any, options: ReviserDecoratorOptions): ReviserDecoratorReturns<{}> {
     if (!options.required && !isRequired(value)) {
       return null;
+    }
+
+    const type: string = getPrimitiveType(value);
+
+    if (type !== PrimitiveTypes.Object && type !== PrimitiveTypes.Array) {
+      return parse("expected an Object or an Array but got {{type}}", { type });
     }
 
     const message: ReviserMessage<T> = ins.map(value);

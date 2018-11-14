@@ -45,11 +45,21 @@ function TypeArrayStructure<T = {}>(Clazz: ReviserConstructor<T>, template?: str
     let hasMessage = false;
 
     for (; i < length; i++) {
+      const type: string = getPrimitiveType(value[i]);
+      const key: string = `[${i}]`;
+
+      if (type !== PrimitiveTypes.Object && type !== PrimitiveTypes.Array) {
+        message[key] = parse('expected an Object or an Array but got {{type}}', {
+          type
+        });
+        continue;
+      }
+
       const m: ReviserMessage<{}> = ins.map(value[i]);
       traslated[i] = ins.get(true);
 
       if (m !== null) {
-        message[`[${i}]`] = m;
+        message[key] = m;
         hasMessage = true;
       }
     }
