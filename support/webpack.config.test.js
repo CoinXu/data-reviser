@@ -22,7 +22,8 @@ module.exports = merge(WebpackConfigBase, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('test')
+        NODE_ENV: JSON.stringify('test'),
+        __VERSION__: JSON.stringify(require('../package.json').version)
       }
     })
   ]

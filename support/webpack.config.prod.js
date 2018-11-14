@@ -22,7 +22,8 @@ module.exports = merge(WebpackConfigBase, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('production')
+        NODE_ENV: JSON.stringify('production'),
+        __VERSION__: JSON.stringify(require('../package.json').version)
       }
     }),
     new UglifyjsPlugin()

@@ -41,6 +41,9 @@ import DecoRequired from "@impl/validators/required";
 
 import { factory } from "@/decorator-factory";
 
+// see support/webpack.config.base.js
+const version = process.env.__VERSION__;
+
 export {
   Reviser,
   DecoMaxLength,
@@ -76,5 +79,7 @@ export {
   TypeUnInt32,
   TypeUnInt64,
 
-  factory
+  factory,
+
+  version
 };
