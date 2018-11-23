@@ -13,7 +13,6 @@ import {
 } from "@inter/decorator";
 
 function TypeStructure<T = {}>(Clazz: ReviserConstructor<T>): PropertyDecorator {
-  const ins: Reviser<T> = new Clazz();
 
   function decorator(target: any, key: string, value: any, options: ReviserDecoratorOptions): ReviserDecoratorReturns<{}> {
     if (!options.required && !isRequired(value)) {
@@ -26,10 +25,13 @@ function TypeStructure<T = {}>(Clazz: ReviserConstructor<T>): PropertyDecorator 
       return parse("expected an Object or an Array but got {{type}}", { type });
     }
 
+    const ins: Reviser<T> = new Clazz();
     const message: ReviserMessage<T> = ins.map(value);
+
     if (message !== null) {
       return message;
     }
+
     target[key] = ins.get(true);
     return null;
   }

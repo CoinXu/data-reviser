@@ -1,3 +1,7 @@
+# v0.0.19
+## Fixed
+1.  `TypeStruct` and `TypeArrayStruct`: Create new instance in each valid.
+
 # v0.0.16
 ## Breaking changes
 1. All of decorators in this library will ignore non-required property while pass a non-required value.

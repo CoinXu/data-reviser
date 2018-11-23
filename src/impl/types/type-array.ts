@@ -69,6 +69,7 @@ function TypeArray(decorators?: PropertyDecorator[], template?: string | Templat
       for (const decorator of struct.decorators) {
         const propKey = `[${i}]`;
         const m: ReviserDecoratorReturns<{}> = decorator(FakeTarget, propKey, value[i], struct.options);
+
         translated[i] = FakeTarget[propKey];
 
         if (m !== null) {

@@ -21,7 +21,6 @@ const Def: Templates = {
 };
 
 function TypeArrayStructure<T = {}>(Clazz: ReviserConstructor<T>, template?: string): PropertyDecorator {
-  const ins: Reviser<T> = new Clazz();
   const Temps = {
     type: getTemplate(Def.type, "type", template)
   };
@@ -55,6 +54,7 @@ function TypeArrayStructure<T = {}>(Clazz: ReviserConstructor<T>, template?: str
         continue;
       }
 
+      const ins: Reviser<T> = new Clazz();
       const m: ReviserMessage<{}> = ins.map(value[i]);
       traslated[i] = ins.get(true);
 
